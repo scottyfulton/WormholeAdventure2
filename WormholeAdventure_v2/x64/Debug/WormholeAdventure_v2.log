@@ -1,0 +1,33 @@
+﻿  Camera.cpp
+  Engine.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\visualstudioapps\wormholeadventure_v2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+c:\visualstudioapps\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(114): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=GLsizei
+          ]
+c:\visualstudioapps\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(122): error C2664: 'GLuint Engine::loadtextures(char *)': cannot convert argument 1 from 'const char [35]' to 'char *'
+  c:\visualstudioapps\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(122): note: Conversion from string literal loses const qualifier (see /Zc:strictStrings)
+  GameState.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\visualstudioapps\wormholeadventure_v2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+  GObject.cpp
+  main.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\visualstudioapps\wormholeadventure_v2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+  objloader.cpp
+c:\visualstudioapps\wormholeadventure_v2\wormholeadventure_v2\objloader.cpp(34): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(208): note: see declaration of 'fopen'
+c:\visualstudioapps\wormholeadventure_v2\wormholeadventure_v2\objloader.cpp(45): error C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1197): note: see declaration of 'fscanf'
+c:\visualstudioapps\wormholeadventure_v2\wormholeadventure_v2\objloader.cpp(53): error C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1197): note: see declaration of 'fscanf'
+c:\visualstudioapps\wormholeadventure_v2\wormholeadventure_v2\objloader.cpp(57): error C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1197): note: see declaration of 'fscanf'
+c:\visualstudioapps\wormholeadventure_v2\wormholeadventure_v2\objloader.cpp(62): error C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1197): note: see declaration of 'fscanf'
+c:\visualstudioapps\wormholeadventure_v2\wormholeadventure_v2\objloader.cpp(67): error C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1197): note: see declaration of 'fscanf'
+  shader.cpp
+  Generating Code...

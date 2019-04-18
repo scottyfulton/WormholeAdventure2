@@ -42,6 +42,7 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="GameMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -54,6 +55,8 @@
     <ClCompile Include="emigration\vertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+=======
+>>>>>>> Created Particle class. Uses a list<term> to keep track of the function (list of terms) that each Particle will update based on. (term has a coefficient and exponent)
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -77,6 +80,7 @@
     <ClInclude Include="Particle.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="GameMenu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -92,6 +96,8 @@
     <ClInclude Include="emigration\vertexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+=======
+>>>>>>> Created Particle class. Uses a list<term> to keep track of the function (list of terms) that each Particle will update based on. (term has a coefficient and exponent)
   </ItemGroup>
   <ItemGroup>
     <None Include="TextureFragmentShader.fragmentshader">

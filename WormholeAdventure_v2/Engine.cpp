@@ -158,8 +158,6 @@ void Engine::loop() {
 	int updateCounter = 0;
 	/***************************************/
 
-
-
 	while (isRunning) {
 		newFrameTime = std::chrono::high_resolution_clock::now();
 		frameTime = newFrameTime - oldFrameTime;
@@ -194,8 +192,6 @@ void Engine::loop() {
 
 		//Poll Inputs
 		input();
-		
-
 		
 		if (((double)(clock::now() - fps).count()) >= 1000000000.0) {
 			//FPS = renderCounter;

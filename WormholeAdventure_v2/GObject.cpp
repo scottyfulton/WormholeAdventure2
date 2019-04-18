@@ -7,6 +7,7 @@ using namespace glm;
 ** then sorting (binarySort) for the 10 closest light sources
 */
 
+GObject::GObject(){}; // implicitly called when child classes are constructed
 GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos) {
 	this->texture = textureID;
 	this->shader = shaderID;

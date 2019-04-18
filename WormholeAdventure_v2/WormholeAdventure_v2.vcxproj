@@ -121,6 +121,11 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="migration\IndexBuffer.cpp" />
+    <ClCompile Include="migration\Render.cpp" />
+    <ClCompile Include="migration\myShader.cpp" />
+    <ClCompile Include="migration\VertexArray.cpp" />
+    <ClCompile Include="migration\VertexBuffer.cpp" />
     <ClCompile Include="objloader.cpp" />
     <ClCompile Include="shader.cpp" />
   </ItemGroup>
@@ -129,13 +134,23 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GObject.h" />
+    <ClInclude Include="migration\IndexBuffer.h" />
+    <ClInclude Include="migration\Render.h" />
+    <ClInclude Include="migration\myShader.h" />
+    <ClInclude Include="migration\VertexArray.h" />
+    <ClInclude Include="migration\VertexBuffer.h" />
+    <ClInclude Include="migration\VertexBufferLayout.h" />
     <ClInclude Include="objloader.hpp" />
     <ClInclude Include="shader.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="res\shaders\Shader.shader" />
     <None Include="TextureFragmentShader.fragmentshader" />
     <None Include="TransformVertexShader.vertexshader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="notes.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

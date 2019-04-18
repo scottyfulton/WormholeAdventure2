@@ -1,6 +1,2 @@
 ﻿  objloader.cpp
-soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(image_DXT.obj)' or at 'C:\VisualStudioApps\WormholeAdventure_v2\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(image_helper.obj)' or at 'C:\VisualStudioApps\WormholeAdventure_v2\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(SOIL.obj)' or at 'C:\VisualStudioApps\WormholeAdventure_v2\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(stb_image_aug.obj)' or at 'C:\VisualStudioApps\WormholeAdventure_v2\Debug\SOIL.pdb'; linking object as if no debug info
-  WormholeAdventure_v2.vcxproj -> C:\VisualStudioApps\WormholeAdventure_v2\Debug\WormholeAdventure_v2.exe
+  WormholeAdventure_v2.vcxproj -> C:\dev\Worm2\Debug\WormholeAdventure_v2.exe

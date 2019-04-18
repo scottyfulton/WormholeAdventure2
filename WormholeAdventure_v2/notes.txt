@@ -22,3 +22,4 @@ to commit changes:
 git branch -a //list all branches, make sure your on the one with changes
 git add . //. = all, or name of file(s)
 git commit -m "Type a meaningful message here about your commit"
+git push origin yourBranchName

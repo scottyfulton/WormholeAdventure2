@@ -1,0 +1,15 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl blinn1
+Ns 11.764706
+Ka 0.010000 0.010000 0.010000
+Kd 0.800000 0.800000 0.800000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 3
+map_Bump -bm 0.350042 C:\\Users\\scott\\Desktop\\LASTFUCKINGSCHOOL\\SS1_FBX\\HULL-N.jpg
+map_Kd C:\\Users\\scott\\Desktop\\LASTFUCKINGSCHOOL\\SS1_FBX\\HULL.jpg
+map_Ks C:\\Users\\scott\\Desktop\\LASTFUCKINGSCHOOL\\SS1_FBX\\HULL-S.jpg

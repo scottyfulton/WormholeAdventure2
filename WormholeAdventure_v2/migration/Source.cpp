@@ -12,6 +12,39 @@
 #include "myShader.h"
 //#include "Texture.h"
 
+
+	////creating a VAO
+	//GLuint vao;
+	//glGenVertexArrays(1, &vao);
+	//glBindVertexArray(vao);
+
+	////creating a vertex VBO to put in the vao and create vertex attribute pointer
+		//GLuint vert_VBO;
+	//glGenBuffers(1, &vert_VBO);
+	//glBindBuffer(GL_ARRAY_BUFFER, vert_VBO);
+	//glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+	////glVertexAttributePointer(index, size, type, normalized, stride, offset) is the format
+	//glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+
+	// uv BO (uv Buffer Object)
+	//GLuint uv_VBO;
+	//glGenBuffers(1, &uv_VBO);
+	//glBindBuffer(GL_ARRAY_BUFFER, uv_VBO);
+	//glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+	////glVertexAttributePointer(index, size, type, normalized, stride, offset) is the format
+	//glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+
+	//glBindVertexArray(0); //delete buffers from CPU mem once it's loaded to GPU mem
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//glBindBuffer(GL_ARRAY_BUFFER, 1);
+
+	//after deleting the VAO from CPU mem, add its IDs to our vaos vector
+	//vaoIDs.push_back(vao);
+	//vaoVertexCounts.push_back(vertices.size()); //index 0 is our VAO vertex count for our first object
+	//done creating one VAO, need to do 2 more times
+
+
+
 //********************************************************************//
 int main(void)
 {

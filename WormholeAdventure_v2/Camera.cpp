@@ -35,7 +35,11 @@ void Camera::render(double alpha){
 
 	//viewMatrix
 	viewMatrix = glm::mat4(1.0);
+<<<<<<< HEAD
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(0, 0, -100)); //inverted
+=======
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(-30, -30, -300)); //inverted
+>>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	//Uniform

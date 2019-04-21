@@ -38,6 +38,7 @@ void GameState::init()
 
 void GameState::update(double time, double dt, bool arr[4])
 {
+<<<<<<< HEAD
 	float currPhi = wormholes.front()->getPhi();
 	glm::mat4* view = (cameras.front())->getView();
 	for (Camera* c : cameras)
@@ -84,6 +85,13 @@ void GameState::update(double time, double dt, bool arr[4])
 		}
 
 	}
+=======
+	for (GObject* g : gObjects)
+		g->update(time, dt);
+
+	for (Wormhole* w : wormholes)
+		w->update(time, dt);
+>>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
 }
 
 void GameState::render(double alpha)

@@ -9,8 +9,8 @@ using namespace glm;
 
 GObject::GObject(){}; // implicitly called when child classes are constructed
 GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos) {
-	this->texture = textureID;
 	this->shader = shaderID;
+	this->texture = textureID;
 	this->vao = vaoID;
 	this->numVertices = numVertices;
 	this->pos = pos;

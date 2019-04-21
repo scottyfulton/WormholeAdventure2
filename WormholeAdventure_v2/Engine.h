@@ -25,6 +25,12 @@
 #include <chrono>
 //for loading the image
 #include <soil.h>
+//for vertex arrays
+#include "migration/VertexArray.h"
+//
+#include "migration//VertexBuffer.h"
+//helps form layout of buffer... stride
+#include "migration/VertexBufferLayout.h"
 
 #include "GameState.h"
 #include <iostream>

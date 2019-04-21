@@ -40,8 +40,8 @@ void Engine::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
-	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
+	window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
+	//window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
 
 
 	if (window == NULL) {
@@ -60,6 +60,9 @@ void Engine::init() {
 		glfwTerminate();
 		//Error
 	}
+
+	//added here, but i dont know, for visuals smoothing
+	//glfwSwapInterval(1); //vsync
 
 	//Escape Key listener
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
@@ -84,7 +87,36 @@ void Engine::init() {
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals; // Won't be used at the moment.
-	bool res = loadOBJ("L200-OBJ-triangles/truck.obj", vertices, uvs, normals);
+	bool res = loadOBJ("ExportedModels/SS1_OBJ/SS1tri.obj", vertices, uvs, normals);
+
+
+	//
+	//VertexArray va;			//vao yo
+	//va.Bind();
+	////VertexBuffer vb(positions, 4 * 2 * sizeof(float));	//4 vertices, size of 2 float coords (x,y) 
+	//VertexBuffer vb(&vertices[0], vertices.size() * sizeof(glm::vec3)); //updated for obj loader
+	//VertexBufferLayout layout1;							//stride for va
+	//layout1.Push<float>(3);								//add layout for loading vb to va
+	//va.AddBuffer(vb, layout1);							//add vb to va
+	////vaoIDs.push_back(va.m_RenderID);
+	//
+	//VertexBuffer uv_vb(&uvs[0], uvs.size() * sizeof(glm::vec2));
+	//VertexBufferLayout layout2;
+	//layout2.Push<float>(2);
+	//va.AddBuffer(uv_vb, layout2);
+
+	////push va id
+	//GLuint dasDing = va.m_RenderID;
+	//vaoIDs.push_back(dasDing);
+	//vaoVertexCounts.push_back(vertices.size());
+
+	//va.UnBind();
+	//vb.UnBind();
+	//uv_vb.UnBind();
+
+
+
+
 
 
 
@@ -92,14 +124,16 @@ void Engine::init() {
 	GLuint vao;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
+
 	//creating a vertex VBO to put in the vao and create vertex attribute pointer
-	GLuint vert_VBO;
+		GLuint vert_VBO;
 	glGenBuffers(1, &vert_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, vert_VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
 	//glVertexAttributePointer(index, size, type, normalized, stride, offset) is the format
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
-	// uv BO (uv Buffer Object)
+
+	 //uv BO (uv Buffer Object)
 	GLuint uv_VBO;
 	glGenBuffers(1, &uv_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, uv_VBO);
@@ -107,9 +141,10 @@ void Engine::init() {
 	//glVertexAttributePointer(index, size, type, normalized, stride, offset) is the format
 	glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
 
-	glBindVertexArray(0); //delete buffers from CPU mem once it's loaded to GPU mem
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, 1);
+	//glBindVertexArray(0); //delete buffers from CPU mem once it's loaded to GPU mem
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//glBindBuffer(GL_ARRAY_BUFFER, 1);
+
 	//after deleting the VAO from CPU mem, add its IDs to our vaos vector
 	vaoIDs.push_back(vao);
 	vaoVertexCounts.push_back(vertices.size()); //index 0 is our VAO vertex count for our first object
@@ -120,7 +155,7 @@ void Engine::init() {
 
 
 	//Load Textures
-	GLuint Texture = loadtextures("L200-OBJ-triangles/truck_color.jpg");
+	GLuint Texture = loadtextures("ExportedModels/SS1_OBJ/SS1tri2.jpg");
 	textures.push_back(Texture); //index 0 is our first VAO's texture
 	//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler"); used in object class, not here
 
@@ -128,6 +163,10 @@ void Engine::init() {
 	gameState = new GameState();
 	//Load Entities
 	//GLuint MatrixID = glGetUniformLocation(programID, "MVP"); not used here, will be later in gamestate (basically one instance of a possible camera class)
+/*
+
+	gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
+	gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));*/
 
 	gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
 	gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));

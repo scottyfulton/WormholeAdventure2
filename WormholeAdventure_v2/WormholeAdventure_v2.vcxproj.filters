@@ -39,6 +39,21 @@
     <ClCompile Include="objloader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="migration\IndexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="migration\Render.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="migration\VertexArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="migration\VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="migration\myShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -59,6 +74,24 @@
     <ClInclude Include="objloader.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="migration\IndexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="migration\Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="migration\VertexArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="migration\VertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="migration\VertexBufferLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="migration\myShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="TextureFragmentShader.fragmentshader">
@@ -67,6 +100,12 @@
     <None Include="TransformVertexShader.vertexshader">
       <Filter>Source Files\Shaders</Filter>
     </None>
+    <None Include="res\shaders\Shader.shader" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="notes.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

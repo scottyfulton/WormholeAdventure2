@@ -1,2 +1,12 @@
 ﻿  Particle.cpp
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\particle.cpp(35): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\particle.cpp(36): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   WormholeAdventure_v2.vcxproj -> S:\_Computer_Graphics_Labs\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe

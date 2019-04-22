@@ -37,6 +37,7 @@ void Camera::render(double alpha){
 	viewMatrix = glm::mat4(1.0);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(0, 0, -100)); //inverted
 =======
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(-30, -30, -300)); //inverted
@@ -44,6 +45,9 @@ void Camera::render(double alpha){
 =======
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(0, 0, -50)); //inverted
 >>>>>>> Added emit timers to particles based on RNG. Problem: Particle's isAlive() either doesn't perform proper status check or use of isAlive() in Wormhole class is improper/invalid. Movement of more than one "ring" of Particle's solely dependent on RNG - not the intent of the logic.
+=======
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0, 0, -100)); //inverted
+>>>>>>> This is MUCH closer to the wormhole effect that we wanted in the beginning.
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	//Uniform

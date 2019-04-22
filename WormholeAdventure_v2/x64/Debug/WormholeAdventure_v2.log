@@ -52,6 +52,19 @@ soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.li
 soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(stb_image_aug.obj)' or at 'S:\_Computer_Graphics_Labs\WormholeAdventure2\x64\Debug\SOIL.pdb'; linking object as if no debug info
 =======
 ﻿  Particle.cpp
+<<<<<<< HEAD
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
+=======
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\particle.cpp(35): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\particle.cpp(36): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+>>>>>>> This is MUCH closer to the wormhole effect that we wanted in the beginning.
   WormholeAdventure_v2.vcxproj -> S:\_Computer_Graphics_Labs\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe
 >>>>>>> Created Particle class. Uses a list<term> to keep track of the function (list of terms) that each Particle will update based on. (term has a coefficient and exponent)

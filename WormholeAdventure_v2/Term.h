@@ -1,4 +1,4 @@
 #pragma once
 struct term {
-	int exponent, coeff;
+	float coeff, exponent;
 };

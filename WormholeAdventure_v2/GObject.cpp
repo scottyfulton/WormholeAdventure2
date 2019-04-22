@@ -35,7 +35,7 @@ void GObject::render(double alpha){
 	//Texture
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
-
+	glEnable(GL_DEPTH_TEST);
 	//Interpolate
 
 

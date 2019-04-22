@@ -12,8 +12,12 @@ Particle::Particle(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numV
 =======
 
 Particle::Particle(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, 
+<<<<<<< HEAD
 					glm::vec3 pos, float theta, float emitTime, std::list<term>* baseShape){
 >>>>>>> Added emit timers to particles based on RNG. Problem: Particle's isAlive() either doesn't perform proper status check or use of isAlive() in Wormhole class is improper/invalid. Movement of more than one "ring" of Particle's solely dependent on RNG - not the intent of the logic.
+=======
+					glm::vec3 pos, float theta, std::list<term>* baseShape){
+>>>>>>> Nick gave a correct implementation to choosing when to update/render a Particle. Particles still not looping back to origin of wormhole to follow the curve of the worhole again (yet).
 	this->shader = shaderID;
 	this->texture = textureID;
 	this->vao = vaoID;
@@ -122,7 +126,6 @@ Particle::~Particle(){};
 	this->vel = glm::vec3(0,0,0.02);
 	this->baseShape = baseShape;
 	this->theta = theta;
-	this->emitTimer = emitTime;
 	this->living = false;
 	this->isLight = true;
 };
@@ -136,13 +139,18 @@ Particle::~Particle(){
 //x and y increment based on radius (pos[0], pos[1], pos[2]) = (x, y, z)
 //radius increments based on predefined function of z
 void Particle::update(float dTheta, float phi, double time, double dt){
-	float radius = calc(this->pos[2], baseShape); //pass in z to baseShape function
-	this->pos += this->vel;
-	this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
-	this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-	this->pos[0] += cos(phi/2) * calc(this->pos[2]/2, &shapeFunc); //shift of x
-	this->pos[1] += sin(phi/2) * calc(this->pos[2]/2, &shapeFunc); //shift of y
-	this->theta += dTheta;
+	if (this->pos[2] >= 50) {
+		//this->pos[2] = 0;
+		this->living = false;
+	}
+	
+		float radius = calc(this->pos[2], baseShape); //pass in z to baseShape function
+		this->pos += this->vel;
+		this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
+		this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
+		this->pos[0] += cos(phi/2) * calc(this->pos[2]/10, &shapeFunc); //shift of x
+		this->pos[1] += sin(phi/2) * calc(this->pos[2] / 10, &shapeFunc); //shift of y
+		this->theta += dTheta;
 };
 
 void Particle::render(float dTheta, float phi, double alpha){
@@ -163,8 +171,8 @@ void Particle::render(float dTheta, float phi, double alpha){
 	
 	//Interpolate
 	this->posI = pos + vel*(float)alpha;
-	//this->posI[0] += cos(phi/4) * calc(this->pos[2]/2, &shapeFunc)*(float)alpha; --causes skipping/twitching
-	//this->posI[1] += sin(phi/4) * calc(this->pos[2]/2, &shapeFunc)*(float)alpha;
+	this->posI[0] += cos(phi/4) * calc(this->pos[2]/10, &shapeFunc)*(float)alpha;
+	this->posI[1] += sin(phi/4) * calc(this->pos[2]/10, &shapeFunc)*(float)alpha;
 	this->updateTheta(dTheta, alpha);
 
 	//Transformation
@@ -208,19 +216,11 @@ void Particle::updateTheta(float dTheta, double alpha) {
 
 //for Wormhole to check if the particle should be rendered
 bool Particle::isAlive(){
-	if (this->pos[2] >= 50) {
-		//this->pos[2] = 0;
-		this->living = false;
-	}
 	return this->living;
 };
 
 void Particle::setLiving() {
 	this->living = true;
-}
-
-void Particle::setTimer(float time) {
-	this->emitTimer = time;
 }
 
 //sets the new shaping function for an individual particle, called once particle "resets" back to 0 position

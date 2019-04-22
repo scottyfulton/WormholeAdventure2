@@ -171,9 +171,9 @@ std::list<Asteroid*>* Wormhole::getAsteroid()
 >>>>>>> Added emit timers to particles based on RNG. Problem: Particle's isAlive() either doesn't perform proper status check or use of isAlive() in Wormhole class is improper/invalid. Movement of more than one "ring" of Particle's solely dependent on RNG - not the intent of the logic.
 #include "Wormhole.h"
 
-Wormhole::Wormhole(){};
+Wormhole::Wormhole() {};
 
-Wormhole::Wormhole(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei vertexCount, GLsizei particleCount, glm::vec3 pos){
+Wormhole::Wormhole(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei vertexCount, GLsizei particleCount, glm::vec3 pos) {
 	this->shader = shaderID;
 	this->texture = textureID;
 	this->vao = vaoID;
@@ -181,54 +181,61 @@ Wormhole::Wormhole(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei vert
 	this->numParticles = particleCount;
 	this->pos = pos;
 	//this->vel = glm::vec3(0.01f, 0.0f, -0.01f);
-	this->shaping = {{1, 2}, {1,1}};
+	this->shaping = { {1, 2}, {1,1} };
 	this->phi = 0;
-	this->dPhi = 0.1;
+	this->dPhi = 0.01;
 	this->currTheta = 0;
 
 	//float random = (r() / r.max) * 5;
-	for (int i = 0; i < particleCount; i++){
+	for (int i = 0; i < particleCount; i++) {
 		//pos[0] = pos[0] + i*2;
-		particles.push_back(new Particle(shaderID, textureID, vaoID, particleCount, pos, currTheta, (r() / (int)r.max) * 200, &cone));
+		particles.push_back(new Particle(shaderID, textureID, vaoID, particleCount, pos, currTheta, &cone));
 		particles.back()->setFunc(&shaping);
-		currTheta += (float)360/particleCount; //roughly 2*PI / particleCount
+		currTheta += (float)360 / particleCount; //roughly 2*PI / particleCount
 	}
 };
 
 //destruct all Particles
-Wormhole::~Wormhole(){
-	for(Particle* p: particles)
-		p->~Particle(); 
-};
-
-void Wormhole::update(double time, double dt){
-	for (Particle* p : particles) {
-		if (p->isAlive()) {
-			p->update(dTheta, phi, time, dt);
-		} else {
-			if (p->emitTimer <= 0)
-			{
-				p = new Particle(shader, texture, vao, numParticles, pos, currTheta, (r() / (int)r.max) * 200, &cone);
-			} else {
-				p->emitTimer--;
-				if(p->emitTimer <= 0)
-					p->setLiving();
-			}
-			
-		}
-	}
-
-	phi += dPhi;
-};
-
-void Wormhole::render(double alpha){
-	//float phiI = phi + dPhi*alpha;
+Wormhole::~Wormhole() {
 	for (Particle* p : particles)
-		p->render(dTheta, phi, alpha); //change to phiI once particle movement working
+		p->~Particle();
 };
 
+void Wormhole::update(double time, double dt) {
+	int random = r() % 1;
+	if (random == 0) {
+		for (Particle* p : particles) {
+			if (!(p->living)) {
+				p->setLiving();
+
+
+
+				break;
+			}
+
+		}
+
+		for (Particle* p : particles) {
+			if (p->living)
+				p->update(dTheta, phi, time, dt);
+		}
+		phi += dPhi;
+	};
+};
+
+void Wormhole::render(double alpha) {
+		//float phiI = phi + dPhi*alpha;
+		for (Particle* p : particles) {
+			if (p->isAlive())
+				p->render(dTheta, phi, alpha); //change to phiI once particle movement working
+		}
+
+<<<<<<< HEAD
 //rng a new shaping function (always a quadratic function) to give a "new" particle
 void Wormhole::setNewShapingFunc(){
 	
 }; 
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
+=======
+	};
+>>>>>>> Nick gave a correct implementation to choosing when to update/render a Particle. Particles still not looping back to origin of wormhole to follow the curve of the worhole again (yet).

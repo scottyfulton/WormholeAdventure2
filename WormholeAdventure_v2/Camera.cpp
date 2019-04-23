@@ -1,4 +1,3 @@
-#pragma once
 #include "Camera.h"
 
 using namespace glm;
@@ -36,7 +35,7 @@ void Camera::render(double alpha){
 
 	//viewMatrix
 	viewMatrix = glm::mat4(1.0);
-	//viewMatrix = glm::translate(viewMatrix, glm::vec3(100.0f, 100.0f, -100.0f));
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0, 0, -100)); //inverted
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	//Uniform

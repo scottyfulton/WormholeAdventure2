@@ -70,7 +70,7 @@ void Engine::init() {
 	//glfwPollEvents(); not needed now, will need for Game Load Screen later
 	glfwSetCursorPos(window, mode->width / 2, mode->height / 2);
 
-	glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	//OpenGL Settings
 	glEnable(GL_DEPTH_TEST);
@@ -84,54 +84,85 @@ void Engine::init() {
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals; // Won't be used at the moment.
-	bool res = loadOBJ("L200-OBJ-triangles/truck.obj", vertices, uvs, normals);
-
-
-
-	//creating a VAO
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-	//creating a vertex VBO to put in the vao and create vertex attribute pointer
-	GLuint vert_VBO;
-	glGenBuffers(1, &vert_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, vert_VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
-	//glVertexAttributePointer(index, size, type, normalized, stride, offset) is the format
-	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
-	// uv BO (uv Buffer Object)
-	GLuint uv_VBO;
-	glGenBuffers(1, &uv_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, uv_VBO);
-	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
-	//glVertexAttributePointer(index, size, type, normalized, stride, offset) is the format
-	glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
-
-	glBindVertexArray(0); //delete buffers from CPU mem once it's loaded to GPU mem
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, 1);
-	//after deleting the VAO from CPU mem, add its IDs to our vaos vector
-	vaoIDs.push_back(vao);
-	vaoVertexCounts.push_back(vertices.size()); //index 0 is our VAO vertex count for our first object
-	//done creating one VAO, need to do 2 more times
-
-
-
+	bool res = loadOBJ("ExportedModels/SS1_OBJ/SS1tri.obj", vertices, uvs, normals);
 
 
 	//Load Textures
-	GLuint Texture = loadtextures("L200-OBJ-triangles/truck_color.jpg");
+	GLuint Texture = loadtextures("ExportedModels/SS1_OBJ/SS1tri2.jpg");
 	textures.push_back(Texture); //index 0 is our first VAO's texture
+	Texture = loadtextures("Resources/Particle.png");
+	textures.push_back(Texture);
 	//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler"); used in object class, not here
 
-	//Create GameState
-	gameState = new GameState();
-	//Load Entities
-	//GLuint MatrixID = glGetUniformLocation(programID, "MVP"); not used here, will be later in gamestate (basically one instance of a possible camera class)
 
-	gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
-	gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
+	/********************************************************************************/
+	//Follow this for creating vao and binding vbos to it.  Probably just add more vbos 
+	//make va
+	vertexArray* va1 = new vertexArray();
+
+	//make vb
+	vertexBuffer* vert_VB1 = new vertexBuffer(&vertices[0], vertices.size() * sizeof(glm::vec3));
+	va1->addBuffer(vert_VB1, 0, 0, 3, GL_FLOAT, false, 0, 0);
+
+	//make uv vb
+	vertexBuffer* uv_VB1 = new vertexBuffer(&uvs[0], uvs.size() * sizeof(glm::vec2));
+	va1->addBuffer(uv_VB1, 1, 1, 2, GL_FLOAT, false, 0, 0);
+
+	//get it on 
+	vaoIDs.push_back(va1->arrayID);
+	vaoVertexCounts.push_back(vertices.size());
+	/********************************************************************************/
+	
+	//construct VAO for a particle - hardcoded first
+	vertices = {
+		glm::vec3(-.5, .5, -5),
+		glm::vec3(-.5, -.5, -5),
+		glm::vec3(.5, .5, -5),
+		glm::vec3(.5, .5, -5),
+		glm::vec3(-.5, -.5, -5),
+		glm::vec3(.5, -.5, -5)
+	};
+	uvs = {
+		glm::vec2(0, 0),
+		glm::vec2(0, 1),
+		glm::vec2(1, 0),
+		glm::vec2(1, 0),
+		glm::vec2(0, 1),
+		glm::vec2(1, 1)
+	};
+
+	/********************************************************************************/
+	vertexArray* va2 = new vertexArray();
+
+	//make vb
+	vertexBuffer* vert_VB2 = new vertexBuffer(&vertices[0], vertices.size() * sizeof(glm::vec3));
+	va2->addBuffer(vert_VB2, 0, 0, 3, GL_FLOAT, false, 0, 0);
+
+	//make uv vb
+	vertexBuffer* uv_VB2 = new vertexBuffer(&uvs[0], uvs.size() * sizeof(glm::vec2));
+	va2->addBuffer(uv_VB2, 1, 1, 2, GL_FLOAT, false, 0, 0);
+
+	//get it on 
+	vaoIDs.push_back(va2->arrayID);
+	vaoVertexCounts.push_back(vertices.size());
+	/********************************************************************************/
+
+	if (isRunning) {
+		//Create GameState
+		gameState = new GameState();
+		//Load Entities
+		//GLuint MatrixID = glGetUniformLocation(programID, "MVP"); not used here, will be later in gamestate (basically one instance of a possible camera class)
+
+		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
+		gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
+		gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));
+	}
+	
 }
+
+
+
+
 
 void Engine::loop() {
 
@@ -157,8 +188,6 @@ void Engine::loop() {
 	int renderCounter = 0;
 	int updateCounter = 0;
 	/***************************************/
-
-
 
 	while (isRunning) {
 		newFrameTime = std::chrono::high_resolution_clock::now();
@@ -195,8 +224,6 @@ void Engine::loop() {
 		//Poll Inputs
 		input();
 		
-
-		
 		if (((double)(clock::now() - fps).count()) >= 1000000000.0) {
 			//FPS = renderCounter;
 			//UPDATES = updateCounter;
@@ -227,11 +254,11 @@ GLuint Engine::loadtextures(const char* fileName) {
 
 	int width, height;
 
-	unsigned char* image = SOIL_load_image(fileName, &width, &height, 0, SOIL_LOAD_RGB);
+	unsigned char* image = SOIL_load_image(fileName, &width, &height, 0, SOIL_LOAD_RGBA);
 	GLuint textureId;
 	glGenTextures(1, &textureId); //Make room for our texture
 	glBindTexture(GL_TEXTURE_2D, textureId);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	if (image == NULL)
 		printf("Could not load the texture image from path %s!\n", fileName);

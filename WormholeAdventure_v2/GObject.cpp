@@ -7,9 +7,10 @@ using namespace glm;
 ** then sorting (binarySort) for the 10 closest light sources
 */
 
+GObject::GObject(){}; // implicitly called when child classes are constructed
 GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos) {
-	this->texture = textureID;
 	this->shader = shaderID;
+	this->texture = textureID;
 	this->vao = vaoID;
 	this->numVertices = numVertices;
 	this->pos = pos;
@@ -34,7 +35,7 @@ void GObject::render(double alpha){
 	//Texture
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
-
+	glEnable(GL_DEPTH_TEST);
 	//Interpolate
 
 

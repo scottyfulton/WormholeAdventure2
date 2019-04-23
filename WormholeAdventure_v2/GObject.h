@@ -17,13 +17,14 @@ using namespace glm;
 
 class GObject {
 public:
+	GObject(); // implicitly called when child classes are constructed
 	GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos);
 	~GObject();
 
 	void update(double time, double dt); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
 	void render(double alpha);
 
-private:
+protected:
 	GLuint texture, shader, vao; // simply a reference to the correct vao/vbo to use for each GObject drawn
 	// when glDrawElements called, pass each object's "texture", "shader", etc. which simply reference the already loaded & bound data
 	
@@ -38,11 +39,5 @@ private:
 
 	GLsizei numVertices;
 
-
-
-
-
-	
-	
 	bool isLight;
 };

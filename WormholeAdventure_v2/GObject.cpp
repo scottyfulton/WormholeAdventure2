@@ -1,11 +1,21 @@
 #pragma once
 #include "GObject.h"
 
+
+
+
+
+
+
+
 using namespace glm;
 /*
 ** Each GObject's light sources should be obtained by looping through every object, determining if a GObject is a light,
 ** then sorting (binarySort) for the 10 closest light sources
 */
+
+GObject *obj; 
+ 
 
 GObject::GObject(){}; // implicitly called when child classes are constructed
 GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos) {
@@ -14,14 +24,23 @@ GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVer
 	this->vao = vaoID;
 	this->numVertices = numVertices;
 	this->pos = pos;
+	
+	
+	
+	
+
 };
 
 GObject::~GObject() {
 
+
 }
 
-void GObject::update(double time, double dt) { //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
+void GObject::update( double time, double dt) { //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
+	
 
+	
+	
 };
 
 void GObject::render(double alpha){

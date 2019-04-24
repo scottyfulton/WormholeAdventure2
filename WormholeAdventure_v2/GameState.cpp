@@ -1,6 +1,7 @@
 #pragma once
 #include "GameState.h"
 
+
 GameState::GameState()
 {
 
@@ -29,6 +30,9 @@ void GameState::update(double time, double dt)
 
 	for (Wormhole* w : wormholes)
 		w->update(time, dt);
+
+	
+	
 }
 
 void GameState::render(double alpha)

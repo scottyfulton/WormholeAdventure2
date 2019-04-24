@@ -1,6 +1,16 @@
-﻿  objloader.cpp
-soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(image_DXT.obj)' or at 'C:\VisualStudioApps\WormholeAdventure_v2\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(image_helper.obj)' or at 'C:\VisualStudioApps\WormholeAdventure_v2\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(SOIL.obj)' or at 'C:\VisualStudioApps\WormholeAdventure_v2\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(stb_image_aug.obj)' or at 'C:\VisualStudioApps\WormholeAdventure_v2\Debug\SOIL.pdb'; linking object as if no debug info
-  WormholeAdventure_v2.vcxproj -> C:\VisualStudioApps\WormholeAdventure_v2\Debug\WormholeAdventure_v2.exe
+﻿  Asteroid.cpp
+c:\users\user\desktop\graphicsproj\wormholeadventure2\wormholeadventure_v2\asteroid.cpp(39): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\user\desktop\graphicsproj\wormholeadventure2\wormholeadventure_v2\asteroid.cpp(40): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(image_DXT.obj)' or at 'C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\SOIL.pdb'; linking object as if no debug info
+soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(image_helper.obj)' or at 'C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\SOIL.pdb'; linking object as if no debug info
+soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(SOIL.obj)' or at 'C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\SOIL.pdb'; linking object as if no debug info
+soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(stb_image_aug.obj)' or at 'C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\SOIL.pdb'; linking object as if no debug info
+  WormholeAdventure_v2.vcxproj -> C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\WormholeAdventure_v2.exe

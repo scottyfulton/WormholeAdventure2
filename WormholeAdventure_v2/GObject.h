@@ -13,7 +13,12 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+
+
+
+
 using namespace glm;
+
 
 class GObject {
 public:
@@ -25,7 +30,7 @@ public:
 	void render(double alpha);
 
 protected:
-	GLuint texture, shader, vao; // simply a reference to the correct vao/vbo to use for each GObject drawn
+	GLuint texture, shader, vao, type; // simply a reference to the correct vao/vbo to use for each GObject drawn
 	// when glDrawElements called, pass each object's "texture", "shader", etc. which simply reference the already loaded & bound data
 	
 	//Matricies
@@ -36,8 +41,12 @@ protected:
 	glm::vec3 pos;
 	glm::vec3 vel;
 	glm::vec3 acc;
+	
+	
+	
 
 	GLsizei numVertices;
+	
 
 	bool isLight;
 };

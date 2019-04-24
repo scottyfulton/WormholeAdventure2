@@ -25,7 +25,7 @@ class Wormhole {
 		std::vector<GLsizei> *vertexCounts;
 		//Matricies
 
-		glm::mat4 transformationMatrix;
+		glm::mat4 transformationMatrix, viewMatTransposed = glm::transpose(glm::mat4(1.0));
 		//pos, vel, acc
 		glm::vec3 pos;
 		/*glm::vec3 vel;

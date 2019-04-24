@@ -13,7 +13,7 @@ public:
 	~Particle();
 
 	void update(float dTheta, float phi, double time, double dt); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
-	void render(float dTheta, float phi, double alpha);
+	void render(glm::mat4 *viewMatTransposed, float dTheta, float phi, double alpha);
 	float calc(float val, std::list<term>* function);
 	bool isAlive(); //for Wormhole to check if the particle should be rendered
 	void setFunc(std::list<term>* shapingFunc); //sets the new shaping function for an individual particle, called once particle "resets" back to 0 position

@@ -3,8 +3,8 @@
 
 Wormhole::Wormhole() {};
 
-Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID, std::vector<GLuint> *vaoID, 
-					std::vector<GLsizei> *vertexCount, GLsizei particleCount, GLsizei asteroidCount,  glm::vec3 pos) {
+Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID, std::vector<GLuint> *vaoID,
+	std::vector<GLsizei> *vertexCount, GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos) {
 	this->shaders = shaderID;
 	this->textures = textureID;
 	this->vaos = vaoID;
@@ -13,7 +13,7 @@ Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureI
 	this->numAsteroids = asteroidCount;
 	this->pos = pos;
 	//this->vel = glm::vec3(0.01f, 0.0f, -0.01f);
-	this->shaping = {{-1, 2}, {1,1} };
+	this->shaping = { {-1, 2}, {1,1} };
 	this->phi = 0;
 	this->dPhi = 0;
 	this->ddPhi = 0.000005;
@@ -26,10 +26,10 @@ Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureI
 	}
 
 	for (int i = 0; i < asteroidCount; i++) {
-		asteroids.push_back(new Asteroid((*shaders)[0], (*textures)[2], (*vaos)[2], (*vertexCounts)[2],  pos, &cone));
+		asteroids.push_back(new Asteroid((*shaders)[0], (*textures)[2], (*vaos)[2], (*vertexCounts)[2], pos, &cone));
 		asteroids.back()->setFunc(&shaping);
 	}
-	
+
 };
 
 //destruct all Particles
@@ -42,7 +42,7 @@ Wormhole::~Wormhole() {
 };
 
 void Wormhole::update(double time, double dt) {
-	
+
 	int random = (std::rand() / RAND_MAX) % 2;
 	if (random == 0) {
 		for (Particle* p : particles) {
@@ -52,7 +52,16 @@ void Wormhole::update(double time, double dt) {
 			}
 
 		}
-		
+		for (Particle* p : particles) {
+			if (p->living) {
+
+				p->update(dTheta, phi, time, dt);
+			}
+		}
+	};
+
+	random = (std::rand() / RAND_MAX) % 10;
+	if (random == 0) {
 		for (Asteroid* a : asteroids) {
 			if (!(a->living)) {
 				a->reset(numAsteroids);
@@ -60,25 +69,16 @@ void Wormhole::update(double time, double dt) {
 			}
 
 		}
-	
-		for (Particle* p : particles) {
-			if (p->living) {
-				
-				p->update(dTheta, phi, time, dt);
-			}
-		}
-
 		for (Asteroid* a : asteroids) {
 			if (a->living) {
 
 				a->update(dTheta, phi, time, dt);
 			}
 		}
-		
-		//std::cout << "Number of Particles alive: " << numAlive << std::endl;
-		phi += dPhi;
-		dPhi += ddPhi;
 	};
+
+	phi += sin(phi)*dPhi;
+	dPhi += ddPhi;
 };
 
 void Wormhole::render(double alpha) {
@@ -99,7 +99,7 @@ void Wormhole::render(double alpha) {
 	//float phiI = phi + dPhi*alpha;
 	for (Particle* p : particles) {
 		if (p->isAlive())
-			p->render(dTheta, phi, alpha); //change to phiI once particle movement working
+			p->render(&viewMatTransposed, dTheta, phi, alpha); //change to phiI once particle movement working
 	}
 
 
@@ -112,7 +112,7 @@ void Wormhole::render(double alpha) {
 
 	for (Asteroid* a : asteroids) {
 		if (a->isAlive())
-			a->render(dTheta, phi, alpha); //change to phiI once particle movement working
+			a->render(&viewMatTransposed, dTheta, phi, alpha); //change to phiI once particle movement working
 	}
-	
+
 };

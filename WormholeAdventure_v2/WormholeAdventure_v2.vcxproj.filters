@@ -39,19 +39,19 @@
     <ClCompile Include="objloader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="migration\IndexBuffer.cpp">
+    <ClCompile Include="Particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="migration\Render.cpp">
+    <ClCompile Include="GameMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="migration\VertexArray.cpp">
+    <ClCompile Include="Wormhole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="migration\VertexBuffer.cpp">
+    <ClCompile Include="emigration\vertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="migration\myShader.cpp">
+    <ClCompile Include="emigration\vertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,22 +74,22 @@
     <ClInclude Include="objloader.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="migration\IndexBuffer.h">
+    <ClInclude Include="Particle.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMenu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wormhole.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Term.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="emigration\vertexArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="migration\Render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="migration\VertexArray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="migration\VertexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="migration\VertexBufferLayout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="migration\myShader.h">
+    <ClInclude Include="emigration\vertexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -100,12 +100,6 @@
     <None Include="TransformVertexShader.vertexshader">
       <Filter>Source Files\Shaders</Filter>
     </None>
-    <None Include="res\shaders\Shader.shader" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="notes.txt">
-      <Filter>Source Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 ﻿  Engine.cpp
 c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
-  c:\dev\wormholeadventure_v2\wormholeadventure_v2\packages\glfw.3.3.0.1\build\native\include\glfw\glfw3.h(104): note: see previous definition of 'APIENTRY'
-  WormholeAdventure_v2.vcxproj -> C:\Dev\WormholeAdventure_v2\WormholeAdventure_v2\Debug\WormholeAdventure_v2.exe
+  c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\wormhole.h(16): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  WormholeAdventure_v2.vcxproj -> C:\Dev\WormholeAdventure2-Travis\WormholeAdventure2-Travis\Debug\WormholeAdventure_v2.exe

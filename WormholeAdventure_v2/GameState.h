@@ -14,6 +14,7 @@
 //#include "common\controls.hpp"
 //#include "common/objloader.hpp"
 #include "GObject.h"
+#include "Wormhole.h"
 #include <list>
 #include "Camera.h"
 
@@ -33,9 +34,11 @@ public:
 	void addCamera(Camera* obj);
 	void removeCamera(Camera* obj);
 
+	void addWormhole(Wormhole* obj);
+	void removeWormhole(Wormhole* obj);
+
 private:
 	std::list<Camera*> cameras;
 	std::list<GObject*> gObjects;
-	
-
+	std::list<Wormhole*> wormholes;
 };

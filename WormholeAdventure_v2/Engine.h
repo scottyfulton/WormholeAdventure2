@@ -36,6 +36,10 @@
 #include <iostream>
 //#include <ratio>
 
+//vao/vbo classes
+#include "emigration/vertexArray.h"
+#include "emigration/vertexBuffer.h"
+
 
 //#include "Camera.h"
 //#include "GObject.h"

@@ -4,9 +4,12 @@ uniform sampler2D texture0;
 
 in vec2 uv_Frag;
 
-out vec3 color;
+out vec4 color;
+
 
 void main(){
-
-	color = texture(texture0, uv_Frag).rgb;
+	color = texture(texture0, uv_Frag); // * vec4(1.0, 0.0, 1.0, 1.0);
+	if(color.a < 0.5){
+        discard;
+    }
 }

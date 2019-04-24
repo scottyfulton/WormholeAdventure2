@@ -24,6 +24,8 @@
 //#include "Include.h"
 
 
+
+
 class GameState {
 public:
 	GameState();
@@ -41,6 +43,7 @@ public:
 
 	void addWormhole(Wormhole* obj);
 	void removeWormhole(Wormhole* obj);
+	
 
 <<<<<<< HEAD
 	void addPlayer(Player* obj);
@@ -58,7 +61,11 @@ private:
 	std::list<GObject*> gObjects;
 	std::list<Wormhole*> wormholes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std::list<Player*> players;
 =======
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
+=======
+	
+>>>>>>> Implemented Asteroids
 };

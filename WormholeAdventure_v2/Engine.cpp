@@ -147,6 +147,8 @@ void Engine::init() {
 	textures.push_back(Texture); //index 0 is our first VAO's texture
 	Texture = loadtextures("Resources/Particle.png");
 	textures.push_back(Texture);
+	Texture = loadtextures("Asteroid/10464_Asteroid_v1_diffuse.png");
+	textures.push_back(Texture);
 	//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler"); used in object class, not here
 	
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
@@ -264,6 +266,28 @@ void Engine::init() {
 
 	vaoIDs.push_back(vao1);
 	vaoVertexCounts.push_back(vertices.size()); //index 0 is our VAO vertex count for our first object
+	vertices.clear();
+	uvs.clear();
+	normals.clear();
+	
+
+	res = loadOBJ("Asteroid/asteroid1.obj", vertices, uvs, normals);
+	GLuint vao2;
+	glGenVertexArrays(1, &vao2);
+	glBindVertexArray(vao2);
+
+	glGenBuffers(1, &vert_VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, vert_VBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+
+	glGenBuffers(1, &uv_VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, uv_VBO);
+	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+
+	vaoIDs.push_back(vao2);
+	vaoVertexCounts.push_back(vertices.size()); //index 0 is our VAO vertex count for our first object*/
 	//construct game menu
 
 	if (isRunning) {
@@ -274,7 +298,9 @@ void Engine::init() {
 
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
 		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
-		gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));
+		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, &vaoVertexCounts, 1000, 10,  glm::vec3(0.0f, 0.0f, 0.0f)));
+		//gameState->addGObject(new GObject(shaders[0], textures[2], vaoIDs[2], vaoVertexCounts[2], glm::vec3(0.0f, 0.0f, 0.0f)));
+		
 	}
 	
 }

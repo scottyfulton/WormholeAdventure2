@@ -100,8 +100,8 @@ bool Particle::isAlive(){
 
 void Particle::reset(float particleCount){
 	this->pos[2] = 0;
-	this->vel = glm::vec3(0, 0, 0.0001);
-	this->acc = glm::vec3(0, 0, 0.00005);
+	this->vel = glm::vec3(0, 0, 0.1);
+	this->acc = glm::vec3(0, 0, 0.0);
 	this->setTheta(((float)360 / particleCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
 	this->setLiving();
 }

@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="emigration\vertexArray.cpp" />
     <ClCompile Include="emigration\vertexBuffer.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="Wormhole.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Asteroid.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="emigration\vertexArray.h" />
     <ClInclude Include="emigration\vertexBuffer.h" />

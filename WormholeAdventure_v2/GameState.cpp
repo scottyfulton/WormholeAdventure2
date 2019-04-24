@@ -1,6 +1,7 @@
 #pragma once
 #include "GameState.h"
 
+
 GameState::GameState()
 {
 	isHit = false;
@@ -91,7 +92,13 @@ void GameState::update(double time, double dt, bool arr[4])
 
 	for (Wormhole* w : wormholes)
 		w->update(time, dt);
+<<<<<<< HEAD
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
+=======
+
+	
+	
+>>>>>>> Implemented Asteroids
 }
 
 void GameState::render(double alpha)

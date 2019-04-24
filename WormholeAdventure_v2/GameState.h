@@ -19,6 +19,8 @@
 #include "Camera.h"
 
 
+
+
 class GameState {
 public:
 	GameState();
@@ -36,9 +38,11 @@ public:
 
 	void addWormhole(Wormhole* obj);
 	void removeWormhole(Wormhole* obj);
+	
 
 private:
 	std::list<Camera*> cameras;
 	std::list<GObject*> gObjects;
 	std::list<Wormhole*> wormholes;
+	
 };

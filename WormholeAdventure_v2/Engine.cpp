@@ -298,7 +298,7 @@ void Engine::init() {
 
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
 		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
-		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, &vaoVertexCounts, 1000, 10,  glm::vec3(0.0f, 0.0f, 0.0f)));
+		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, &vaoVertexCounts, 2000, 10,  glm::vec3(0.0f, 0.0f, 0.0f)));
 		//gameState->addGObject(new GObject(shaders[0], textures[2], vaoIDs[2], vaoVertexCounts[2], glm::vec3(0.0f, 0.0f, 0.0f)));
 		
 	}

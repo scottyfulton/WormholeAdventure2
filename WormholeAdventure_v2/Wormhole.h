@@ -69,8 +69,12 @@ class Wormhole {
 		std::vector<GLsizei> *vertexCounts;
 		//Matricies
 
+<<<<<<< HEAD
 		glm::mat4 transformationMatrix;
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
+=======
+		glm::mat4 transformationMatrix, viewMatTransposed = glm::transpose(glm::mat4(1.0));
+>>>>>>> Changed particles to not spiral so they are easier to see when looking directly down the z axis. Might change back once the camera is looking down the curve of the Wormhole rather than at its base.
 		//pos, vel, acc
 		glm::vec3 pos;
 		/*glm::vec3 vel;

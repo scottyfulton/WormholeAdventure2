@@ -10,6 +10,7 @@ Engine::Engine() {
 }
 //need a VAO and the number of vertices in model to pass to each object
 Engine::~Engine() {
+	glfwTerminate();
 	delete gameState;
 	delete this;
 }
@@ -29,8 +30,8 @@ void Engine::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
-	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
+	window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
+	//window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
 
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
@@ -52,7 +53,7 @@ void Engine::init() {
 	//Escape Key listener
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_FALSE);
 	// Hide the mouse and enable unlimited mouvement
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// Set the mouse at the center of the screen
 	//glfwPollEvents(); not needed now, will need for Game Load Screen later
@@ -173,7 +174,7 @@ void Engine::init() {
 	if (isRunning) {
 		//Create GameState
 		gameState = new GameState();
-		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
+		gameState->addCamera(new Camera(shaders[0],90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
 		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, &vaoVertexCounts, 1000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
 	}
 }
@@ -248,6 +249,7 @@ void Engine::loop() {
 			fps = clock::now();
 		}
 	}
+	this->~Engine();
 }
 
 void Engine::input() {
@@ -276,8 +278,6 @@ void Engine::input() {
 		keys[3] = true;
 	else
 		keys[3] = false;
-
-	std::cout << "Up: " << keys[0] << "Left: " << keys[1] << "Down: " << keys[2] << "Right: " << keys[3] << std::endl;
 }
 
 

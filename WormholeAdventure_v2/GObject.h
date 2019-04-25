@@ -30,6 +30,7 @@ public:
 	void render(double alpha);
 
 protected:
+	
 	GLuint texture, shader, vao, type; // simply a reference to the correct vao/vbo to use for each GObject drawn
 	// when glDrawElements called, pass each object's "texture", "shader", etc. which simply reference the already loaded & bound data
 	
@@ -42,11 +43,6 @@ protected:
 	glm::vec3 vel;
 	glm::vec3 acc;
 	
-	
-	
-
 	GLsizei numVertices;
-	
-
 	bool isLight;
 };

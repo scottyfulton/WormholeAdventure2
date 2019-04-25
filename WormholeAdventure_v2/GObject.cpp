@@ -1,13 +1,6 @@
 #pragma once
 #include "GObject.h"
 
-
-
-
-
-
-
-
 using namespace glm;
 /*
 ** Each GObject's light sources should be obtained by looping through every object, determining if a GObject is a light,
@@ -24,10 +17,6 @@ GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVer
 	this->vao = vaoID;
 	this->numVertices = numVertices;
 	this->pos = pos;
-	
-	
-	
-	
 
 };
 

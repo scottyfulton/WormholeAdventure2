@@ -10,7 +10,10 @@ Engine::Engine() {
 }
 //need a VAO and the number of vertices in model to pass to each object
 Engine::~Engine() {
+<<<<<<< HEAD
 	glfwTerminate();
+=======
+>>>>>>> Got rid of commented lines that haven't been used since a long time ago - like, a couple days.
 	delete gameState;
 	delete this;
 }
@@ -33,7 +36,6 @@ void Engine::init() {
 	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
 	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
 	//window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
-
 
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
@@ -296,13 +298,8 @@ void Engine::init() {
 	if (isRunning) {
 		//Create GameState
 		gameState = new GameState();
-		//Load Entities
-		//GLuint MatrixID = glGetUniformLocation(programID, "MVP"); not used here, will be later in gamestate (basically one instance of a possible camera class)
-
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
-		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
 		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, &vaoVertexCounts, 1000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
-		//gameState->addGObject(new GObject(shaders[0], textures[2], vaoIDs[2], vaoVertexCounts[2], glm::vec3(0.0f, 0.0f, 0.0f)));
 	}
 }
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.

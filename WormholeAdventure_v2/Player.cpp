@@ -102,18 +102,7 @@ void Player::update(double time, double dt) { //manipulates position data (parti
 //call gobj update method
 
 	bool boolArr[] = { false, false, false,false };
-	std::string inputVal = NULL;
 	int inVal = 0;
-	//for (int i = 0; i < 4; i++) {
-	//	if (boolArr[i] == false)
-	//	{
-	//		inputVal.push_back('0');
-	//	}
-	//	else 
-	//	{
-	//		inputVal.push_back('1');
-	//	}
-	//}
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -554,9 +543,10 @@ void Player::render(double alpha) {
 	rotationYMatrix = glm::mat4(1.0);
 	rotationZMatrix = glm::mat4(1.0);
 	rotationXMatrix = glm::rotate(rotationXMatrix, (valX), glm::vec3(1.0, 0.0, 0.0));
-	rotationYMatrix = glm::rotate(rotationYMatrix, (radTemp + valY), glm::vec3(0.0, 1.0, 0.0));
+	rotationYMatrix = glm::rotate(rotationYMatrix, (1.57f/2.0f), glm::vec3(0.0, 1.0, 0.0));
 	rotationZMatrix = glm::rotate(rotationZMatrix, (valZ), glm::vec3(0.0, 0.0, 1.0));
-	rotationMatrix = rotationZMatrix * rotationYMatrix *rotationXMatrix;
+	//rotationMatrix = rotationZMatrix * rotationYMatrix *rotationXMatrix;
+	rotationMatrix =  rotationXMatrix* rotationYMatrix *rotationZMatrix;
 
 	valX = pos[0];
 	valY = pos[1];

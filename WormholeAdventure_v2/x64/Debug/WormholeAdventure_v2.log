@@ -115,5 +115,7 @@ s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(19
 >>>>>>> Created Particle class. Uses a list<term> to keep track of the function (list of terms) that each Particle will update based on. (term has a coefficient and exponent)
 =======
 ﻿  Player.cpp
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\player.cpp(67): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\player.cpp(73): warning C4305: 'initializing': truncation from 'double' to 'float'
   WormholeAdventure_v2.vcxproj -> C:\Dev\WormholeAdventure_v2\x64\Debug\WormholeAdventure_v2.exe
 >>>>>>> updated player class with input switch case

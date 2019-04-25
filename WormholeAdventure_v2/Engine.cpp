@@ -240,6 +240,7 @@ void Engine::init() {
 
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		Player* player0 = new Player(&shaders, &textures, &vaoIDs,
 			&vaoVertexCounts, glm::vec3(0.0f, 0.0f, 75.0f), glm::vec3(0.0, 1.0, 0.0));
@@ -251,6 +252,9 @@ void Engine::init() {
 
 =======
 		Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0));
+=======
+		//Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0));
+>>>>>>> Fixed ship by dividing by 2
 		gameState->addPlayer(new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0)));
 		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
 		gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));

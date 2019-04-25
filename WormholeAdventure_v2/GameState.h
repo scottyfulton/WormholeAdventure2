@@ -7,6 +7,7 @@
 #include "GObject.h"
 #include "Wormhole.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "Player.h"
 =======
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
@@ -15,6 +16,12 @@
 //#include "Include.h"
 
 
+=======
+#include "Player.h"
+#include <list>
+#include "Camera.h"
+//#include "Include.h"
+>>>>>>> updated player class with input switch case
 
 
 class GameState {
@@ -43,8 +50,17 @@ public:
 	//void addInput(Input* obj);
 	//void removeInput(Input* obj);
 
+<<<<<<< HEAD
 =======
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
+=======
+	void addPlayer(Player* obj);
+	void removePlayer(Player* obj);
+
+	//void addInput(Input* obj);
+	//void removeInput(Input* obj);
+
+>>>>>>> updated player class with input switch case
 private:
 	bool collisionDetection(Player* obj1, Asteroid* obj2);
 	bool isHit;
@@ -53,10 +69,14 @@ private:
 	std::list<Wormhole*> wormholes;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	std::list<Player*> players;
 =======
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
 =======
 	
 >>>>>>> Implemented Asteroids
+=======
+	std::list<Player*> players;
+>>>>>>> updated player class with input switch case
 };

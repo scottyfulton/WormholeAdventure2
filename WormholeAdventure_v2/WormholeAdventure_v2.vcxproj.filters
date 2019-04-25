@@ -60,6 +60,7 @@
     <ClCompile Include="emigration\vertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
 =======
 >>>>>>> Created Particle class. Uses a list<term> to keep track of the function (list of terms) that each Particle will update based on. (term has a coefficient and exponent)
 =======
@@ -69,6 +70,11 @@
       <Filter>Source Files</Filter>
     </ClCompile>
 >>>>>>> Implemented Asteroids
+=======
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+>>>>>>> updated player class with input switch case
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -113,6 +119,7 @@
     <ClInclude Include="emigration\vertexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
 =======
 >>>>>>> Created Particle class. Uses a list<term> to keep track of the function (list of terms) that each Particle will update based on. (term has a coefficient and exponent)
 =======
@@ -122,6 +129,11 @@
       <Filter>Source Files</Filter>
     </ClInclude>
 >>>>>>> Implemented Asteroids
+=======
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+>>>>>>> updated player class with input switch case
   </ItemGroup>
   <ItemGroup>
     <None Include="TextureFragmentShader.fragmentshader">

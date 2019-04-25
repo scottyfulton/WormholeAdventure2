@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿  Player.cpp
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(58): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -112,3 +113,7 @@ s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(19
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
   WormholeAdventure_v2.vcxproj -> S:\_Computer_Graphics_Labs\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe
 >>>>>>> Created Particle class. Uses a list<term> to keep track of the function (list of terms) that each Particle will update based on. (term has a coefficient and exponent)
+=======
+﻿  Player.cpp
+  WormholeAdventure_v2.vcxproj -> C:\Dev\WormholeAdventure_v2\x64\Debug\WormholeAdventure_v2.exe
+>>>>>>> updated player class with input switch case

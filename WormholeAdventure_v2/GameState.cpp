@@ -20,6 +20,10 @@ GameState::~GameState()
 		//players.remove(p);
 	}
 
+	for (Player* p : players) {
+		players.remove(p);
+	}
+
 	for (GObject* g : gObjects) {
 		g->~GObject();
 		//gObjects.remove(g);
@@ -53,6 +57,7 @@ void GameState::update(double time, double dt, bool arr[4])
 
 	for (GObject* g : gObjects)
 		g->update(time, dt);
+<<<<<<< HEAD
 
 	for (Wormhole* w : wormholes) {
 		w->setviewMat(view);
@@ -100,6 +105,13 @@ void GameState::update(double time, double dt, bool arr[4])
 
 	for (Wormhole* w : wormholes) {
 		w->setviewMat(view);
+=======
+	
+	for (Player* p : players) 
+		p->update(time, dt);
+	
+	for (Wormhole* w : wormholes)
+>>>>>>> updated player class with input switch case
 		w->update(time, dt);
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -120,8 +132,13 @@ void GameState::render(double alpha)
 		c->render(alpha);
 
 	for (Player* p : players)
+<<<<<<< HEAD
 		p->render(alpha, isHit);
 	
+=======
+		p->render(alpha);
+
+>>>>>>> updated player class with input switch case
 	//Objects
 	for (GObject* g : gObjects)
 		g->render(alpha);
@@ -166,6 +183,7 @@ void GameState::removePlayer(Player* obj)
 {
 	players.remove(obj);
 }
+<<<<<<< HEAD
 
 //Player needs getPos and Asteroid needs get postion
 bool GameState::collisionDetection(Player* obj1, Asteroid* obj2)
@@ -188,3 +206,14 @@ bool GameState::collisionDetection(Player* obj1, Asteroid* obj2)
 		return false;
 	}
 }
+=======
+//
+//void addInput(Input* obj)
+//{
+//
+//}
+//void removeInput(Input* obj)
+//{
+//
+//}
+>>>>>>> updated player class with input switch case

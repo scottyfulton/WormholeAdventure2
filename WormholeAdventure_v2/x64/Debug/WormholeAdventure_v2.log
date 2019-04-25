@@ -1,2 +1,4 @@
 ﻿  Player.cpp
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\player.cpp(67): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\player.cpp(73): warning C4305: 'initializing': truncation from 'double' to 'float'
   WormholeAdventure_v2.vcxproj -> C:\Dev\WormholeAdventure_v2\x64\Debug\WormholeAdventure_v2.exe

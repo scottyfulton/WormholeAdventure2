@@ -10,18 +10,8 @@ Engine::Engine() {
 }
 //need a VAO and the number of vertices in model to pass to each object
 Engine::~Engine() {
-	// Cleanup VBO and shader
-	/*
-	glDeleteProgram(programID);
-	glDeleteTextures(1, &Texture);
-	glDeleteVertexArrays(1, &VertexArrayID);
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
-	// Close OpenGL window and terminate GLFW
-	glfwTerminate();
-	*/
-	//Clean up buffers
 	delete gameState;
+	delete this;
 }
 
 void Engine::init() {
@@ -41,7 +31,6 @@ void Engine::init() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
 	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
-
 
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
@@ -184,13 +173,8 @@ void Engine::init() {
 	if (isRunning) {
 		//Create GameState
 		gameState = new GameState();
-		//Load Entities
-		//GLuint MatrixID = glGetUniformLocation(programID, "MVP"); not used here, will be later in gamestate (basically one instance of a possible camera class)
-
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
-		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
 		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, &vaoVertexCounts, 1000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
-		//gameState->addGObject(new GObject(shaders[0], textures[2], vaoIDs[2], vaoVertexCounts[2], glm::vec3(0.0f, 0.0f, 0.0f)));
 	}
 }
 

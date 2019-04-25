@@ -12,6 +12,10 @@ GameState::~GameState()
 		cameras.remove(c);
 	}
 
+	for (Player* p : players) {
+		players.remove(p);
+	}
+
 	for (GObject* g : gObjects) {
 		gObjects.remove(g);
 	}
@@ -26,7 +30,10 @@ void GameState::update(double time, double dt)
 {
 	for (GObject* g : gObjects)
 		g->update(time, dt);
-
+	
+	for (Player* p : players) 
+		p->update(time, dt);
+	
 	for (Wormhole* w : wormholes)
 		w->update(time, dt);
 }
@@ -35,6 +42,9 @@ void GameState::render(double alpha)
 {
 	for (Camera* c : cameras)
 		c->render(alpha);
+
+	for (Player* p : players)
+		p->render(alpha);
 
 	//Objects
 	for (GObject* g : gObjects)
@@ -72,3 +82,20 @@ void GameState::removeCamera(Camera* obj)
 	cameras.remove(obj);
 }
 
+void GameState::addPlayer(Player* obj)
+{
+	players.push_back(obj);
+}
+void GameState::removePlayer(Player* obj)
+{
+	players.remove(obj);
+}
+//
+//void addInput(Input* obj)
+//{
+//
+//}
+//void removeInput(Input* obj)
+//{
+//
+//}

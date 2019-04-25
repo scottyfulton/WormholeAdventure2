@@ -8,12 +8,14 @@ using namespace glm;
 */
 
 GObject::GObject(){}; // implicitly called when child classes are constructed
-GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos) {
+GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos, glm::vec3 rot ) {
 	this->shader = shaderID;
 	this->texture = textureID;
 	this->vao = vaoID;
 	this->numVertices = numVertices;
 	this->pos = pos;
+	this->rot = rot;
+	
 };
 
 GObject::~GObject() {
@@ -37,6 +39,16 @@ void GObject::render(double alpha){
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glEnable(GL_DEPTH_TEST);
 	//Interpolate
+	/*
+			//Interpolate
+		posI.x = (float) (pos.x + (vel.x * alpha));
+		posI.y = (float) (pos.y + (vel.y * alpha));
+		posI.z = (float) (pos.z + (vel.z * alpha));
+	*/
+
+
+	//translation
+	translateMatrix = glm::mat4(1.0);
 
 
 	//Transformation
@@ -51,3 +63,11 @@ void GObject::render(double alpha){
 	glDrawArrays(GL_TRIANGLES, 0, numVertices);
 
 }
+/*
+reset  matrix 
+
+
+
+
+
+*/

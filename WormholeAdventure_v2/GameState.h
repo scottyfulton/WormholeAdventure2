@@ -15,8 +15,10 @@
 //#include "common/objloader.hpp"
 #include "GObject.h"
 #include "Wormhole.h"
+#include "Player.h"
 #include <list>
 #include "Camera.h"
+//#include "Include.h"
 
 
 class GameState {
@@ -37,8 +39,15 @@ public:
 	void addWormhole(Wormhole* obj);
 	void removeWormhole(Wormhole* obj);
 
+	void addPlayer(Player* obj);
+	void removePlayer(Player* obj);
+
+	//void addInput(Input* obj);
+	//void removeInput(Input* obj);
+
 private:
 	std::list<Camera*> cameras;
 	std::list<GObject*> gObjects;
 	std::list<Wormhole*> wormholes;
+	std::list<Player*> players;
 };

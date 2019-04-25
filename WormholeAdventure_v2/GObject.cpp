@@ -1,13 +1,6 @@
 #pragma once
 #include "GObject.h"
 
-
-
-
-
-
-
-
 using namespace glm;
 /*
 ** Each GObject's light sources should be obtained by looping through every object, determining if a GObject is a light,
@@ -25,10 +18,13 @@ GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVer
 	this->numVertices = numVertices;
 	this->pos = pos;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	
 	
 	
+=======
+>>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
 
 =======
 	this->rot = rot;

@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿  Player.cpp
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(58): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -111,6 +112,11 @@ s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(19
 >>>>>>> Changed particles to not spiral so they are easier to see when looking directly down the z axis. Might change back once the camera is looking down the curve of the Wormhole rather than at its base.
 =======
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
+=======
+﻿  Camera.cpp
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\camera.cpp(57): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\camera.cpp(58): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+>>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
   WormholeAdventure_v2.vcxproj -> S:\_Computer_Graphics_Labs\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe
 >>>>>>> Created Particle class. Uses a list<term> to keep track of the function (list of terms) that each Particle will update based on. (term has a coefficient and exponent)
 =======

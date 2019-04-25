@@ -31,6 +31,7 @@ public:
 
 
 protected:
+	
 	GLuint texture, shader, vao, type; // simply a reference to the correct vao/vbo to use for each GObject drawn
 	// when glDrawElements called, pass each object's "texture", "shader", etc. which simply reference the already loaded & bound data
 	;
@@ -50,15 +51,16 @@ protected:
 	glm::vec3 acc;
 <<<<<<< HEAD
 	
+<<<<<<< HEAD
 	
 	
 =======
 	glm::vec3 rot;
 >>>>>>> updated player class with input switch case
 
+=======
+>>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
 	GLsizei numVertices;
-	
-
 	bool isLight;
 };
 

@@ -39,7 +39,7 @@ void Asteroid::update(float phi, double time, double dt) {
 	this->pos[1] += 175.76 * sin(phi)* sin(z/11) * z; //shift of y
 };
 
-void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
+void Asteroid::render(glm::mat4 *viewMat, float phi, double alpha) {
 	//Interpolate
 	this->posI = pos + vel * (float)alpha;
 	//this->thetaI = theta + dTheta * (float)alpha;
@@ -47,7 +47,7 @@ void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
 	transformationMatrix = glm::mat4(1.0);//this works NICK! it's ugly but it WORKS
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
 	transformationMatrix = glm::translate(transformationMatrix, posI);
-	transformationMatrix *= *viewMatInv; //won't work if camera's view matrix is adjusted
+	//transformationMatrix *= *viewMat; //won't work if camera's view matrix is adjusted
 
 	//Setting Uniform Value
 	glUniform1i(texture, 0);

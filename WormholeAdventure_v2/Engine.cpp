@@ -11,9 +11,13 @@ Engine::Engine() {
 //need a VAO and the number of vertices in model to pass to each object
 Engine::~Engine() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	glfwTerminate();
 =======
 >>>>>>> Got rid of commented lines that haven't been used since a long time ago - like, a couple days.
+=======
+	glfwTerminate();
+>>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
 	delete gameState;
 	delete this;
 }
@@ -33,9 +37,14 @@ void Engine::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+<<<<<<< HEAD
 	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
 	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
 	//window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
+=======
+	window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
+	//window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
+>>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
 
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
@@ -57,7 +66,7 @@ void Engine::init() {
 	//Escape Key listener
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_FALSE);
 	// Hide the mouse and enable unlimited mouvement
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// Set the mouse at the center of the screen
 	//glfwPollEvents(); not needed now, will need for Game Load Screen later
@@ -309,7 +318,7 @@ void Engine::init() {
 	if (isRunning) {
 		//Create GameState
 		gameState = new GameState();
-		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
+		gameState->addCamera(new Camera(shaders[0],90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
 		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, &vaoVertexCounts, 1000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
 	}
 }
@@ -424,10 +433,13 @@ void Engine::input() {
 	else
 		keys[3] = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 	std::cout << "Up: " << keys[0] << "Left: " << keys[1] << "Down: " << keys[2] << "Right: " << keys[3] << std::endl;
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
+=======
+>>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
 }
 
 

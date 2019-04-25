@@ -187,7 +187,7 @@ Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureI
 	this->shaping = { {-1, 2}, {1,1} };
 	this->phi = 0;
 	this->dPhi = 0;
-	this->ddPhi = 0.0000005;
+	this->ddPhi = 0.000005;
 	this->currTheta = 0;
 	this->particleTimer = (10000000 / numParticles);
 	this->asteroidTimer = (1000000000 / numAsteroids);
@@ -253,7 +253,7 @@ void Wormhole::update(double time, double dt) {
 			a->update(phi, time, dt);
 		}
 	}
-	phi += dPhi;
+	phi += sin(dPhi)*dPhi;
 	dPhi += ddPhi;
 };
 

@@ -187,8 +187,10 @@ Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureI
 	this->shaping = { {-1, 2}, {1,1} };
 	this->phi = 0;
 	this->dPhi = 0;
-	this->ddPhi = 0.000005;
+	this->ddPhi = 0.0000005;
 	this->currTheta = 0;
+	this->particleTimer = (10000000 / numParticles);
+	this->asteroidTimer = (1000000000 / numAsteroids);
 
 	//float random = (r() / r.max) * 5;
 	for (int i = 0; i < particleCount; i++) {
@@ -214,8 +216,9 @@ Wormhole::~Wormhole() {
 
 void Wormhole::update(double time, double dt) {
 
-	int random = (std::rand() / RAND_MAX) % 2;
-	if (random == 0) {
+	float percentage = ((std::rand() % 10000)) * (particleTimer/2);
+	particleTimer -= percentage;
+	if (particleTimer <= 0.0f) {
 		for (Particle* p : particles) {
 			if (!(p->living)) {
 				p->reset(numParticles);
@@ -223,16 +226,17 @@ void Wormhole::update(double time, double dt) {
 			}
 
 		}
-		for (Particle* p : particles) {
-			if (p->living) {
-
-				p->update(dTheta, phi, time, dt);
-			}
-		}
+		particleTimer = (10000000 / numParticles);
 	};
+	for (Particle* p : particles) {
+		if (p->living) {
 
-	random = (std::rand() / RAND_MAX) % 10;
-	if (random == 0) {
+			p->update(dTheta, phi, time, dt);
+		}
+	}
+	percentage = ((std::rand() % 10000)) * (asteroidTimer/2);
+	asteroidTimer -= percentage;
+	if (asteroidTimer <= 0.0f) {
 		for (Asteroid* a : asteroids) {
 			if (!(a->living)) {
 				a->reset(numAsteroids);
@@ -240,15 +244,16 @@ void Wormhole::update(double time, double dt) {
 			}
 
 		}
-		for (Asteroid* a : asteroids) {
-			if (a->living) {
-
-				a->update(dTheta, phi, time, dt);
-			}
-		}
+		asteroidTimer = (1000000000 / numAsteroids);
 	};
 
-	phi += sin(phi)*dPhi;
+	for (Asteroid* a : asteroids) {
+		if (a->living) {
+
+			a->update(phi, time, dt);
+		}
+	}
+	phi += dPhi;
 	dPhi += ddPhi;
 };
 
@@ -270,9 +275,10 @@ void Wormhole::render(double alpha) {
 	//float phiI = phi + dPhi*alpha;
 	for (Particle* p : particles) {
 		if (p->isAlive())
-			p->render(&viewMatTransposed, dTheta, phi, alpha); //change to phiI once particle movement working
+			p->render(&viewMat, dTheta, phi, alpha); //change to phiI once particle movement working
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -291,6 +297,10 @@ void Wormhole::setNewShapingFunc(){
 
 	//VAO
 	glUseProgram((*shaders)[0]);
+=======
+	// set up for asteroids
+	//glUseProgram((*shaders)[0]);
+>>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
 	glBindVertexArray((*vaos)[2]);
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
@@ -298,7 +308,7 @@ void Wormhole::setNewShapingFunc(){
 
 	for (Asteroid* a : asteroids) {
 		if (a->isAlive())
-			a->render(&viewMatTransposed, dTheta, phi, alpha); //change to phiI once particle movement working
+			a->render(&viewMat, phi, alpha); //change to phiI once particle movement working
 	}
 <<<<<<< HEAD
 	
@@ -307,4 +317,15 @@ void Wormhole::setNewShapingFunc(){
 =======
 
 };
+<<<<<<< HEAD
 >>>>>>> Changed particles to not spiral so they are easier to see when looking directly down the z axis. Might change back once the camera is looking down the curve of the Wormhole rather than at its base.
+=======
+
+float Wormhole::getPhi() {
+	return this->phi;
+};
+
+void Wormhole::setviewMat(glm::mat4 *viewMat){
+	this->viewMat = *viewMat;
+};
+>>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.

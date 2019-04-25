@@ -1,6 +1,6 @@
 #pragma once
 // Include standard headers
-#include <stdio.h>
+#include <iostream>
 #include <stdlib.h>
 #include <vector>
 
@@ -64,7 +64,7 @@ class Engine {
 		//Loop
 		bool isRunning = true; 
 		bool mouseEnabled = true; //used later for mouse input feature
-		
+		bool keys[4] = {false, false, false, false};
 		//Shaders
 		std::vector<GLuint> shaders;
 

@@ -39,6 +39,7 @@ class Wormhole {
 		void update(double time, double dt);
 		void render(double alpha);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		void setviewMat(glm::mat4 *viewMat);
 		float getPhi();
 		//std::list<Asteroid*>* getAsteroid(int index);
@@ -57,12 +58,15 @@ class Wormhole {
 
 		glm::mat4 transformationMatrix, viewMat;
 =======
+=======
+		void setviewMat(glm::mat4 *viewMat);
+		float getPhi();
+>>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
 
 	private:
 		bool isLight;
-		const float dTheta = 0.1; //rate of increase in theta for each particle, causes spiraling
-		float currTheta, phi, dPhi, ddPhi; //passed in construction of a Particle, designates orientation on circumference of the Wormhole - phi = direction of shaping function
-		
+		const float dTheta = 0.01; //rate of increase in theta for each particle, causes spiraling
+		float currTheta, phi, dPhi, ddPhi, particleTimer, asteroidTimer; //passed in construction of a Particle, designates orientation on circumference of the Wormhole - phi = direction of shaping function
 		std::vector<GLuint> *textures, *shaders, *vaos;
 		GLuint numParticles, numAsteroids; // simply a reference to the correct vao/vbo to use for each GObject drawn
 		//GLsizei numVertices;		// when glDrawElements called, pass each object's "texture", "shader", etc. which simply reference the already loaded & bound data
@@ -70,11 +74,15 @@ class Wormhole {
 		//Matricies
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		glm::mat4 transformationMatrix;
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
 =======
 		glm::mat4 transformationMatrix, viewMatTransposed = glm::transpose(glm::mat4(1.0));
 >>>>>>> Changed particles to not spiral so they are easier to see when looking directly down the z axis. Might change back once the camera is looking down the curve of the Wormhole rather than at its base.
+=======
+		glm::mat4 transformationMatrix, viewMat;
+>>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
 		//pos, vel, acc
 		glm::vec3 pos;
 		/*glm::vec3 vel;

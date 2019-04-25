@@ -19,8 +19,11 @@ Camera::~Camera() {
 
 }
 
-void Camera::update(double time, double dt) { //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
-
+void Camera::update(float phi, double time, double dt) { //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
+	float z = this->pos[2];
+	float radius = pow(z,2);
+	this->pos[0] += cos(phi) * sin(z / 12.75) * 30 * radius; //shift of x
+	this->pos[1] += sin(phi) * sin(z / 12.75) * 30 * radius; //shift of y
 };
 
 void Camera::render(double alpha){
@@ -35,12 +38,13 @@ void Camera::render(double alpha){
 
 	//viewMatrix
 	viewMatrix = glm::mat4(1.0);
-	viewMatrix = glm::translate(viewMatrix, glm::vec3(0, 0, -100)); //inverted
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0, 0, -500)); //inverted
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	//Uniform
 	glUniformMatrix4fv(glGetUniformLocation(shader, "projectionMatrix"), 1, false, glm::value_ptr(projectionMatrix));
 	glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, false, glm::value_ptr(viewMatrix));
-
-
+}
+glm::mat4* Camera::getView() {
+	return &viewMatrix;
 }

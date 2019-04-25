@@ -25,14 +25,18 @@ void GameState::init()
 
 void GameState::update(double time, double dt)
 {
+	float currPhi = wormholes.front()->getPhi();
+	glm::mat4 *view = (cameras.front())->getView();
+	for(Camera* c: cameras)
+		c->update(currPhi, time, dt);
+
 	for (GObject* g : gObjects)
 		g->update(time, dt);
 
-	for (Wormhole* w : wormholes)
+	for (Wormhole* w : wormholes) {
+		w->setviewMat(view);
 		w->update(time, dt);
-
-	
-	
+	}
 }
 
 void GameState::render(double alpha)

@@ -22,37 +22,30 @@ Particle::~Particle(){
 //x and y increment based on radius (pos[0], pos[1], pos[2]) = (x, y, z)
 //radius increments based on predefined function of z
 void Particle::update(float dTheta, float phi, double time, double dt){
-	if (this->pos[2] >= 25) {
+	if (this->pos[2] >= 50) {
 		this->living = false;
 	}
 	//std::cout << "z value of particle: " << this->pos[2] << std::endl;
 		float z = this->pos[2];
-		this->radius = calc(z, baseShape); //pass in z to baseShape function
+		this->radius = calc(z-2, baseShape); //pass in z to baseShape function
 		this->vel += this->acc;
 		this->pos += this->vel;
 		this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
 		this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-		this->pos[0] += 2.4*cos(phi) * sin(z/3.5) * calc(z, &shapeFunc); //shift of x
-		this->pos[1] += 2.4 * sin(phi) * sin(z/3.5) * calc(z, &shapeFunc); //shift of y
-		//this->theta += dTheta;
+		this->pos[0] += cos(phi) * sin(z/12.75) * 30 * z; //shift of x
+		this->pos[1] += sin(phi) * sin(z/12.75) * 30 * z; //shift of y
+		this->theta += dTheta;
 };
 
-void Particle::render(glm::mat4 *viewMatTransposed, float dTheta, float phi, double alpha){	
+void Particle::render(glm::mat4 *viewMatInv, float dTheta, float phi, double alpha){	
 	//Interpolate
 	this->posI = pos + vel*(float)alpha;
 	this->thetaI = theta + dTheta * (float)alpha;
-	//this->posI[0] = cos(thetaI) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
-	//this->posI[1] = sin(thetaI) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-	//this->posI[0] += (cos(phi/2) * calc(this->pos[2], &shapeFunc))*(float)alpha;
-	//this->posI[1] += (sin(phi/2) * calc(this->pos[2], &shapeFunc))*(float)alpha;
-	
 
-	//Transformation
-	//transformationMatrix = glm::mat4(1.0);//this works NICK! it's ugly but it WORKS
-	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(2.5, 2.5, 2.5));
+	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.5, 0.5, 0.5));
 	transformationMatrix = glm::translate(glm::mat4(1.0), posI);
 	//multiplying by the transpose of the view matrix of Camera to counteract skewing caused by persepective
-	transformationMatrix *= *viewMatTransposed; //won't work if camera's view matrix is adjusted
+	transformationMatrix *= *viewMatInv; //won't work if camera's view matrix is adjusted
 	
 	//Setting Uniform Value
 	glUniform1i(texture, 0);
@@ -80,7 +73,7 @@ bool Particle::isAlive(){
 void Particle::reset(float particleCount){
 	this->pos[2] = 0;
 	this->vel = glm::vec3(0, 0, 0.01);
-	this->acc = glm::vec3(0, 0, 0.000005);
+	this->acc = glm::vec3(0, 0, 0.00015);
 	this->setTheta(((float)360 / particleCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
 	this->setLiving();
 }

@@ -13,19 +13,20 @@ class Wormhole {
 
 		void update(double time, double dt);
 		void render(double alpha);
+		void setviewMat(glm::mat4 *viewMat);
+		float getPhi();
 
 	private:
 		bool isLight;
-		const float dTheta = 0.1; //rate of increase in theta for each particle, causes spiraling
-		float currTheta, phi, dPhi, ddPhi; //passed in construction of a Particle, designates orientation on circumference of the Wormhole - phi = direction of shaping function
-		
+		const float dTheta = 0.01; //rate of increase in theta for each particle, causes spiraling
+		float currTheta, phi, dPhi, ddPhi, particleTimer, asteroidTimer; //passed in construction of a Particle, designates orientation on circumference of the Wormhole - phi = direction of shaping function
 		std::vector<GLuint> *textures, *shaders, *vaos;
 		GLuint numParticles, numAsteroids; // simply a reference to the correct vao/vbo to use for each GObject drawn
 		//GLsizei numVertices;		// when glDrawElements called, pass each object's "texture", "shader", etc. which simply reference the already loaded & bound data
 		std::vector<GLsizei> *vertexCounts;
 		//Matricies
 
-		glm::mat4 transformationMatrix, viewMatTransposed = glm::transpose(glm::mat4(1.0));
+		glm::mat4 transformationMatrix, viewMat;
 		//pos, vel, acc
 		glm::vec3 pos;
 		/*glm::vec3 vel;

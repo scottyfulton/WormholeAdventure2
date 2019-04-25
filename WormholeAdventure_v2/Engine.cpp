@@ -3,8 +3,7 @@
 /*
 ** The view and projection matrices will be the same for every GObject, and every GObject's shader can be the same with an if statement in the shader
 ** that determines if the object is also a light source. With that in mind, only one set of shaders is needed.
-** Moving forward: -need to adjust to one set of shaders	-need to account for attenuation distance before computing a GObject as a light source
-** -need to declare globals to pass between classes
+** Moving forward: -need to account for attenuation distance before computing a GObject as a light source
 */
 Engine::Engine() {
 
@@ -62,7 +61,7 @@ void Engine::init() {
 	}
 
 	//Escape Key listener
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_FALSE);
 	// Hide the mouse and enable unlimited mouvement
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -123,7 +122,7 @@ void Engine::init() {
 	Texture = loadtextures("Asteroid/10464_Asteroid_v1_diffuse.png");
 	textures.push_back(Texture);
 	//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler"); used in object class, not here
-	
+
 	//construct VAO for a particle - hardcoded first
 	vertices = {
 		glm::vec3(-.5, .5, -5),
@@ -161,7 +160,7 @@ void Engine::init() {
 	vertices.clear();
 	uvs.clear();
 	normals.clear();
-	
+
 
 	res = loadOBJ("Asteroid/asteroid1.obj", vertices, uvs, normals);
 	GLuint vao2;
@@ -190,11 +189,9 @@ void Engine::init() {
 
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
 		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
-		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, &vaoVertexCounts, 2000, 10,  glm::vec3(0.0f, 0.0f, 0.0f)));
+		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, &vaoVertexCounts, 1000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
 		//gameState->addGObject(new GObject(shaders[0], textures[2], vaoIDs[2], vaoVertexCounts[2], glm::vec3(0.0f, 0.0f, 0.0f)));
-		
 	}
-	
 }
 
 void Engine::loop() {
@@ -243,7 +240,6 @@ void Engine::loop() {
 			//subtracting dt intervals
 			accumulator -= dt;
 		}
-
 		//Calculate Alpha
 		alpha = accumulator / dt;
 
@@ -256,7 +252,7 @@ void Engine::loop() {
 
 		//Poll Inputs
 		input();
-		
+
 		if (((double)(clock::now() - fps).count()) >= 1000000000.0) {
 			//FPS = renderCounter;
 			//UPDATES = updateCounter;
@@ -267,19 +263,37 @@ void Engine::loop() {
 			updateCounter = 0;
 			fps = clock::now();
 		}
-
 	}
 }
 
 void Engine::input() {
-	//Poll Events
 	glfwPollEvents();
-	//Reset Cursor
-	glfwSetCursorPos(window, mode->width / 2, mode->height / 2);
 
 	if ((glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) || glfwWindowShouldClose(window)) {
 		isRunning = false;
 	}
+
+	if (glfwGetKey(window, GLFW_KEY_W) || glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		keys[0] = true;
+	else
+		keys[0] = false;
+
+	if (glfwGetKey(window, GLFW_KEY_A) || glfwGetKey(window,GLFW_KEY_LEFT) == GLFW_PRESS)
+		keys[1] = true;
+	else
+		keys[1] = false;
+
+	if (glfwGetKey(window, GLFW_KEY_S) || glfwGetKey(window,  GLFW_KEY_DOWN) == GLFW_PRESS)
+		keys[2] = true;
+	else
+		keys[2] = false;
+
+	if (glfwGetKey(window, GLFW_KEY_D) || glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		keys[3] = true;
+	else
+		keys[3] = false;
+
+	std::cout << "Up: " << keys[0] << "Left: " << keys[1] << "Down: " << keys[2] << "Right: " << keys[3] << std::endl;
 }
 
 
@@ -301,6 +315,6 @@ GLuint Engine::loadtextures(const char* fileName) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	return textureId;
-	
+
 	return 0;
 }

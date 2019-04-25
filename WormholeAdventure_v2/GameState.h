@@ -1,18 +1,9 @@
 #pragma once
-// Include GLEW
 #include <GL/glew.h>
-//#include <GL/glut.h>
-// Include GLFW
 #include <GLFW/glfw3.h>
-// Include GLM
-//#include <glm/glm.hpp>
-//#include <glm/gtc/matrix_transform.hpp>
-//#include <glm\gtc\type_ptr.hpp>
-// to scale
-//#include <glm/gtc/matrix_transform.hpp> 
-//#include "common\shader.hpp"
-//#include "common\controls.hpp"
-//#include "common/objloader.hpp"
+#include <glm/glm.hpp>
+#include <glm\gtc\type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "GObject.h"
 #include "Wormhole.h"
 #include <list>

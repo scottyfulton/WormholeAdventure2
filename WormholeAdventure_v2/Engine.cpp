@@ -11,18 +11,8 @@ Engine::Engine() {
 }
 //need a VAO and the number of vertices in model to pass to each object
 Engine::~Engine() {
-	// Cleanup VBO and shader
-	/*
-	glDeleteProgram(programID);
-	glDeleteTextures(1, &Texture);
-	glDeleteVertexArrays(1, &VertexArrayID);
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
-	// Close OpenGL window and terminate GLFW
-	glfwTerminate();
-	*/
-	//Clean up buffers
 	delete gameState;
+	delete this;
 }
 
 void Engine::init() {
@@ -41,7 +31,8 @@ void Engine::init() {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
-	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
+	//window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
+	window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
 
 
 	if (window == NULL) {
@@ -62,7 +53,7 @@ void Engine::init() {
 	}
 
 	//Escape Key listener
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_FALSE);
 	// Hide the mouse and enable unlimited mouvement
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -91,6 +82,8 @@ void Engine::init() {
 	GLuint Texture = loadtextures("ExportedModels/SS1_OBJ/SS1tri2.jpg");
 	textures.push_back(Texture); //index 0 is our first VAO's texture
 	Texture = loadtextures("Resources/Particle.png");
+	textures.push_back(Texture);
+	Texture = loadtextures("ExportedModels/Asteroid/10464_Asteroid_v1_diffuse.png");
 	textures.push_back(Texture);
 	//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler"); used in object class, not here
 
@@ -131,6 +124,8 @@ void Engine::init() {
 		glm::vec2(1, 1)
 	};
 
+
+
 	/********************************************************************************/
 	vertexArray* va2 = new vertexArray();
 
@@ -146,6 +141,27 @@ void Engine::init() {
 	vaoIDs.push_back(va2->arrayID);
 	vaoVertexCounts.push_back(vertices.size());
 	/********************************************************************************/
+	vertices.clear();
+	uvs.clear();
+	normals.clear();
+	   
+
+	res = loadOBJ("ExportedModels/Asteroid/asteroid1.obj", vertices, uvs, normals);//make va
+		/********************************************************************************/
+	vertexArray* va3 = new vertexArray();
+
+	//make vb
+	vertexBuffer* vert_VB3 = new vertexBuffer(&vertices[0], vertices.size() * sizeof(glm::vec3));
+	va3->addBuffer(vert_VB3, 0, 0, 3, GL_FLOAT, false, 0, 0);
+
+	//make uv vb
+	vertexBuffer* uv_VB3 = new vertexBuffer(&uvs[0], uvs.size() * sizeof(glm::vec2));
+	va3->addBuffer(uv_VB3, 1, 1, 2, GL_FLOAT, false, 0, 0);
+
+	//get it on 
+	vaoIDs.push_back(va3->arrayID);
+	vaoVertexCounts.push_back(vertices.size());
+	/********************************************************************************/
 
 	if (isRunning) {
 		//Create GameState
@@ -155,9 +171,13 @@ void Engine::init() {
 
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
 		//Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0));
-		gameState->addPlayer(new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0)));
+		gameState->addPlayer(new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], 
+			glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0)));
 		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
-		gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));
+		//gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));
+		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, 
+			&vaoVertexCounts, 10000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
+
 	}
 	
 }
@@ -202,7 +222,7 @@ void Engine::loop() {
 
 		while (accumulator >= dt) {
 
-			gameState->update(time, dt);
+			gameState->update(time, dt, keys);
 
 			//FPS keeps track of updates
 			updateCounter++;
@@ -241,14 +261,31 @@ void Engine::loop() {
 }
 
 void Engine::input() {
-	//Poll Events
 	glfwPollEvents();
-	//Reset Cursor
-	glfwSetCursorPos(window, mode->width / 2, mode->height / 2);
 
 	if ((glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) || glfwWindowShouldClose(window)) {
 		isRunning = false;
 	}
+
+	if (glfwGetKey(window, GLFW_KEY_W) || glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		keys[0] = true;
+	else
+		keys[0] = false;
+
+	if (glfwGetKey(window, GLFW_KEY_A) || glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+		keys[1] = true;
+	else
+		keys[1] = false;
+
+	if (glfwGetKey(window, GLFW_KEY_S) || glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		keys[2] = true;
+	else
+		keys[2] = false;
+
+	if (glfwGetKey(window, GLFW_KEY_D) || glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		keys[3] = true;
+	else
+		keys[3] = false;
 }
 
 

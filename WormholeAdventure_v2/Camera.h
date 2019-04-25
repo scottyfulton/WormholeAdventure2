@@ -19,23 +19,17 @@ public:
 	Camera(GLuint shaderID, float fov, float ratio, float near_p, float far_p);
 	~Camera();
 
-	void update(double time, double dt); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
+
+	void update(float phi, double time, double dt); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
 	void render(double alpha);
+	glm::mat4* getView();
 
 private:
 	GLuint shader; // simply a reference to the correct vao/vbo to use for each GObject drawn
 	// when glDrawElements called, pass each object's "texture", "shader", etc. which simply reference the already loaded & bound data
-	
+
 	//Matricies
-	glm::mat4 projectionMatrix;
-	glm::mat4 viewMatrix;
-
-	glm::vec3 pos;
-	glm::vec3 vel;
-	glm::vec3 acc;
-
-	float fov;
-	float ratio;
-	float near_p;
-	float far_p;
+	glm::mat4 projectionMatrix, viewMatrix, transformationMatrix;
+	glm::vec3 pos = glm::vec3(0, 0, -500), vel, acc;
+	float fov, ratio, near_p, far_p, phi;
 };

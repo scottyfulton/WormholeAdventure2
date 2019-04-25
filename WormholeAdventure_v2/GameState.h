@@ -27,7 +27,7 @@ public:
 	~GameState();
 
 	void init(); //load all the vaos, vbos, things
-	void update(double time, double dt); //vaos, vbos updated with new vertex positions
+	void update(double time, double dt, bool arr[4]); //vaos, vbos updated with new vertex positions
 	void render(double alpha);
 
 	void addGObject(GObject* obj);

@@ -3,6 +3,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿  Player.cpp
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(58): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -19,15 +20,24 @@ s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(11
           ]
 <<<<<<< HEAD
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(227): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+=======
+﻿  Asteroid.cpp
+c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travis\wormholeadventure_v2\asteroid.cpp(38): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+>>>>>>> Latest, got shiz
           with
           [
               T=float
           ]
+<<<<<<< HEAD
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(239): warning C4305: 'argument': truncation from 'double' to 'T'
+=======
+c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travis\wormholeadventure_v2\asteroid.cpp(39): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+>>>>>>> Latest, got shiz
           with
           [
               T=float
           ]
+<<<<<<< HEAD
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(265): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
@@ -64,15 +74,43 @@ c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(1
   s:\_computer_graphics_labs\wormholeadventure2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(21): warning C4305: 'initializing': truncation from 'double' to 'const float'
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(115): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+=======
+  Wormhole.cpp
+c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travis\wormholeadventure_v2\wormhole.h(21): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travis\wormholeadventure_v2\wormhole.cpp(19): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travis\wormholeadventure_v2\wormhole.cpp(21): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travis\wormholeadventure_v2\wormhole.cpp(22): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travis\wormholeadventure_v2\wormhole.cpp(53): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
+c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travis\wormholeadventure_v2\wormhole.cpp(58): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travis\wormholeadventure_v2\wormhole.cpp(71): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
+c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travis\wormholeadventure_v2\wormhole.cpp(76): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+  Camera.cpp
+  vertexArray.cpp
+  vertexBuffer.cpp
+  Engine.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\dev\wormholeadventure_v2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\wormhole.h(16): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(94): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(98): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(103): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+>>>>>>> Latest, got shiz
           with
           [
               _Ty=GLsizei
           ]
+<<<<<<< HEAD
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(160): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+=======
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(130): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(134): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(139): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+>>>>>>> Latest, got shiz
           with
           [
               _Ty=GLsizei
           ]
+<<<<<<< HEAD
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(182): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
           with
           [
@@ -86,15 +124,36 @@ s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(19
   Particle.cpp
 >>>>>>> Changed particles to not spiral so they are easier to see when looking directly down the z axis. Might change back once the camera is looking down the curve of the Wormhole rather than at its base.
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\particle.cpp(35): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+=======
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(158): error C2661: 'Wormhole::Wormhole': no overloaded function takes 7 arguments
+  GameMenu.cpp
+  GameState.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\dev\wormholeadventure_v2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\wormhole.h(16): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  GObject.cpp
+  main.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\dev\wormholeadventure_v2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\wormhole.h(16): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  objloader.cpp
+  Particle.cpp
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\particle.cpp(35): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+>>>>>>> Latest, got shiz
           with
           [
               T=float
           ]
+<<<<<<< HEAD
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\particle.cpp(36): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+=======
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\particle.cpp(36): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+>>>>>>> Latest, got shiz
           with
           [
               T=float
           ]
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> This is MUCH closer to the wormhole effect that we wanted in the beginning.
 =======
@@ -125,3 +184,10 @@ c:\dev\wormholeadventure_v2\wormholeadventure_v2\player.cpp(67): warning C4244: 
 c:\dev\wormholeadventure_v2\wormholeadventure_v2\player.cpp(73): warning C4305: 'initializing': truncation from 'double' to 'float'
   WormholeAdventure_v2.vcxproj -> C:\Dev\WormholeAdventure_v2\x64\Debug\WormholeAdventure_v2.exe
 >>>>>>> updated player class with input switch case
+=======
+  Player.cpp
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\player.cpp(67): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\player.cpp(73): warning C4305: 'initializing': truncation from 'double' to 'float'
+  shader.cpp
+  Generating Code...
+>>>>>>> Latest, got shiz

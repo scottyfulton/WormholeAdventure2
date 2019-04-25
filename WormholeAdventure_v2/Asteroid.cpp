@@ -26,7 +26,11 @@ Asteroid::~Asteroid() {
 //radius increments based on predefined function of z
 void Asteroid::update(float phi, double time, double dt) {
 	
+<<<<<<< HEAD
 	if (this->pos[2] >=55) {
+=======
+	if (this->pos[2] >=150) {
+>>>>>>> Latest, got shiz
 		this->living = false;
 	}
 	float z = this->pos[2];
@@ -35,19 +39,34 @@ void Asteroid::update(float phi, double time, double dt) {
 	this->pos += this->vel;
 	this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
 	this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
+<<<<<<< HEAD
 	this->pos[0] += 175.76 * cos(phi)* sin(z / 11) * z; //shift of x
 	this->pos[1] += 175.76 * sin(phi)* sin(z/11) * z; //shift of y
 };
 
 void Asteroid::render(glm::mat4 *viewMat, float phi, double alpha) {
+=======
+	this->pos[0] += cos(phi) * sin(z / 12.75) * 250.0f; //shift of x
+	this->pos[1] += sin(phi) * sin(z / 12.75) * 250.0f; //shift of y
+};
+
+void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
+>>>>>>> Latest, got shiz
 	//Interpolate
 	this->posI = pos + vel * (float)alpha;
 	//this->thetaI = theta + dTheta * (float)alpha;
 	
 	transformationMatrix = glm::mat4(1.0);//this works NICK! it's ugly but it WORKS
+<<<<<<< HEAD
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
 	transformationMatrix = glm::translate(transformationMatrix, posI);
 	//transformationMatrix *= *viewMat; //won't work if camera's view matrix is adjusted
+=======
+	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
+	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
+	transformationMatrix = glm::translate(transformationMatrix, posI);
+	//transformationMatrix *= *viewMatInv; //won't work if camera's view matrix is adjusted
+>>>>>>> Latest, got shiz
 
 	//Setting Uniform Value
 	glUniform1i(texture, 0);
@@ -91,4 +110,8 @@ void Asteroid::setTheta(float newTheta) {
 //sets the new shaping function for an individual particle, called once particle "resets" back to 0 position
 void Asteroid::setFunc(std::list<term>* shapingFunc) {
 	shapeFunc = *shapingFunc;
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> Latest, got shiz

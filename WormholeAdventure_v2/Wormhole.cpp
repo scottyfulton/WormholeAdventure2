@@ -5,9 +5,14 @@
 
 Wormhole::Wormhole() {};
 
+<<<<<<< HEAD
 Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID, 
 	std::vector<GLuint> *vaoID,	std::vector<GLsizei> *vertexCount, 
 	GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos) {
+=======
+Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID, std::vector<GLuint> *vaoID,
+	std::vector<GLsizei> *vertexCount, GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos) {
+>>>>>>> Latest, got shiz
 	this->shaders = shaderID;
 	this->textures = textureID;
 	this->vaos = vaoID;
@@ -21,7 +26,11 @@ Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureI
 	this->dPhi = 0;
 	this->ddPhi = 0.0000005;
 	this->currTheta = 0;
+<<<<<<< HEAD
 	this->particleTimer = (100000 / numParticles);
+=======
+	this->particleTimer = (10000000 / numParticles);
+>>>>>>> Latest, got shiz
 	this->asteroidTimer = (1000000000 / numAsteroids);
 
 	//float random = (r() / r.max) * 5;
@@ -44,8 +53,11 @@ Wormhole::~Wormhole() {
 
 	for (Asteroid* a : asteroids)
 		a->~Asteroid();
+<<<<<<< HEAD
 
 	delete this;
+=======
+>>>>>>> Latest, got shiz
 };
 
 void Wormhole::update(double time, double dt) {
@@ -60,6 +72,7 @@ void Wormhole::update(double time, double dt) {
 			}
 
 		}
+<<<<<<< HEAD
 		particleTimer = (100000 / numParticles);
 	};
 	for (Particle* p : particles) {
@@ -69,12 +82,24 @@ void Wormhole::update(double time, double dt) {
 		}
 	}
 	percentage = ((std::rand() % 100)) * (asteroidTimer/2);
+=======
+		particleTimer = (10000000 / numParticles);
+	};
+	for (Particle* p : particles) {
+		if (p->living) {
+
+			p->update(dTheta, phi, time, dt);
+		}
+	}
+	percentage = ((std::rand() % 10000)) * (asteroidTimer/2);
+>>>>>>> Latest, got shiz
 	asteroidTimer -= percentage;
 	if (asteroidTimer <= 0.0f) {
 		for (Asteroid* a : asteroids) {
 			if (!(a->living)) {
 				a->reset(numAsteroids);
 				break;
+<<<<<<< HEAD
 			}
 
 		}
@@ -246,6 +271,13 @@ void Wormhole::update(double time, double dt) {
 		}
 		asteroidTimer = (1000000000 / numAsteroids);
 	};
+=======
+			}
+
+		}
+		asteroidTimer = (1000000000 / numAsteroids);
+	};
+>>>>>>> Latest, got shiz
 
 	for (Asteroid* a : asteroids) {
 		if (a->living) {
@@ -253,7 +285,11 @@ void Wormhole::update(double time, double dt) {
 			a->update(phi, time, dt);
 		}
 	}
+<<<<<<< HEAD
 	phi += sin(dPhi)*dPhi;
+=======
+	phi += dPhi;
+>>>>>>> Latest, got shiz
 	dPhi += ddPhi;
 };
 
@@ -276,6 +312,7 @@ void Wormhole::render(double alpha) {
 	for (Particle* p : particles) {
 		if (p->isAlive())
 			p->render(&viewMat, dTheta, phi, alpha); //change to phiI once particle movement working
+<<<<<<< HEAD
 	}
 
 <<<<<<< HEAD
@@ -309,6 +346,8 @@ void Wormhole::setNewShapingFunc(){
 	for (Asteroid* a : asteroids) {
 		if (a->isAlive())
 			a->render(&viewMat, phi, alpha); //change to phiI once particle movement working
+=======
+>>>>>>> Latest, got shiz
 	}
 <<<<<<< HEAD
 	
@@ -321,11 +360,32 @@ void Wormhole::setNewShapingFunc(){
 >>>>>>> Changed particles to not spiral so they are easier to see when looking directly down the z axis. Might change back once the camera is looking down the curve of the Wormhole rather than at its base.
 =======
 
+<<<<<<< HEAD
+=======
+	// set up for asteroids
+	//glUseProgram((*shaders)[0]);
+	glBindVertexArray((*vaos)[2]);
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glBindTexture(GL_TEXTURE_2D, (*textures)[2]);
+
+	for (Asteroid* a : asteroids) {
+		if (a->isAlive())
+			a->render(&viewMat, phi, alpha); //change to phiI once particle movement working
+	}
+
+};
+
+>>>>>>> Latest, got shiz
 float Wormhole::getPhi() {
 	return this->phi;
 };
 
 void Wormhole::setviewMat(glm::mat4 *viewMat){
 	this->viewMat = *viewMat;
+<<<<<<< HEAD
 };
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
+=======
+};
+>>>>>>> Latest, got shiz

@@ -45,11 +45,15 @@ void GameState::update(double time, double dt, bool arr[4])
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Latest, got shiz
 	float currPhi = wormholes.front()->getPhi();
 	glm::mat4* view = (cameras.front())->getView();
 	for (Camera* c : cameras)
 		c->update(currPhi, time, dt);
 
+<<<<<<< HEAD
 	for (Player* p : players) {
 		p->setviewMat(view);
 		p->update(time, dt, arr);
@@ -100,11 +104,17 @@ void GameState::update(double time, double dt, bool arr[4])
 		c->update(currPhi, time, dt);
 
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
+=======
+	for (Player* p : players)
+		p->update(time, dt, arr);
+
+>>>>>>> Latest, got shiz
 	for (GObject* g : gObjects)
 		g->update(time, dt);
 
 	for (Wormhole* w : wormholes) {
 		w->setviewMat(view);
+<<<<<<< HEAD
 =======
 	
 	for (Player* p : players) 
@@ -124,12 +134,17 @@ void GameState::update(double time, double dt, bool arr[4])
 =======
 	}
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
+=======
+		w->update(time, dt);
+	}
+>>>>>>> Latest, got shiz
 }
 
 void GameState::render(double alpha)
 {
 	for (Camera* c : cameras)
 		c->render(alpha);
+<<<<<<< HEAD
 
 	for (Player* p : players)
 <<<<<<< HEAD
@@ -139,12 +154,17 @@ void GameState::render(double alpha)
 		p->render(alpha);
 
 >>>>>>> updated player class with input switch case
+=======
+>>>>>>> Latest, got shiz
 	//Objects
 	for (GObject* g : gObjects)
 		g->render(alpha);
 
 	for (Wormhole* w : wormholes)
 		w->render(alpha);
+
+	for (Player* p : players)
+		p->render(alpha);
 }
 
 void GameState::addGObject(GObject* obj)

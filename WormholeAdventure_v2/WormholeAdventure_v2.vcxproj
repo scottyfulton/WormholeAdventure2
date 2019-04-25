@@ -142,10 +142,10 @@
     <ClInclude Include="GObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Term.h" />
-    <ClInclude Include="Wormhole.h" />
     <ClInclude Include="objloader.hpp" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="shader.hpp" />
+    <ClInclude Include="Wormhole.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

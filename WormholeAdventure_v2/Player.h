@@ -26,7 +26,11 @@
 =======
 
 #include <string>
+<<<<<<< HEAD
 >>>>>>> updated player class with input switch case
+=======
+#include <iostream>
+>>>>>>> Latest, got shiz
 
 #include "GObject.h"
 #include "Player.h"
@@ -59,12 +63,15 @@ protected:
 	Player(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos, glm::vec3 rotate);
 	~Player();
 
-	void update(double time, double dt); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
+	void update(double time, double dt, bool arr[4]); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
 	void render(double alpha);
+	void resetNetForce();
+	void addForce(float force, float theta, float phi);
+	void addForceVec(float x, float y, float z);
 
 protected:
 	float radTemp = glm::radians(90.f);
-	float valX, valY, valZ;
+	float valX, valY, valZ, phi, theta, force, movFriction, mass;
 	GLuint texture, shader, vao; // simply a reference to the correct vao/vbo to use for each GObject drawn
 >>>>>>> updated player class with input switch case
 	// when glDrawElements called, pass each object's "texture", "shader", etc. which simply reference the already loaded & bound data
@@ -92,10 +99,15 @@ protected:
 
 	/*pos, vel, acc*/
 	glm::vec3 pos;
+	glm::vec3 posI;
 	glm::vec3 vel;
 	glm::vec3 acc;
 	glm::vec3 rot;
+<<<<<<< HEAD
 >>>>>>> updated player class with input switch case
+=======
+	glm::vec3 netForce;
+>>>>>>> Latest, got shiz
 
 	GLsizei numVertices;
 

@@ -49,11 +49,14 @@
     <ClCompile Include="GameMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Wormhole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+>>>>>>> Latest, got shiz
     <ClCompile Include="emigration\vertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -74,7 +77,16 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
 >>>>>>> updated player class with input switch case
+=======
+    <ClCompile Include="Wormhole.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+>>>>>>> Latest, got shiz
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -105,9 +117,6 @@
     <ClInclude Include="GameMenu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Wormhole.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Term.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -133,7 +142,16 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
 >>>>>>> updated player class with input switch case
+=======
+    <ClInclude Include="Wormhole.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+>>>>>>> Latest, got shiz
   </ItemGroup>
   <ItemGroup>
     <None Include="TextureFragmentShader.fragmentshader">

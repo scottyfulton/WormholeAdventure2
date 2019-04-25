@@ -12,12 +12,15 @@ Engine::Engine() {
 Engine::~Engine() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	glfwTerminate();
 =======
 >>>>>>> Got rid of commented lines that haven't been used since a long time ago - like, a couple days.
 =======
 	glfwTerminate();
 >>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
+=======
+>>>>>>> Latest, got shiz
 	delete gameState;
 	delete this;
 }
@@ -39,12 +42,18 @@ void Engine::init() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 <<<<<<< HEAD
 	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
+<<<<<<< HEAD
 	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
 	//window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
 =======
 	window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
 	//window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
 >>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
+=======
+	//window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
+	window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
+
+>>>>>>> Latest, got shiz
 
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
@@ -97,8 +106,11 @@ void Engine::init() {
 	textures.push_back(Texture);
 	Texture = loadtextures("ExportedModels/Asteroid/10464_Asteroid_v1_diffuse.png");
 	textures.push_back(Texture);
+<<<<<<< HEAD
 	Texture = loadtextures("ExportedModels/Boom/BOOM.png");
 	textures.push_back(Texture);
+=======
+>>>>>>> Latest, got shiz
 	//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler"); used in object class, not here
 
 	//ship
@@ -185,6 +197,12 @@ void Engine::init() {
 	};
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+	/********************************************************************************/
+>>>>>>> Latest, got shiz
 	vertexArray* va2 = new vertexArray();
 
 	//make vb
@@ -203,9 +221,15 @@ void Engine::init() {
 	uvs.clear();
 	normals.clear();
 	   
+<<<<<<< HEAD
 	//asteroid
 	/********************************************************************************/
 	res = loadOBJ("ExportedModels/Asteroid/asteroid1.obj", vertices, uvs, normals);//make va
+=======
+
+	res = loadOBJ("ExportedModels/Asteroid/asteroid1.obj", vertices, uvs, normals);//make va
+		/********************************************************************************/
+>>>>>>> Latest, got shiz
 	vertexArray* va3 = new vertexArray();
 
 	//make vb
@@ -220,6 +244,7 @@ void Engine::init() {
 	vaoIDs.push_back(va3->arrayID);
 	vaoVertexCounts.push_back(vertices.size());
 	/********************************************************************************/
+<<<<<<< HEAD
 
 	//BOOM
 	/********************************************************************************/
@@ -238,6 +263,8 @@ void Engine::init() {
 	//vaoVertexCounts.push_back(vertices.size());
 	/********************************************************************************/
 
+=======
+>>>>>>> Latest, got shiz
 
 	if (isRunning) {
 		//Create GameState
@@ -263,11 +290,21 @@ void Engine::init() {
 		Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0));
 =======
 		//Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0));
+<<<<<<< HEAD
 >>>>>>> Fixed ship by dividing by 2
 		gameState->addPlayer(new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0)));
 		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
 		gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));
 >>>>>>> updated player class with input switch case
+=======
+		gameState->addPlayer(new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], 
+			glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0)));
+		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
+		//gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));
+		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, 
+			&vaoVertexCounts, 10000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
+
+>>>>>>> Latest, got shiz
 	}
 }
 
@@ -411,19 +448,27 @@ void Engine::input() {
 		keys[0] = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (glfwGetKey(window, GLFW_KEY_A) || glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 =======
 	if (glfwGetKey(window, GLFW_KEY_A) || glfwGetKey(window,GLFW_KEY_LEFT) == GLFW_PRESS)
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
+=======
+	if (glfwGetKey(window, GLFW_KEY_A) || glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+>>>>>>> Latest, got shiz
 		keys[1] = true;
 	else
 		keys[1] = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (glfwGetKey(window, GLFW_KEY_S) || glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 =======
 	if (glfwGetKey(window, GLFW_KEY_S) || glfwGetKey(window,  GLFW_KEY_DOWN) == GLFW_PRESS)
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
+=======
+	if (glfwGetKey(window, GLFW_KEY_S) || glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+>>>>>>> Latest, got shiz
 		keys[2] = true;
 	else
 		keys[2] = false;
@@ -434,12 +479,15 @@ void Engine::input() {
 		keys[3] = false;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 	std::cout << "Up: " << keys[0] << "Left: " << keys[1] << "Down: " << keys[2] << "Right: " << keys[3] << std::endl;
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
 =======
 >>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
+=======
+>>>>>>> Latest, got shiz
 }
 
 

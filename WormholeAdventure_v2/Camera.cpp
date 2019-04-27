@@ -12,7 +12,6 @@ Camera::Camera(GLuint shaderID, float fov, float ratio, float near_p, float far_
 	this->ratio = ratio;
 	this->near_p = near_p;
 	this->far_p = far_p;
-
 };
 
 Camera::~Camera() {
@@ -29,9 +28,14 @@ void Camera::update(float phi, double time, double dt) { //manipulates position 
 	//this->pos[1] += sin(phi) * sin(z / 12.75) * 30 * radius; //shift of y
 =======
 	float radius = pow(z, 2);
+<<<<<<< HEAD
 	this->pos[0] += cos(phi) * sin(z / 12.75) * 30 * radius; //shift of x
 	this->pos[1] += sin(phi) * sin(z / 12.75) * 30 * radius; //shift of y
 >>>>>>> Latest, got shiz
+=======
+	//this->pos[0] += cos(phi) * sin(z / 12.75) * 30 * radius; //shift of x
+	//this->pos[1] += sin(phi) * sin(z / 12.75) * 30 * radius; //shift of y
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 };
 
 void Camera::render(double alpha){
@@ -65,9 +69,13 @@ void Camera::render(double alpha){
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
 =======
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+<<<<<<< HEAD
 	//viewMatrix = glm::translate(viewMatrix, glm::vec3(-40.0f, 0, 0.0f)); //inverted
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -100.0f)); //inverted
 >>>>>>> Added bilboarding and moved ship closer
+=======
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -50.0f)); // adjustments to camera in x- or z-axis are inverted, not to anything else
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 =======
@@ -85,6 +93,7 @@ void Camera::render(double alpha){
 	//Uniform
 	glUniformMatrix4fv(glGetUniformLocation(shader, "projectionMatrix"), 1, false, glm::value_ptr(projectionMatrix));
 	glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, false, glm::value_ptr(viewMatrix));
+<<<<<<< HEAD
 }
 
 void Camera::setRotationAngles(float phi) {
@@ -101,9 +110,21 @@ void Camera::setRotationAngles(float phi) {
 
 glm::mat4* Camera::getView() {
 	return &viewMatrix;
+=======
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 }
 
 glm::mat4* Camera::getView() {
 	return &viewMatrix;
 }
 
+void Camera::setRotationAngles(float phi) {
+	float xCoord = cos(phi) * pow(40, 2);
+	float yCoord = sin(phi) * pow(40, 2);
+	float deltaZ = (-(this->pos.z) + 40);
+	//float distanceToPt = sqrt(pow(xCoord, 2) + pow(yCoord, 2) + pow(deltaZ, 2));
+	float distanceX = sqrt(pow(xCoord, 2) + pow(deltaZ, 2));
+	float distanceY = sqrt(pow(yCoord, 2) + pow(deltaZ, 2));
+	this->rotX = asin(xCoord / distanceX);
+	this->rotY = asin(yCoord / distanceY);
+}

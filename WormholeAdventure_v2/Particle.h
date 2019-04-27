@@ -18,6 +18,9 @@ public:
 	void render(glm::mat4 *viewMat, float dTheta, float phi, double alpha);
 	float calc(float val, std::list<term>* function);
 	bool isAlive(); //for Wormhole to check if the particle should be rendered
+	float* getTheta();
+	glm::vec3* getPosition();
+	glm::vec3* getVelocity();
 	void setFunc(std::list<term>* shapingFunc); //sets the new shaping function for an individual particle, called once particle "resets" back to 0 position
 	void reset(float particleCount);
 	// inherits projectionMatrix, transformationMatrix, pos,

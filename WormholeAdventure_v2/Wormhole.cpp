@@ -255,7 +255,7 @@ void Wormhole::update(double time, double dt) {
 	};
 	for (Particle* p : particles) {
 		if (p->living) {
-
+			updateP(p->getTheta(), p->getPosition(), p->getVelocity());
 			p->update(dTheta, phi, time, dt);
 		}
 	}
@@ -281,13 +281,17 @@ void Wormhole::update(double time, double dt) {
 
 	for (Asteroid* a : asteroids) {
 		if (a->living) {
-
+			updateA((a->getTheta()), a->getPosition(), a->getVelocity());
 			a->update(phi, time, dt);
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	phi += sin(dPhi)*dPhi;
 =======
+=======
+
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 	phi += dPhi;
 >>>>>>> Latest, got shiz
 	dPhi += ddPhi;
@@ -361,6 +365,7 @@ void Wormhole::setNewShapingFunc(){
 =======
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	// set up for asteroids
 	//glUseProgram((*shaders)[0]);
@@ -377,6 +382,33 @@ void Wormhole::setNewShapingFunc(){
 };
 
 >>>>>>> Latest, got shiz
+=======
+void Wormhole::updateP(float* theta, glm::vec3* objPos, glm::vec3* vel){
+	float z = (*objPos)[2];
+	float radius = z; //pass in z to baseShape function
+	radius > 80.0f ? radius = 80.0f : NULL;//limit on spread
+
+	(*objPos) += *vel;
+	(*objPos)[0] = cos(*theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
+	(*objPos)[1] = sin(*theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
+	(*objPos)[0] += cos(phi) * sin(z/5.0f) * 10.0f; //shift of x
+	(*objPos)[1] += sin(phi) * sin(z/5.0f) * 10.0f; //shift of y
+	*theta += dTheta;
+};
+
+void Wormhole::updateA(float* theta, glm::vec3* objPos, glm::vec3* vel) {
+	float z = (*objPos)[2];
+	float radius = z; //pass in z to baseShape function
+	radius > 80.0f ? radius = 80.0f : NULL;//limit on spread
+
+	(*objPos) += *vel;
+	(*objPos)[0] = cos(*theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
+	(*objPos)[1] = sin(*theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
+	(*objPos)[0] += cos(phi) * sin(z / 5.0f) * 10.0f; //shift of x
+	(*objPos)[1] += sin(phi) * sin(z / 5.0f) * 10.0f; //shift of y
+};
+
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 float Wormhole::getPhi() {
 	return this->phi;
 };
@@ -393,8 +425,6 @@ void Wormhole::setviewMat(glm::mat4 *viewMat){
 =======
 };
 
-//change to make more efficient 
-//std::list<Asteroid*>* Wormhole::getAsteroid(int index)
 std::list<Asteroid*>* Wormhole::getAsteroid()
 {
 

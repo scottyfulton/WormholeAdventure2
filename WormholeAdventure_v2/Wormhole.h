@@ -139,6 +139,7 @@ class Wormhole {
 		std::list<Particle*> particles;
 		std::list<Asteroid*> asteroids;
 	
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 		void setNewShapingFunc(); //rng a new shaping function (always a quadratic function) to give a "new" particle
@@ -146,4 +147,8 @@ class Wormhole {
 =======
 		//void setNewShapingFunc(); //rng a new shaping function (always a quadratic function) to give a "new" particle
 >>>>>>> This is MUCH closer to the wormhole effect that we wanted in the beginning.
+=======
+		void updateP(float* theta, glm::vec3* objPos, glm::vec3* vel);
+		void updateA(float* theta, glm::vec3* objPos, glm::vec3* vel);
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 };

@@ -53,7 +53,6 @@ class Engine {
 		void loop();
 		void input();
 
-		bool keys[4] = { false, false, false, false };
 	private:
 		//Window
 		GLFWwindow* window;

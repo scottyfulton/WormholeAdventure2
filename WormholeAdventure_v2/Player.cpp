@@ -68,7 +68,7 @@ Player::Player(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVerti
 	this->numVertices = numVertices;
 	this->pos = pos;
 	this->rot = rotate;
-	//this->valY
+	this->valY;
 	this->vel = glm::vec3(0.0f);
 	this->acc = glm::vec3(0.0f);
 	this->phi = 90.0f;
@@ -505,7 +505,7 @@ void Player::setviewMat(glm::mat4 *viewMat) {
 			//acc.x =  zero;
 			//acc.y =  zero;
 			force = zero;
-			//acc[2] =  zero;
+			//acc[0] =  zero;
 			break;
 		case 1:					//U
 			/*acc.y =  incr;*/ 
@@ -604,8 +604,6 @@ void Player::setviewMat(glm::mat4 *viewMat) {
 	resetNetForce();
 	addForce(force, theta, phi);
 	addForceVec(-vel.x * movFriction, -vel.y * movFriction, -vel.z * movFriction);
-
-
 
 	acc.x = netForce.x / mass;
 	acc.y = netForce.y / mass;

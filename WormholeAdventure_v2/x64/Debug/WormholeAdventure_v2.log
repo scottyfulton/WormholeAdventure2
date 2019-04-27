@@ -4,6 +4,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿  Player.cpp
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(58): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -39,10 +40,20 @@ c:\users\scott\downloads\wormholeadventure2-travis_4_25\wormholeadventure2-travi
           ]
 <<<<<<< HEAD
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(265): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+=======
+﻿  Engine.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  s:\_computer_graphics_labs\wormholeadventure2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(24): warning C4305: 'initializing': truncation from 'double' to 'const float'
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(98): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(102): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(107): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
           with
           [
-              T=float
+              _Ty=GLsizei
           ]
+<<<<<<< HEAD
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(268): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
@@ -95,10 +106,16 @@ c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(94): warning C4267: 
 c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(98): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
 c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(103): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
 >>>>>>> Latest, got shiz
+=======
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(134): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(138): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(143): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
           with
           [
               _Ty=GLsizei
           ]
+<<<<<<< HEAD
 <<<<<<< HEAD
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(160): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
 =======
@@ -106,10 +123,16 @@ c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(130): warning C4267:
 c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(134): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
 c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(139): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
 >>>>>>> Latest, got shiz
+=======
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(155): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(159): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(164): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
           with
           [
               _Ty=GLsizei
           ]
+<<<<<<< HEAD
 <<<<<<< HEAD
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\engine.cpp(182): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
           with
@@ -127,13 +150,15 @@ s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\particle.cpp(
 =======
 c:\dev\wormholeadventure_v2\wormholeadventure_v2\engine.cpp(158): error C2661: 'Wormhole::Wormhole': no overloaded function takes 7 arguments
   GameMenu.cpp
+=======
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
   GameState.cpp
 c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
-  c:\dev\wormholeadventure_v2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
-c:\dev\wormholeadventure_v2\wormholeadventure_v2\wormhole.h(16): warning C4305: 'initializing': truncation from 'double' to 'const float'
-  GObject.cpp
+  s:\_computer_graphics_labs\wormholeadventure2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(24): warning C4305: 'initializing': truncation from 'double' to 'const float'
   main.cpp
 c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+<<<<<<< HEAD
   c:\dev\wormholeadventure_v2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
 c:\dev\wormholeadventure_v2\wormholeadventure_v2\wormhole.h(16): warning C4305: 'initializing': truncation from 'double' to 'const float'
   objloader.cpp
@@ -191,3 +216,18 @@ c:\dev\wormholeadventure_v2\wormholeadventure_v2\player.cpp(73): warning C4305: 
   shader.cpp
   Generating Code...
 >>>>>>> Latest, got shiz
+=======
+  s:\_computer_graphics_labs\wormholeadventure2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(24): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  Wormhole.cpp
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(24): warning C4305: 'initializing': truncation from 'double' to 'const float'
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(19): warning C4305: '=': truncation from 'double' to 'float'
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(21): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(22): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(53): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(58): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(71): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(76): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+  Generating Code...
+  WormholeAdventure_v2.vcxproj -> S:\_Computer_Graphics_Labs\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.

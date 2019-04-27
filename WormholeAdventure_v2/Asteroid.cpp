@@ -28,6 +28,7 @@ void Asteroid::update(float phi, double time, double dt) {
 	
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (this->pos[2] >=55) {
 =======
 	if (this->pos[2] >=150) {
@@ -35,10 +36,13 @@ void Asteroid::update(float phi, double time, double dt) {
 =======
 	if (this->pos[2] >=400) {
 >>>>>>> Added bilboarding and moved ship closer
+=======
+	if (this->pos[0] >=100) {
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 		this->living = false;
 	}
 
-	float z = this->pos[2];
+	float z = this->pos[1];
 	
 	float answer = z - 3;
 	//keeps z-3 positive
@@ -46,6 +50,7 @@ void Asteroid::update(float phi, double time, double dt) {
 	{
 		answer = 0;
 	}
+<<<<<<< HEAD
 	this->radius = calc(answer, baseShape); //pass in z to baseShape function
 	radius > 79 ? radius = 79 : NULL;//limit on spread
 	this->vel += this->acc;
@@ -69,6 +74,19 @@ void Asteroid::render(glm::mat4 *viewMat, float phi, double alpha) {
 	this->pos[0] += cos(phi) * sin(z / 28) * 80; //shift of x
 	this->pos[1] += sin(phi) * sin(z / 28) * 80; //shift of y
 >>>>>>> Added bilboarding and moved ship closer
+=======
+	//this->radius = calc(answer, baseShape); //pass in z to baseShape function
+	//radius > 79 ? radius = 79 : NULL;//limit on spread
+	//this->vel += this->acc;
+	//this->pos += this->vel;
+	//this->pos[2] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
+	//this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
+	//this->pos[2] += cos(phi) * sin(z) * 5; //shift of x
+	//this->pos[1] += sin(phi) * sin(z) * 5; //shift of y
+
+	//this->pos[2] += cos(phi) * sin(z) * 5; //shift of x
+	//this->pos[1] += sin(phi) * sin(z) * 5; //shift of y
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 };
 
 void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
@@ -79,11 +97,15 @@ void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
 	
 	transformationMatrix = glm::mat4(1.0);//this works NICK! it's ugly but it WORKS
 <<<<<<< HEAD
+<<<<<<< HEAD
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
 	transformationMatrix = glm::translate(transformationMatrix, posI);
 	//transformationMatrix *= *viewMat; //won't work if camera's view matrix is adjusted
 =======
 	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
+=======
+	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.5, 0.5, 0.5));
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
 	transformationMatrix = glm::translate(transformationMatrix, posI);
 	//transformationMatrix *= *viewMatInv; //won't work if camera's view matrix is adjusted
@@ -107,18 +129,22 @@ float Asteroid::calc(float val, std::list<term>* function) {
 	return sum; //sum = f(z) now
 };
 
+void Asteroid::reset(float asteroidCount) {
+	this->pos[0] = 0;
+	this->vel = glm::vec3(0, 0, 1);
+	this->acc = glm::vec3(0, 0, 0.85);
+	this->setTheta(((float)360 / asteroidCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
+	this->setLiving();
+}
+
+glm::vec3* Asteroid::getPosition() { return &(this->pos); }
+glm::vec3* Asteroid::getVelocity() { return &(this->vel); }
+float* Asteroid::getTheta() { return &theta; }
 //for Wormhole to check if the particle should be rendered
 bool Asteroid::isAlive() {
 	return this->living;
 };
 
-void Asteroid::reset(float asteroidCount) {
-	this->pos[2] = 0;
-	this->vel = glm::vec3(0, 0, 0.001);
-	this->acc = glm::vec3(0, 0, 0.00005);
-	this->setTheta(((float)360 / asteroidCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
-	this->setLiving();
-}
 
 void Asteroid::setLiving() {
 	this->living = true;
@@ -133,6 +159,7 @@ void Asteroid::setFunc(std::list<term>* shapingFunc) {
 	shapeFunc = *shapingFunc;
 <<<<<<< HEAD
 };
+<<<<<<< HEAD
 =======
 };
 <<<<<<< HEAD
@@ -144,3 +171,5 @@ glm::vec3 Asteroid::getPosition()
 	return this->posI;
 }
 >>>>>>> Added bilboarding and moved ship closer
+=======
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.

@@ -36,7 +36,14 @@ private:
 
 	//Matricies
 	glm::mat4 projectionMatrix, viewMatrix, transformationMatrix;
+<<<<<<< HEAD
 	glm::vec3 pos = glm::vec3(0, 0, -50), vel, acc;
 	float fov, ratio, near_p, far_p, phi;
 >>>>>>> Latest, got shiz
+=======
+	glm::vec3 pos = glm::vec3(-50, 0, 0), vel, acc;
+	float fov, ratio, near_p, far_p, phi, rotX, rotY;
+
+	void setRotationAngles(float phi);
+>>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 };

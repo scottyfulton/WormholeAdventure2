@@ -18,12 +18,14 @@ public:
 	void render(glm::mat4 *viewMatTransposed, float phi, double alpha);
 	float calc(float val, std::list<term>* function);
 	bool isAlive(); //for Wormhole to check if the particle should be rendered
+	float* getTheta();
+	glm::vec3* getPosition();
+	glm::vec3* getVelocity();
 	void setFunc(std::list<term>* shapingFunc); //sets the new shaping function for an individual particle, called once particle "resets" back to 0 position
 	void reset(float asteroidCount);
 	// inherits projectionMatrix, transformationMatrix, pos,
 	// vel, & acc(not used)
 	// every particle will also be a light
-	glm::vec3 getPosition();
 	
 	
 private:

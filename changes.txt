@@ -1,0 +1,45 @@
+for (Particle* p : particles) {
+		if (p->living) {
+			updateObj(p->getTheta(), p->getPosition(), p->getVelocity());
+			p->update(dTheta, phi, time, dt);
+		}
+	}
+
+---------------
+
+for (Asteroid* a : asteroids) {
+		if (a->living) {
+			updateObj((a->getTheta()), a->getPosition(), a->getVelocity());
+			a->update(phi, time, dt);
+		}
+	}
+
+-------------
+
+void updateObj(float* theta, glm::vec3* objPos, glm::vec3* vel);
+
+-------------
+
+float* getTheta();
+	glm::vec3* getPosition();
+	glm::vec3* getVelocity();
+
+glm::vec3* Particle::getPosition() { return getPos(); }
+glm::vec3* Particle::getVelocity() { return getVel(); }
+float* Particle::getTheta() { return &theta; }
+
+glm::vec3* Asteroid::getPosition(){ return getPos(); }
+glm::vec3* Asteroid::getVelocity(){ return getVel(); }
+float* Asteroid::getTheta(){return &theta;}
+------------
+
+void Camera::setRotationAngles(float phi) {
+	float xCoord = cos(phi) * pow(800,2);
+	float yCoord = sin(phi) * pow(800,2);
+	float deltaZ = (-(this->pos.z)+ 800);
+	//float distanceToPt = sqrt(pow(xCoord, 2) + pow(yCoord, 2) + pow(deltaZ, 2));
+	float distanceX = sqrt(pow(xCoord, 2) + pow(deltaZ, 2));
+	float distanceY = sqrt(pow(yCoord, 2) + pow(deltaZ, 2));
+	this->rotX = asin(xCoord / distanceX);
+	this->rotY = asin(yCoord / distanceY);
+

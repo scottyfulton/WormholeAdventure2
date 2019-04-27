@@ -13,15 +13,19 @@ GameState::~GameState()
 	for (Camera* c : cameras) {
 		c->~Camera();
 		//cameras.remove(c);
+<<<<<<< HEAD
 	}
 
 	for (Player* p : players) {
 		p->~Player();
 		//players.remove(p);
+=======
+>>>>>>> Changed phi value for moving player left (case 2) to 90 & commented the z-coordinate update for the player (shouldn't move in the z anyways). Weird result.
 	}
 
 	for (Player* p : players) {
-		players.remove(p);
+		p->~Player();
+		//players.remove(p);
 	}
 
 	for (GObject* g : gObjects) {

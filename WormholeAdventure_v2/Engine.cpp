@@ -282,6 +282,7 @@ void Engine::init() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		Player* player0 = new Player(&shaders, &textures, &vaoIDs,
 			&vaoVertexCounts, glm::vec3(0.0f, 0.0f, 75.0f), glm::vec3(0.0, 1.0, 0.0));
@@ -307,6 +308,9 @@ void Engine::init() {
 =======
 		Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], 
 			vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 80), glm::vec3(0.0, 1.0, 0.0));
+=======
+		Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 50.0f), glm::vec3(0.0, 1.0, 0.0));
+>>>>>>> Changed phi value for moving player left (case 2) to 90 & commented the z-coordinate update for the player (shouldn't move in the z anyways). Weird result.
 		
 		gameState->addPlayer(player0);
 

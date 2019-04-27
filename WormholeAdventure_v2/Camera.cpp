@@ -70,12 +70,16 @@ void Camera::render(double alpha){
 =======
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//viewMatrix = glm::translate(viewMatrix, glm::vec3(-40.0f, 0, 0.0f)); //inverted
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -100.0f)); //inverted
 >>>>>>> Added bilboarding and moved ship closer
 =======
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -50.0f)); // adjustments to camera in x- or z-axis are inverted, not to anything else
 >>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
+=======
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -80.0f)); // adjustments to camera in x- or z-axis are inverted, not to anything else
+>>>>>>> Changed phi value for moving player left (case 2) to 90 & commented the z-coordinate update for the player (shouldn't move in the z anyways). Weird result.
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 =======

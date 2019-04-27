@@ -117,7 +117,6 @@ void Player::update(double time, double dt) { //manipulates position data (parti
 void Player::update(double time, double dt, bool arr[4]) { //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
 >>>>>>> Latest, got shiz
 //input cases determine theta&phi for rot in 3d space	
-//call gobj update method
 
 	//bool boolArr[] = { false, false, false,false };
 	bool *boolArr = arr;
@@ -505,7 +504,7 @@ void Player::setviewMat(glm::mat4 *viewMat) {
 			//acc.x =  zero;
 			//acc.y =  zero;
 			force = zero;
-			//acc[0] =  zero;
+			acc[0] =  zero;
 			break;
 		case 1:					//U
 			/*acc.y =  incr;*/ 
@@ -515,7 +514,7 @@ void Player::setviewMat(glm::mat4 *viewMat) {
 			break;
 		case 2:				 //L
 			//acc.x = -incr;
-			phi = 0.0f;		//using phi as dir instead or pos/neg
+			phi = 90;		//using phi as dir instead or pos/neg
 			theta = -90.0f;
 			force = incr;
 			break;
@@ -613,7 +612,7 @@ void Player::setviewMat(glm::mat4 *viewMat) {
 	vel.z = vel.z + acc.z;
 	pos.x = pos.x + vel.x;
 	pos.y = pos.y + vel.y;
-	pos.z = pos.z + vel.z;
+	//pos.z = pos.z + vel.z;
 	//std::cout << pos.x << " " << pos.y << " " << 
 };
 
@@ -641,30 +640,25 @@ void Player::render(double alpha) {
 	
 	transformationMatrix = glm::mat4(1.0);
 	rotationMatrix = glm::mat4(1.0);
-
-
 	rotationXMatrix = glm::mat4(1.0);
 	rotationYMatrix = glm::mat4(1.0);
 	rotationZMatrix = glm::mat4(1.0);
-	rotationXMatrix = glm::rotate(rotationXMatrix, (valX), glm::vec3(1.0, 0.0, 0.0));
-	rotationYMatrix = glm::rotate(rotationYMatrix, (1.57f/2.0f), glm::vec3(0.0, 1.0, 0.0));
-	rotationZMatrix = glm::rotate(rotationZMatrix, (valZ), glm::vec3(0.0, 0.0, 1.0));
-	//rotationMatrix = rotationZMatrix * rotationYMatrix *rotationXMatrix;
-	rotationMatrix =  rotationXMatrix* rotationYMatrix *rotationZMatrix;
+	scaleMatrix = glm::mat4(1.0);
 
-	valX = pos[0];
-	valY = pos[1];
-	valZ = pos[2];
+	rotationXMatrix = glm::rotate(rotationXMatrix, (valX), glm::vec3(1.0, 0.0, 0.0));
+	rotationYMatrix = glm::rotate(rotationYMatrix, (valY) , glm::vec3(0.0, 1.0, 0.0)); // (1.57f/2.0f)
+	rotationZMatrix = glm::rotate(rotationZMatrix, (valZ), glm::vec3(0.0, 0.0, 1.0));
+	rotationMatrix = rotationZMatrix * rotationYMatrix *rotationXMatrix;
+	//rotationMatrix =  rotationXMatrix* rotationYMatrix *rotationZMatrix;
 
 	//this->pos[0] += cos(phi) * sin(z / 12.75) * 30 * z; //shift of x
 	//this->pos[1] += sin(phi) * sin(z / 12.75) * 30 * z; //shift of y
 	translationMatrix = glm::translate(transformationMatrix, posI);
 
-	scaleMatrix = glm::mat4(1.0);
-	scaleMatrix = glm::scale(rotationMatrix, glm::vec3(1.0f));
+	//scaleMatrix = glm::scale(rotationMatrix, glm::vec3(1.0f));
 
 	/*transformationMatrix = translationMatrix * rotationMatrix * scaleMatrix;*/
-	transformationMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+	transformationMatrix = scaleMatrix * rotationMatrix *  translationMatrix;
 
 	//Uniform
 	glUniform1i(texture, 0);
@@ -672,6 +666,7 @@ void Player::render(double alpha) {
 
 	//Draw
 	glDrawArrays(GL_TRIANGLES, 0, numVertices);
+<<<<<<< HEAD
 
 
 <<<<<<< HEAD
@@ -680,6 +675,12 @@ void Player::render(double alpha) {
 >>>>>>> updated player class with input switch case
 =======
 =======
+=======
+	glBegin(GL_LINES);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(pos.x, pos.y, pos.z);
+	glEnd();
+>>>>>>> Changed phi value for moving player left (case 2) to 90 & commented the z-coordinate update for the player (shouldn't move in the z anyways). Weird result.
 }
 >>>>>>> Added bilboarding and moved ship closer
 

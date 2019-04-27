@@ -29,6 +29,7 @@ void Asteroid::update(float phi, double time, double dt) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (this->pos[2] >=55) {
 =======
 	if (this->pos[2] >=150) {
@@ -75,6 +76,20 @@ void Asteroid::render(glm::mat4 *viewMat, float phi, double alpha) {
 	this->pos[1] += sin(phi) * sin(z / 28) * 80; //shift of y
 >>>>>>> Added bilboarding and moved ship closer
 =======
+=======
+	if (this->pos[2] >=50) {
+		this->living = false;
+	}
+
+	//float z = this->pos[2];
+	//
+	//float answer = z - 3;
+	////keeps z-3 positive
+	//if (answer <= 0)
+	//{
+	//	answer = 0;
+	//}
+>>>>>>> Changed phi value for moving player left (case 2) to 90 & commented the z-coordinate update for the player (shouldn't move in the z anyways). Weird result.
 	//this->radius = calc(answer, baseShape); //pass in z to baseShape function
 	//radius > 79 ? radius = 79 : NULL;//limit on spread
 	//this->vel += this->acc;

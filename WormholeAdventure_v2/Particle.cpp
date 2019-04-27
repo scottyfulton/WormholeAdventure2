@@ -141,10 +141,14 @@ Particle::~Particle(){
 //x and y increment based on radius (pos[0], pos[1], pos[2]) = (x, y, z)
 //radius increments based on predefined function of z
 void Particle::update(float dTheta, float phi, double time, double dt){
+<<<<<<< HEAD
 	if (this->pos[2] >= 150) {
 =======
 	if (this->pos[0] >= 150) {
 >>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
+=======
+	if (this->pos[2] >= 50) {
+>>>>>>> Changed phi value for moving player left (case 2) to 90 & commented the z-coordinate update for the player (shouldn't move in the z anyways). Weird result.
 		this->living = false;
 	}
 	//std::cout << "z value of particle: " << this->pos[2] << std::endl;
@@ -195,7 +199,7 @@ void Particle::render(glm::mat4 *viewMat, float dTheta, float phi, double alpha)
 void Particle::reset(float particleCount) {
 	this->pos[0] = 0;
 	this->vel = glm::vec3(0, 0, 0.1);
-	this->acc = glm::vec3(0, 0, 0.015);
+	this->acc = glm::vec3(0, 0, 0.045);
 	this->setTheta(((float)360 / particleCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
 	this->setLiving();
 }

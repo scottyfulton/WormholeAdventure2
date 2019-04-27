@@ -3,7 +3,8 @@
 /*
 ** The view and projection matrices will be the same for every GObject, and every GObject's shader can be the same with an if statement in the shader
 ** that determines if the object is also a light source. With that in mind, only one set of shaders is needed.
-** Moving forward: -need to account for attenuation distance before computing a GObject as a light source
+** Moving forward: -need to adjust to one set of shaders	-need to account for attenuation distance before computing a GObject as a light source
+** -need to declare globals to pass between classes
 */
 Engine::Engine() {
 
@@ -30,8 +31,10 @@ void Engine::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
+	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
 	//window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
+	window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
+
 
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
@@ -53,7 +56,7 @@ void Engine::init() {
 	//Escape Key listener
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_FALSE);
 	// Hide the mouse and enable unlimited mouvement
-	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// Set the mouse at the center of the screen
 	//glfwPollEvents(); not needed now, will need for Game Load Screen later
@@ -73,46 +76,37 @@ void Engine::init() {
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
 	std::vector<glm::vec3> normals; // Won't be used at the moment.
-	bool res = loadOBJ("L200-OBJ-triangles/truck.obj", vertices, uvs, normals);
+	bool res = loadOBJ("ExportedModels/SS1_OBJ/SS1tri.obj", vertices, uvs, normals);
 
-	//creating a VAO
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-	//creating a vertex VBO to put in the vao and create vertex attribute pointer
-	GLuint vert_VBO;
-	glGenBuffers(1, &vert_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, vert_VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
-	//glVertexAttributePointer(index, size, type, normalized, stride, offset) is the format
-	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
-	// uv BO (uv Buffer Object)
-	GLuint uv_VBO;
-	glGenBuffers(1, &uv_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, uv_VBO);
-	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
-	//glVertexAttributePointer(index, size, type, normalized, stride, offset) is the format
-	//stride is byte count of the size of a "VBO", offset is offset within a "VBO"
-	//
-	glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
-
-	//glBindVertexArray(0); //delete buffers from CPU mem once it's loaded to GPU mem
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
-	//glBindBuffer(GL_ARRAY_BUFFER, 1);
-	//after deleting the VAO from CPU mem, add its IDs to our vaos vector
-	vaoIDs.push_back(vao);
-	vaoVertexCounts.push_back(vertices.size()); //index 0 is our VAO vertex count for our first object
-	//done creating one VAO, need to do 2 more times
 
 	//Load Textures
-	GLuint Texture = loadtextures("L200-OBJ-triangles/truck_color.jpg");
+	GLuint Texture = loadtextures("ExportedModels/SS1_OBJ/SS1tri2.jpg");
 	textures.push_back(Texture); //index 0 is our first VAO's texture
 	Texture = loadtextures("Resources/Particle.png");
 	textures.push_back(Texture);
-	Texture = loadtextures("Asteroid/10464_Asteroid_v1_diffuse.png");
+	Texture = loadtextures("ExportedModels/Asteroid/10464_Asteroid_v1_diffuse.png");
 	textures.push_back(Texture);
 	//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler"); used in object class, not here
 
+
+	/********************************************************************************/
+	//Follow this for creating vao and binding vbos to it.  Probably just add more vbos 
+	//make va
+	vertexArray* va1 = new vertexArray();
+
+	//make vb
+	vertexBuffer* vert_VB1 = new vertexBuffer(&vertices[0], vertices.size() * sizeof(glm::vec3));
+	va1->addBuffer(vert_VB1, 0, 0, 3, GL_FLOAT, false, 0, 0);
+
+	//make uv vb
+	vertexBuffer* uv_VB1 = new vertexBuffer(&uvs[0], uvs.size() * sizeof(glm::vec2));
+	va1->addBuffer(uv_VB1, 1, 1, 2, GL_FLOAT, false, 0, 0);
+
+	//get it on 
+	vaoIDs.push_back(va1->arrayID);
+	vaoVertexCounts.push_back(vertices.size());
+	/********************************************************************************/
+	
 	//construct VAO for a particle - hardcoded first
 	vertices = {
 		glm::vec3(-.5, .5, -5),
@@ -131,53 +125,73 @@ void Engine::init() {
 		glm::vec2(1, 1)
 	};
 
-	GLuint vao1;
-	glGenVertexArrays(1, &vao1);
-	glBindVertexArray(vao1);
 
-	glGenBuffers(1, &vert_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, vert_VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 
-	glGenBuffers(1, &uv_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, uv_VBO);
-	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+	/********************************************************************************/
+	vertexArray* va2 = new vertexArray();
 
-	vaoIDs.push_back(vao1);
-	vaoVertexCounts.push_back(vertices.size()); //index 0 is our VAO vertex count for our first object
+	//make vb
+	vertexBuffer* vert_VB2 = new vertexBuffer(&vertices[0], vertices.size() * sizeof(glm::vec3));
+	va2->addBuffer(vert_VB2, 0, 0, 3, GL_FLOAT, false, 0, 0);
+
+	//make uv vb
+	vertexBuffer* uv_VB2 = new vertexBuffer(&uvs[0], uvs.size() * sizeof(glm::vec2));
+	va2->addBuffer(uv_VB2, 1, 1, 2, GL_FLOAT, false, 0, 0);
+
+	//get it on 
+	vaoIDs.push_back(va2->arrayID);
+	vaoVertexCounts.push_back(vertices.size());
+	/********************************************************************************/
 	vertices.clear();
 	uvs.clear();
 	normals.clear();
+	   
 
+	res = loadOBJ("ExportedModels/Asteroid/asteroid1.obj", vertices, uvs, normals);//make va
+		/********************************************************************************/
+	vertexArray* va3 = new vertexArray();
 
-	res = loadOBJ("Asteroid/asteroid1.obj", vertices, uvs, normals);
-	GLuint vao2;
-	glGenVertexArrays(1, &vao2);
-	glBindVertexArray(vao2);
+	//make vb
+	vertexBuffer* vert_VB3 = new vertexBuffer(&vertices[0], vertices.size() * sizeof(glm::vec3));
+	va3->addBuffer(vert_VB3, 0, 0, 3, GL_FLOAT, false, 0, 0);
 
-	glGenBuffers(1, &vert_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, vert_VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+	//make uv vb
+	vertexBuffer* uv_VB3 = new vertexBuffer(&uvs[0], uvs.size() * sizeof(glm::vec2));
+	va3->addBuffer(uv_VB3, 1, 1, 2, GL_FLOAT, false, 0, 0);
 
-	glGenBuffers(1, &uv_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, uv_VBO);
-	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
-
-	vaoIDs.push_back(vao2);
-	vaoVertexCounts.push_back(vertices.size()); //index 0 is our VAO vertex count for our first object*/
-	//construct game menu
+	//get it on 
+	vaoIDs.push_back(va3->arrayID);
+	vaoVertexCounts.push_back(vertices.size());
+	/********************************************************************************/
 
 	if (isRunning) {
 		//Create GameState
+
+		//
 		gameState = new GameState();
-		gameState->addCamera(new Camera(shaders[0],90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
-		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, &vaoVertexCounts, 1000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
+		//Load Entities
+		//GLuint MatrixID = glGetUniformLocation(programID, "MVP"); not used here, will be later in gamestate (basically one instance of a possible camera class)
+
+		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
+		Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], 
+			vaoVertexCounts[0], glm::vec3(-75.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0));
+		
+		gameState->addPlayer(player0);
+
+		/*gameState->addPlayer(new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0],
+			glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0)));*/
+		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
+		//gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));
+		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, 
+			&vaoVertexCounts, 10000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
+
 	}
+	
 }
+
+
+
+
 
 void Engine::loop() {
 
@@ -215,7 +229,7 @@ void Engine::loop() {
 
 		while (accumulator >= dt) {
 
-			gameState->update(time, dt);
+			gameState->update(time, dt, keys);
 
 			//FPS keeps track of updates
 			updateCounter++;
@@ -225,6 +239,7 @@ void Engine::loop() {
 			//subtracting dt intervals
 			accumulator -= dt;
 		}
+
 		//Calculate Alpha
 		alpha = accumulator / dt;
 
@@ -237,8 +252,9 @@ void Engine::loop() {
 
 		//Poll Inputs
 		input();
-
+		
 		if (((double)(clock::now() - fps).count()) >= 1000000000.0) {
+
 			//FPS = renderCounter;
 			//UPDATES = updateCounter;
 			std::cout << "Tick: " << updateCounter << std::endl;
@@ -248,6 +264,7 @@ void Engine::loop() {
 			updateCounter = 0;
 			fps = clock::now();
 		}
+
 	}
 	this->~Engine();
 }
@@ -264,12 +281,12 @@ void Engine::input() {
 	else
 		keys[0] = false;
 
-	if (glfwGetKey(window, GLFW_KEY_A) || glfwGetKey(window,GLFW_KEY_LEFT) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_A) || glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 		keys[1] = true;
 	else
 		keys[1] = false;
 
-	if (glfwGetKey(window, GLFW_KEY_S) || glfwGetKey(window,  GLFW_KEY_DOWN) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_S) || glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 		keys[2] = true;
 	else
 		keys[2] = false;
@@ -299,6 +316,6 @@ GLuint Engine::loadtextures(const char* fileName) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	return textureId;
-
+	
 	return 0;
 }

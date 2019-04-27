@@ -26,28 +26,41 @@ Asteroid::~Asteroid() {
 //radius increments based on predefined function of z
 void Asteroid::update(float phi, double time, double dt) {
 	
-	if (this->pos[2] >=55) {
+	if (this->pos[2] >=400) {
 		this->living = false;
 	}
+
 	float z = this->pos[2];
-	this->radius = calc(z-3, baseShape); //pass in z to baseShape function
+	
+	float answer = z - 3;
+	//keeps z-3 positive
+	if (answer <= 0)
+	{
+		answer = 0;
+	}
+	this->radius = calc(answer, baseShape); //pass in z to baseShape function
+	radius > 79 ? radius = 79 : NULL;//limit on spread
 	this->vel += this->acc;
 	this->pos += this->vel;
 	this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
 	this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-	this->pos[0] += 175.76 * cos(phi)* sin(z / 11) * z; //shift of x
-	this->pos[1] += 175.76 * sin(phi)* sin(z/11) * z; //shift of y
+	//this->pos[0] += cos(phi) * sin(z / 12.75) * 250.0f; //shift of x
+	//this->pos[1] += sin(phi) * sin(z / 12.75) * 250.0f; //shift of y
+
+	this->pos[0] += cos(phi) * sin(z / 28) * 80; //shift of x
+	this->pos[1] += sin(phi) * sin(z / 28) * 80; //shift of y
 };
 
-void Asteroid::render(glm::mat4 *viewMat, float phi, double alpha) {
+void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
 	//Interpolate
 	this->posI = pos + vel * (float)alpha;
 	//this->thetaI = theta + dTheta * (float)alpha;
 	
 	transformationMatrix = glm::mat4(1.0);//this works NICK! it's ugly but it WORKS
-	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
+	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
+	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
 	transformationMatrix = glm::translate(transformationMatrix, posI);
-	//transformationMatrix *= *viewMat; //won't work if camera's view matrix is adjusted
+	//transformationMatrix *= *viewMatInv; //won't work if camera's view matrix is adjusted
 
 	//Setting Uniform Value
 	glUniform1i(texture, 0);
@@ -92,3 +105,8 @@ void Asteroid::setTheta(float newTheta) {
 void Asteroid::setFunc(std::list<term>* shapingFunc) {
 	shapeFunc = *shapingFunc;
 };
+
+glm::vec3 Asteroid::getPosition()
+{
+	return this->posI;
+}

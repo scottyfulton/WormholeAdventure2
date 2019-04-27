@@ -30,6 +30,10 @@
 #include <iostream>
 //#include <ratio>
 
+//vao/vbo classes
+#include "emigration/vertexArray.h"
+#include "emigration/vertexBuffer.h"
+
 
 //#include "Camera.h"
 //#include "GObject.h"
@@ -43,6 +47,7 @@ class Engine {
 		void loop();
 		void input();
 
+		bool keys[4] = { false, false, false, false };
 	private:
 		//Window
 		GLFWwindow* window;

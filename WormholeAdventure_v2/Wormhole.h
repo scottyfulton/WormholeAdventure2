@@ -15,6 +15,9 @@ class Wormhole {
 		void render(double alpha);
 		void setviewMat(glm::mat4 *viewMat);
 		float getPhi();
+		//std::list<Asteroid*>* getAsteroid(int index);
+		std::list<Asteroid*>* getAsteroid();
+
 
 	private:
 		bool isLight;
@@ -33,11 +36,10 @@ class Wormhole {
 		glm::vec3 acc;*/
 
 		//std::random_device r;
-		std::list<term> cone = {{1,2}}; // function to define the initial cone shape of the wormhole
+		std::list<term> cone = {{1.0f,2.0f}}; // function to define the initial cone shape of the wormhole
 		std::list<term> shaping; //if changed, only passed to a particle when the particle reaches the maximum height of the wormhole (max z)
 		std::list<Particle*> particles;
 		std::list<Asteroid*> asteroids;
-
 	
 
 		//void setNewShapingFunc(); //rng a new shaping function (always a quadratic function) to give a "new" particle

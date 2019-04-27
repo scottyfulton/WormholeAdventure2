@@ -1,0 +1,9 @@
+
+man asteroids to folow wormhole
+shaping z^2
+initial xy calc based on theirown theta milt z^s
+shaping adds to offset to their location in xy
+where?????? asteroid update
+
+wh calls objs postions/updates
+

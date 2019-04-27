@@ -26,18 +26,18 @@ Asteroid::~Asteroid() {
 //radius increments based on predefined function of z
 void Asteroid::update(float phi, double time, double dt) {
 	
-	if (this->pos[0] >=100) {
+	if (this->pos[2] >=50) {
 		this->living = false;
 	}
 
-	float z = this->pos[1];
-	
-	float answer = z - 3;
-	//keeps z-3 positive
-	if (answer <= 0)
-	{
-		answer = 0;
-	}
+	//float z = this->pos[2];
+	//
+	//float answer = z - 3;
+	////keeps z-3 positive
+	//if (answer <= 0)
+	//{
+	//	answer = 0;
+	//}
 	//this->radius = calc(answer, baseShape); //pass in z to baseShape function
 	//radius > 79 ? radius = 79 : NULL;//limit on spread
 	//this->vel += this->acc;

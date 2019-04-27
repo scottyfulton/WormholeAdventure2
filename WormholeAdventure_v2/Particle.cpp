@@ -22,7 +22,7 @@ Particle::~Particle(){
 //x and y increment based on radius (pos[0], pos[1], pos[2]) = (x, y, z)
 //radius increments based on predefined function of z
 void Particle::update(float dTheta, float phi, double time, double dt){
-	if (this->pos[0] >= 150) {
+	if (this->pos[2] >= 50) {
 		this->living = false;
 	}
 	//std::cout << "z value of particle: " << this->pos[2] << std::endl;
@@ -63,7 +63,7 @@ void Particle::render(glm::mat4 *viewMat, float dTheta, float phi, double alpha)
 void Particle::reset(float particleCount) {
 	this->pos[0] = 0;
 	this->vel = glm::vec3(0, 0, 0.1);
-	this->acc = glm::vec3(0, 0, 0.015);
+	this->acc = glm::vec3(0, 0, 0.045);
 	this->setTheta(((float)360 / particleCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
 	this->setLiving();
 }

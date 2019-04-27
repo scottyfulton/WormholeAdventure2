@@ -173,8 +173,7 @@ void Engine::init() {
 		//GLuint MatrixID = glGetUniformLocation(programID, "MVP"); not used here, will be later in gamestate (basically one instance of a possible camera class)
 
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
-		Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], 
-			vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 80), glm::vec3(0.0, 1.0, 0.0));
+		Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 50.0f), glm::vec3(0.0, 1.0, 0.0));
 		
 		gameState->addPlayer(player0);
 
@@ -186,7 +185,6 @@ void Engine::init() {
 			&vaoVertexCounts, 10000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
 
 	}
-	
 }
 
 

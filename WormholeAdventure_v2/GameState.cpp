@@ -9,16 +9,25 @@ GameState::GameState()
 GameState::~GameState()
 {
 	for (Camera* c : cameras) {
-		cameras.remove(c);
+		c->~Camera();
+		//cameras.remove(c);
 	}
 
 	for (Player* p : players) {
-		players.remove(p);
+		p->~Player();
+		//players.remove(p);
 	}
 
 	for (GObject* g : gObjects) {
-		gObjects.remove(g);
+		g->~GObject();
+		//gObjects.remove(g);
 	}
+
+	for (Wormhole* w : wormholes) {
+		w->~Wormhole();
+		//wormholes.remove(w);
+	}
+	delete this;
 }
 
 void GameState::init()

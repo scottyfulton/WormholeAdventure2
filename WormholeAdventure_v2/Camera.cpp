@@ -38,7 +38,7 @@ void Camera::render(double alpha){
 	//viewMatrix
 	viewMatrix = glm::mat4(1.0);
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -50.0f)); // adjustments to camera in x- or z-axis are inverted, not to anything else
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -80.0f)); // adjustments to camera in x- or z-axis are inverted, not to anything else
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	//Uniform

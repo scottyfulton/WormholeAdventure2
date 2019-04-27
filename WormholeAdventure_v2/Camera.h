@@ -30,6 +30,8 @@ private:
 
 	//Matricies
 	glm::mat4 projectionMatrix, viewMatrix, transformationMatrix;
-	glm::vec3 pos = glm::vec3(0, 0, -50), vel, acc;
-	float fov, ratio, near_p, far_p, phi;
+	glm::vec3 pos = glm::vec3(-50, 0, 0), vel, acc;
+	float fov, ratio, near_p, far_p, phi, rotX, rotY;
+
+	void setRotationAngles(float phi);
 };

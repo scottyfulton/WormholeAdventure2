@@ -22,32 +22,23 @@ Particle::~Particle(){
 //x and y increment based on radius (pos[0], pos[1], pos[2]) = (x, y, z)
 //radius increments based on predefined function of z
 void Particle::update(float dTheta, float phi, double time, double dt){
-	if (this->pos[2] >= 150) {
+	if (this->pos[0] >= 150) {
 		this->living = false;
 	}
 	//std::cout << "z value of particle: " << this->pos[2] << std::endl;
-		float z = this->pos[2];
-		this->radius = calc(z, baseShape); //pass in z to baseShape function
-		radius > 80 ? radius = 80 : NULL;//limit on spread
+		//float z = this->pos[0];
+		//this->radius = calc(z, baseShape); //pass in z to baseShape function
+		//radius > 80 ? radius = 80 : NULL;//limit on spread
 
-		this->vel += this->acc;
-		this->pos += this->vel;
-		this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
-		this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-		//if ((cos(phi) * sin(z / 12.75)) > 50.0f)
-		//	
-		//{
-		//	
-		//}
-
-		//this->pos[0] += cos(phi) * sin(z / 12.75) * 80; //shift of x
-		//this->pos[1] += sin(phi) * sin(z / 12.75) * 80; //shift of y
-
-		this->pos[0] += cos(phi) * sin(z / 28) * 80; //shift of x
-		this->pos[1] += sin(phi) * sin(z / 28) * 80; //shift of y
-		
-		
-		this->theta += dTheta;
+		//this->vel += this->acc;
+		//this->pos += this->vel;
+		//this->pos[2] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
+		//this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
+		//this->pos[2] += cos(phi) * sin(z) * 5; //shift of x
+		//this->pos[1] += sin(phi) * sin(z) * 5; //shift of y
+		//
+		//
+		/*this->theta += dTheta;*/
 };
 
 
@@ -58,7 +49,7 @@ void Particle::render(glm::mat4 *viewMat, float dTheta, float phi, double alpha)
 
 	transformationMatrix = glm::translate(glm::mat4(1.0), posI);
 	transformationMatrix *= getBillboardMat(viewMat);
-	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(10, 10, 10));
+	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.5, 0.5, 0.5));
 	
 	//Setting Uniform Value
 	glUniform1i(texture, 0);
@@ -69,27 +60,32 @@ void Particle::render(glm::mat4 *viewMat, float dTheta, float phi, double alpha)
 	glDisable(GL_BLEND); //other textures aren't transparent and don't have an alpha value (0)
 };
 
-//always passed the z value of a Particle
-float Particle::calc(float val, std::list<term>* function) {
-	float sum = 0;
-	for (term t : *function)
-		sum += t.coeff * pow(val, t.exponent); 
+void Particle::reset(float particleCount) {
+	this->pos[0] = 0;
+	this->vel = glm::vec3(0, 0, 0.1);
+	this->acc = glm::vec3(0, 0, 0.015);
+	this->setTheta(((float)360 / particleCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
+	this->setLiving();
+}
 
-	return sum; //sum = f(z) now
-};
+//always passed the z value of a Particle
+//float Particle::calc(float val, std::list<term>* function) {
+//	float sum = 0;
+//	for (term t : *function)
+//		sum += t.coeff * pow(val, t.exponent); 
+//
+//	return sum; //sum = f(z) now
+//};
 
 //for Wormhole to check if the particle should be rendered
 bool Particle::isAlive(){
 	return this->living;
 };
 
-void Particle::reset(float particleCount) {
-	this->pos[2] = 0;
-	this->vel = glm::vec3(0, 0, 0.01);
-	this->acc = glm::vec3(0, 0, 0.00015);
-	this->setTheta(((float)360 / particleCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
-	this->setLiving();
-}
+glm::vec3* Particle::getPosition() { return &(this->pos); }
+glm::vec3* Particle::getVelocity() { return &(this->vel); }
+float* Particle::getTheta() { return &theta; }
+
 
 void Particle::setLiving() {
 	this->living = true;

@@ -41,6 +41,6 @@ class Wormhole {
 		std::list<Particle*> particles;
 		std::list<Asteroid*> asteroids;
 	
-
-		//void setNewShapingFunc(); //rng a new shaping function (always a quadratic function) to give a "new" particle
+		void updateP(float* theta, glm::vec3* objPos, glm::vec3* vel);
+		void updateA(float* theta, glm::vec3* objPos, glm::vec3* vel);
 };

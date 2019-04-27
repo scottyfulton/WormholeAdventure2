@@ -26,11 +26,11 @@ Asteroid::~Asteroid() {
 //radius increments based on predefined function of z
 void Asteroid::update(float phi, double time, double dt) {
 	
-	if (this->pos[2] >=400) {
+	if (this->pos[0] >=100) {
 		this->living = false;
 	}
 
-	float z = this->pos[2];
+	float z = this->pos[1];
 	
 	float answer = z - 3;
 	//keeps z-3 positive
@@ -38,17 +38,17 @@ void Asteroid::update(float phi, double time, double dt) {
 	{
 		answer = 0;
 	}
-	this->radius = calc(answer, baseShape); //pass in z to baseShape function
-	radius > 79 ? radius = 79 : NULL;//limit on spread
-	this->vel += this->acc;
-	this->pos += this->vel;
-	this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
-	this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-	//this->pos[0] += cos(phi) * sin(z / 12.75) * 250.0f; //shift of x
-	//this->pos[1] += sin(phi) * sin(z / 12.75) * 250.0f; //shift of y
+	//this->radius = calc(answer, baseShape); //pass in z to baseShape function
+	//radius > 79 ? radius = 79 : NULL;//limit on spread
+	//this->vel += this->acc;
+	//this->pos += this->vel;
+	//this->pos[2] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
+	//this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
+	//this->pos[2] += cos(phi) * sin(z) * 5; //shift of x
+	//this->pos[1] += sin(phi) * sin(z) * 5; //shift of y
 
-	this->pos[0] += cos(phi) * sin(z / 28) * 80; //shift of x
-	this->pos[1] += sin(phi) * sin(z / 28) * 80; //shift of y
+	//this->pos[2] += cos(phi) * sin(z) * 5; //shift of x
+	//this->pos[1] += sin(phi) * sin(z) * 5; //shift of y
 };
 
 void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
@@ -57,7 +57,7 @@ void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
 	//this->thetaI = theta + dTheta * (float)alpha;
 	
 	transformationMatrix = glm::mat4(1.0);//this works NICK! it's ugly but it WORKS
-	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
+	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.5, 0.5, 0.5));
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
 	transformationMatrix = glm::translate(transformationMatrix, posI);
 	//transformationMatrix *= *viewMatInv; //won't work if camera's view matrix is adjusted
@@ -80,18 +80,22 @@ float Asteroid::calc(float val, std::list<term>* function) {
 	return sum; //sum = f(z) now
 };
 
+void Asteroid::reset(float asteroidCount) {
+	this->pos[0] = 0;
+	this->vel = glm::vec3(0, 0, 1);
+	this->acc = glm::vec3(0, 0, 0.85);
+	this->setTheta(((float)360 / asteroidCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
+	this->setLiving();
+}
+
+glm::vec3* Asteroid::getPosition() { return &(this->pos); }
+glm::vec3* Asteroid::getVelocity() { return &(this->vel); }
+float* Asteroid::getTheta() { return &theta; }
 //for Wormhole to check if the particle should be rendered
 bool Asteroid::isAlive() {
 	return this->living;
 };
 
-void Asteroid::reset(float asteroidCount) {
-	this->pos[2] = 0;
-	this->vel = glm::vec3(0, 0, 0.001);
-	this->acc = glm::vec3(0, 0, 0.00005);
-	this->setTheta(((float)360 / asteroidCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
-	this->setLiving();
-}
 
 void Asteroid::setLiving() {
 	this->living = true;
@@ -105,8 +109,3 @@ void Asteroid::setTheta(float newTheta) {
 void Asteroid::setFunc(std::list<term>* shapingFunc) {
 	shapeFunc = *shapingFunc;
 };
-
-glm::vec3 Asteroid::getPosition()
-{
-	return this->posI;
-}

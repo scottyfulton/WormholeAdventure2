@@ -27,18 +27,32 @@ Asteroid::~Asteroid() {
 void Asteroid::update(float phi, double time, double dt) {
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (this->pos[2] >=55) {
 =======
 	if (this->pos[2] >=150) {
 >>>>>>> Latest, got shiz
+=======
+	if (this->pos[2] >=400) {
+>>>>>>> Added bilboarding and moved ship closer
 		this->living = false;
 	}
+
 	float z = this->pos[2];
-	this->radius = calc(z-3, baseShape); //pass in z to baseShape function
+	
+	float answer = z - 3;
+	//keeps z-3 positive
+	if (answer <= 0)
+	{
+		answer = 0;
+	}
+	this->radius = calc(answer, baseShape); //pass in z to baseShape function
+	radius > 79 ? radius = 79 : NULL;//limit on spread
 	this->vel += this->acc;
 	this->pos += this->vel;
 	this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
 	this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
+<<<<<<< HEAD
 <<<<<<< HEAD
 	this->pos[0] += 175.76 * cos(phi)* sin(z / 11) * z; //shift of x
 	this->pos[1] += 175.76 * sin(phi)* sin(z/11) * z; //shift of y
@@ -48,6 +62,13 @@ void Asteroid::render(glm::mat4 *viewMat, float phi, double alpha) {
 =======
 	this->pos[0] += cos(phi) * sin(z / 12.75) * 250.0f; //shift of x
 	this->pos[1] += sin(phi) * sin(z / 12.75) * 250.0f; //shift of y
+=======
+	//this->pos[0] += cos(phi) * sin(z / 12.75) * 250.0f; //shift of x
+	//this->pos[1] += sin(phi) * sin(z / 12.75) * 250.0f; //shift of y
+
+	this->pos[0] += cos(phi) * sin(z / 28) * 80; //shift of x
+	this->pos[1] += sin(phi) * sin(z / 28) * 80; //shift of y
+>>>>>>> Added bilboarding and moved ship closer
 };
 
 void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
@@ -114,4 +135,12 @@ void Asteroid::setFunc(std::list<term>* shapingFunc) {
 };
 =======
 };
+<<<<<<< HEAD
 >>>>>>> Latest, got shiz
+=======
+
+glm::vec3 Asteroid::getPosition()
+{
+	return this->posI;
+}
+>>>>>>> Added bilboarding and moved ship closer

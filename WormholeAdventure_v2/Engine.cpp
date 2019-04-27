@@ -13,6 +13,7 @@ Engine::~Engine() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	glfwTerminate();
 =======
 >>>>>>> Got rid of commented lines that haven't been used since a long time ago - like, a couple days.
@@ -21,6 +22,9 @@ Engine::~Engine() {
 >>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
 =======
 >>>>>>> Latest, got shiz
+=======
+	glfwTerminate();
+>>>>>>> Added bilboarding and moved ship closer
 	delete gameState;
 	delete this;
 }
@@ -277,6 +281,7 @@ void Engine::init() {
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		Player* player0 = new Player(&shaders, &textures, &vaoIDs,
 			&vaoVertexCounts, glm::vec3(0.0f, 0.0f, 75.0f), glm::vec3(0.0, 1.0, 0.0));
@@ -299,6 +304,15 @@ void Engine::init() {
 =======
 		gameState->addPlayer(new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], 
 			glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0)));
+=======
+		Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], 
+			vaoVertexCounts[0], glm::vec3(-75.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0));
+		
+		gameState->addPlayer(player0);
+
+		/*gameState->addPlayer(new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0],
+			glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0)));*/
+>>>>>>> Added bilboarding and moved ship closer
 		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
 		//gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));
 		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, 

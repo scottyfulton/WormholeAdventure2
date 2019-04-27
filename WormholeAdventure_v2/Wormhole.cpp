@@ -384,8 +384,20 @@ float Wormhole::getPhi() {
 void Wormhole::setviewMat(glm::mat4 *viewMat){
 	this->viewMat = *viewMat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
 =======
 };
 >>>>>>> Latest, got shiz
+=======
+};
+
+//change to make more efficient 
+//std::list<Asteroid*>* Wormhole::getAsteroid(int index)
+std::list<Asteroid*>* Wormhole::getAsteroid()
+{
+
+	return &asteroids;
+}
+>>>>>>> Added bilboarding and moved ship closer

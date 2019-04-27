@@ -49,6 +49,7 @@ void Camera::render(double alpha){
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(0, 0, -100)); //inverted
 =======
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(-30, -30, -300)); //inverted
@@ -62,6 +63,11 @@ void Camera::render(double alpha){
 =======
 	viewMatrix = glm::translate(viewMatrix, glm::vec3(0, 0, -500)); //inverted
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
+=======
+	//viewMatrix = glm::rotate(viewMatrix, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	//viewMatrix = glm::translate(viewMatrix, glm::vec3(-40.0f, 0, 0.0f)); //inverted
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -100.0f)); //inverted
+>>>>>>> Added bilboarding and moved ship closer
 	//viewMatrix = glm::rotate(viewMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 =======

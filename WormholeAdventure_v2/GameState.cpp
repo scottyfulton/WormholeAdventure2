@@ -137,13 +137,74 @@ void GameState::update(double time, double dt, bool arr[4])
 =======
 		w->update(time, dt);
 	}
+<<<<<<< HEAD
 >>>>>>> Latest, got shiz
+=======
+
+
+	if (time > 0) {
+
+		//Collision Detection
+		for (Player* p : players)
+		{
+			//Check collision with Wormhole
+
+			//Only check asteroids that are close to ship based on Z axis
+
+
+			//For each astroid calculate collision with ship
+			for (Wormhole* w : wormholes) {
+				//	
+				std::list<Asteroid*>* aList = w->getAsteroid();
+				//for (int i = 0; i < aList->size(); i++) {
+					//std::cout << (*aList) << std::endl;
+					//for (auto a = aList->cbegin(); a != aList->cend; ++a)
+					//{
+					//	if ( collisionDetection(p, a) )
+					//	{
+					//	}
+					//}
+
+					//a = &(w->getAsteroid[i]);
+					//Pass pointers from Players and Asteroids
+					//Asteroid obj1 = aList[i];
+					//aList->get_allocator().allocate(aList->size());
+				//std::cout << "S" << (p->getPosition().x) << ", "
+				//	<< (p->getPosition().y) << ", "
+				//	<< (p->getPosition().z) << std::endl;
+
+
+				for (Asteroid* a : *aList) {
+
+					//std::cout << "A" << (a->getPosition().x) << ", "
+					//	<< (a->getPosition().y) << ", "
+					//	<< (a->getPosition().z) << std::endl;
+					//Asteroid* ass = aList[i];
+					if (collisionDetection(p, a))
+					{
+						//Collision - Ship hit Astroid	
+						//boom game over
+						std::cout << "BOOOOOOOOOOOOM" << std::endl;
+						//std::cout << "BOOOOOOOOOOOOM" << std::endl;
+						//std::cout << "BOOOOOOOOOOOOM" << std::endl;
+
+
+					}
+				}
+			}
+		}
+
+	}
+>>>>>>> Added bilboarding and moved ship closer
 }
 
 void GameState::render(double alpha)
 {
+
+
 	for (Camera* c : cameras)
 		c->render(alpha);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	for (Player* p : players)
@@ -156,6 +217,12 @@ void GameState::render(double alpha)
 >>>>>>> updated player class with input switch case
 =======
 >>>>>>> Latest, got shiz
+=======
+
+	for (Player* p : players)
+		p->render(alpha);
+	
+>>>>>>> Added bilboarding and moved ship closer
 	//Objects
 	for (GObject* g : gObjects)
 		g->render(alpha);
@@ -163,8 +230,6 @@ void GameState::render(double alpha)
 	for (Wormhole* w : wormholes)
 		w->render(alpha);
 
-	for (Player* p : players)
-		p->render(alpha);
 }
 
 void GameState::addGObject(GObject* obj)
@@ -204,6 +269,7 @@ void GameState::removePlayer(Player* obj)
 	players.remove(obj);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 //Player needs getPos and Asteroid needs get postion
 bool GameState::collisionDetection(Player* obj1, Asteroid* obj2)
@@ -228,6 +294,9 @@ bool GameState::collisionDetection(Player* obj1, Asteroid* obj2)
 }
 =======
 //
+=======
+
+>>>>>>> Added bilboarding and moved ship closer
 //void addInput(Input* obj)
 //{
 //
@@ -236,4 +305,44 @@ bool GameState::collisionDetection(Player* obj1, Asteroid* obj2)
 //{
 //
 //}
+<<<<<<< HEAD
 >>>>>>> updated player class with input switch case
+=======
+
+
+
+//Player needs getPos and Asteroid needs get postion
+bool GameState::collisionDetection(Player* obj1, Asteroid* obj2)
+{
+	//Extract Positions from player and asteroid
+	glm::vec3 pos1 = obj1->getPosition();
+	glm::vec3 pos2 = obj2->getPosition();
+
+	//Extract the Radius because its symmetrical!!!!!
+	//std::cout << "big d " << distance << std::endl;
+
+
+	//Calculate Distance
+	//float distance = sqrt(pow(obj2.pos.x - obj1.pos.x, 2.0f) + pow(obj2.y - obj1.y, 2.0f) + pow(obj2.z - obj1.z, 2.0f));
+	float distance = sqrt(pow(pos2.x - pos1.x, 2.0f) + pow(pos2.y - pos1.y, 2.0f) + pow(pos2.z - pos1.z, 2.0f));
+
+	//Subtract radii
+	//distance -= (obj1Radius + obj2Radius);
+
+	//				std::cout << "A " << (obj2->getPosition().x) << ", "
+	//					<< (obj2->getPosition().y) << ", "
+	//					<< (obj2->getPosition().z) << std::endl;
+
+	//				std::cout << "S " << (obj1->getPosition().x) << ", "
+	//<< (obj1->getPosition().y) << ", "
+	//<< (obj1->getPosition().z) << std::endl;
+	distance -= (5 + 5);
+
+	if (distance < 0) {
+		return true;	//
+	}
+	else {
+		return false;
+	}
+}
+>>>>>>> Added bilboarding and moved ship closer

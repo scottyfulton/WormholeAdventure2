@@ -63,7 +63,10 @@ public:
 >>>>>>> updated player class with input switch case
 private:
 	bool collisionDetection(Player* obj1, Asteroid* obj2);
+<<<<<<< HEAD
 	bool isHit;
+=======
+>>>>>>> Added bilboarding and moved ship closer
 	std::list<Camera*> cameras;
 	std::list<GObject*> gObjects;
 	std::list<Wormhole*> wormholes;

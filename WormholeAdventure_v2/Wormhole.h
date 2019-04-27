@@ -125,16 +125,19 @@ class Wormhole {
 		std::random_device r;
 =======
 		//std::random_device r;
+<<<<<<< HEAD
 >>>>>>> This is MUCH closer to the wormhole effect that we wanted in the beginning.
 		std::list<term> cone = {{1,2}}; // function to define the initial cone shape of the wormhole
 >>>>>>> Added emit timers to particles based on RNG. Problem: Particle's isAlive() either doesn't perform proper status check or use of isAlive() in Wormhole class is improper/invalid. Movement of more than one "ring" of Particle's solely dependent on RNG - not the intent of the logic.
 =======
 		std::list<term> cone = {{1.0f,1.1f}}; // function to define the initial cone shape of the wormhole
 >>>>>>> Latest, got shiz
+=======
+		std::list<term> cone = {{1.0f,2.0f}}; // function to define the initial cone shape of the wormhole
+>>>>>>> Added bilboarding and moved ship closer
 		std::list<term> shaping; //if changed, only passed to a particle when the particle reaches the maximum height of the wormhole (max z)
 		std::list<Particle*> particles;
 		std::list<Asteroid*> asteroids;
-
 	
 
 <<<<<<< HEAD

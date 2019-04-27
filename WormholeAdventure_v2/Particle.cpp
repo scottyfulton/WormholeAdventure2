@@ -146,25 +146,37 @@ void Particle::update(float dTheta, float phi, double time, double dt){
 	//std::cout << "z value of particle: " << this->pos[2] << std::endl;
 		float z = this->pos[2];
 		this->radius = calc(z, baseShape); //pass in z to baseShape function
+		radius > 80 ? radius = 80 : NULL;//limit on spread
+
 		this->vel += this->acc;
 		this->pos += this->vel;
 		this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
 		this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-		this->pos[0] += cos(phi) * sin(z / 12.75) * 80; //shift of x
-		this->pos[1] += sin(phi) * sin(z / 12.75) * 80; //shift of y
+		//if ((cos(phi) * sin(z / 12.75)) > 50.0f)
+		//	
+		//{
+		//	
+		//}
+
+		//this->pos[0] += cos(phi) * sin(z / 12.75) * 80; //shift of x
+		//this->pos[1] += sin(phi) * sin(z / 12.75) * 80; //shift of y
+
+		this->pos[0] += cos(phi) * sin(z / 28) * 80; //shift of x
+		this->pos[1] += sin(phi) * sin(z / 28) * 80; //shift of y
+		
+		
 		this->theta += dTheta;
 };
 
-void Particle::render(glm::mat4 *viewMatInv, float dTheta, float phi, double alpha) {
+
+void Particle::render(glm::mat4 *viewMat, float dTheta, float phi, double alpha) {
 	//Interpolate
 	this->posI = pos + vel * (float)alpha;
 	this->thetaI = theta + dTheta * (float)alpha;
-	
 
-	//Transformation
 	transformationMatrix = glm::translate(glm::mat4(1.0), posI);
-	//multiplying by the transpose of the view matrix of Camera to counteract skewing caused by persepective
-	transformationMatrix *= *viewMatInv;
+	transformationMatrix *= getBillboardMat(viewMat);
+	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(10, 10, 10));
 	
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -219,8 +231,11 @@ void Particle::setTheta(float newTheta) {
 void Particle::setFunc(std::list<term>* shapingFunc){
 	shapeFunc = *shapingFunc;
 };
+<<<<<<< HEAD
 >>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
 =======
+=======
+>>>>>>> Added bilboarding and moved ship closer
 
 glm::mat4 Particle::getBillboardMat(glm::mat4* viewMat) {
 	glm::mat4 billboardMat(1.0);
@@ -233,7 +248,13 @@ glm::mat4 Particle::getBillboardMat(glm::mat4* viewMat) {
 	billboardMat[2][0] = (*viewMat)[0][2];
 	billboardMat[2][1] = (*viewMat)[1][2];
 	billboardMat[2][2] = (*viewMat)[2][2];
+<<<<<<< HEAD
 	
 	return billboardMat;
 }
 >>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
+=======
+
+	return billboardMat;
+}
+>>>>>>> Added bilboarding and moved ship closer

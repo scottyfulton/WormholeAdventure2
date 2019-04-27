@@ -23,6 +23,7 @@ public:
 	// inherits projectionMatrix, transformationMatrix, pos,
 	// vel, & acc(not used)
 	// every particle will also be a light
+	glm::vec3 getPosition();
 	
 	
 private:

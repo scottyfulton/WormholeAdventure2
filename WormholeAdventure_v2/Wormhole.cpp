@@ -128,3 +128,11 @@ float Wormhole::getPhi() {
 void Wormhole::setviewMat(glm::mat4 *viewMat){
 	this->viewMat = *viewMat;
 };
+
+//change to make more efficient 
+//std::list<Asteroid*>* Wormhole::getAsteroid(int index)
+std::list<Asteroid*>* Wormhole::getAsteroid()
+{
+
+	return &asteroids;
+}

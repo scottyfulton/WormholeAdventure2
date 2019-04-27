@@ -46,6 +46,7 @@ public:
 	//void removeInput(Input* obj);
 
 private:
+	bool collisionDetection(Player* obj1, Asteroid* obj2);
 	std::list<Camera*> cameras;
 	std::list<GObject*> gObjects;
 	std::list<Wormhole*> wormholes;

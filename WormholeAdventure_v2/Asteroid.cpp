@@ -26,17 +26,29 @@ Asteroid::~Asteroid() {
 //radius increments based on predefined function of z
 void Asteroid::update(float phi, double time, double dt) {
 	
-	if (this->pos[2] >=150) {
+	if (this->pos[2] >=400) {
 		this->living = false;
 	}
+
 	float z = this->pos[2];
-	this->radius = calc(z-3, baseShape); //pass in z to baseShape function
+	
+	float answer = z - 3;
+	//keeps z-3 positive
+	if (answer <= 0)
+	{
+		answer = 0;
+	}
+	this->radius = calc(answer, baseShape); //pass in z to baseShape function
+	radius > 79 ? radius = 79 : NULL;//limit on spread
 	this->vel += this->acc;
 	this->pos += this->vel;
 	this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
 	this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-	this->pos[0] += cos(phi) * sin(z / 12.75) * 250.0f; //shift of x
-	this->pos[1] += sin(phi) * sin(z / 12.75) * 250.0f; //shift of y
+	//this->pos[0] += cos(phi) * sin(z / 12.75) * 250.0f; //shift of x
+	//this->pos[1] += sin(phi) * sin(z / 12.75) * 250.0f; //shift of y
+
+	this->pos[0] += cos(phi) * sin(z / 28) * 80; //shift of x
+	this->pos[1] += sin(phi) * sin(z / 28) * 80; //shift of y
 };
 
 void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
@@ -93,3 +105,8 @@ void Asteroid::setTheta(float newTheta) {
 void Asteroid::setFunc(std::list<term>* shapingFunc) {
 	shapeFunc = *shapingFunc;
 };
+
+glm::vec3 Asteroid::getPosition()
+{
+	return this->posI;
+}

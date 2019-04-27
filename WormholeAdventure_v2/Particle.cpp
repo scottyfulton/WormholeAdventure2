@@ -28,25 +28,37 @@ void Particle::update(float dTheta, float phi, double time, double dt){
 	//std::cout << "z value of particle: " << this->pos[2] << std::endl;
 		float z = this->pos[2];
 		this->radius = calc(z, baseShape); //pass in z to baseShape function
+		radius > 80 ? radius = 80 : NULL;//limit on spread
+
 		this->vel += this->acc;
 		this->pos += this->vel;
 		this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
 		this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-		this->pos[0] += cos(phi) * sin(z / 12.75) * 80; //shift of x
-		this->pos[1] += sin(phi) * sin(z / 12.75) * 80; //shift of y
+		//if ((cos(phi) * sin(z / 12.75)) > 50.0f)
+		//	
+		//{
+		//	
+		//}
+
+		//this->pos[0] += cos(phi) * sin(z / 12.75) * 80; //shift of x
+		//this->pos[1] += sin(phi) * sin(z / 12.75) * 80; //shift of y
+
+		this->pos[0] += cos(phi) * sin(z / 28) * 80; //shift of x
+		this->pos[1] += sin(phi) * sin(z / 28) * 80; //shift of y
+		
+		
 		this->theta += dTheta;
 };
 
-void Particle::render(glm::mat4 *viewMatInv, float dTheta, float phi, double alpha) {
+
+void Particle::render(glm::mat4 *viewMat, float dTheta, float phi, double alpha) {
 	//Interpolate
 	this->posI = pos + vel * (float)alpha;
 	this->thetaI = theta + dTheta * (float)alpha;
-	
 
-	//Transformation
 	transformationMatrix = glm::translate(glm::mat4(1.0), posI);
-	//multiplying by the transpose of the view matrix of Camera to counteract skewing caused by persepective
-	transformationMatrix *= *viewMatInv;
+	transformationMatrix *= getBillboardMat(viewMat);
+	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(10, 10, 10));
 	
 	//Setting Uniform Value
 	glUniform1i(texture, 0);
@@ -91,3 +103,18 @@ void Particle::setTheta(float newTheta) {
 void Particle::setFunc(std::list<term>* shapingFunc){
 	shapeFunc = *shapingFunc;
 };
+
+glm::mat4 Particle::getBillboardMat(glm::mat4* viewMat) {
+	glm::mat4 billboardMat(1.0);
+	billboardMat[0][0] = (*viewMat)[0][0];
+	billboardMat[0][1] = (*viewMat)[1][0];
+	billboardMat[0][2] = (*viewMat)[2][0];
+	billboardMat[1][0] = (*viewMat)[0][1];
+	billboardMat[1][1] = (*viewMat)[1][1];
+	billboardMat[1][2] = (*viewMat)[2][1];
+	billboardMat[2][0] = (*viewMat)[0][2];
+	billboardMat[2][1] = (*viewMat)[1][2];
+	billboardMat[2][2] = (*viewMat)[2][2];
+
+	return billboardMat;
+}

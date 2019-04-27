@@ -34,6 +34,7 @@ public:
 	void resetNetForce();
 	void addForce(float force, float theta, float phi);
 	void addForceVec(float x, float y, float z);
+	glm::vec3 getPosition();
 
 protected:
 	float radTemp = glm::radians(90.f);

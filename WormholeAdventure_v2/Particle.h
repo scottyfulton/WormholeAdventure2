@@ -31,4 +31,5 @@ private:
 	void setTheta(float newTheta);
 	//void updateTheta(float dTheta, double alpha); //interpolates theta value, called in render()
 	glm::vec3 posI;
+	glm::mat4 getBillboardMat(glm::mat4* viewMat);
 };

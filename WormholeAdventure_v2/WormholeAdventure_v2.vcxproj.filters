@@ -114,4 +114,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="assyNotes.txt" />
+  </ItemGroup>
 </Project>

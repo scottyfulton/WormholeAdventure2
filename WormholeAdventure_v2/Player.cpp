@@ -3,7 +3,8 @@
 using namespace glm;
 
 Player::Player() {};
-Player::Player(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos, glm::vec3 rotate)
+Player::Player(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, 
+	glm::vec3 pos, glm::vec3 rotate)
 {
 	this->shader = shaderID;
 	this->texture = textureID;
@@ -175,6 +176,7 @@ void Player::update(double time, double dt, bool arr[4]) { //manipulates positio
 	pos.x = pos.x + vel.x;
 	pos.y = pos.y + vel.y;
 	pos.z = pos.z + vel.z;
+	//std::cout << pos.x << " " << pos.y << " " << 
 };
 
 void Player::render(double alpha) {
@@ -221,7 +223,7 @@ void Player::render(double alpha) {
 	translationMatrix = glm::translate(transformationMatrix, posI);
 
 	scaleMatrix = glm::mat4(1.0);
-	scaleMatrix = glm::scale(rotationMatrix, glm::vec3(4.0f));
+	scaleMatrix = glm::scale(rotationMatrix, glm::vec3(1.0f));
 
 	/*transformationMatrix = translationMatrix * rotationMatrix * scaleMatrix;*/
 	transformationMatrix = scaleMatrix * rotationMatrix * translationMatrix;
@@ -234,7 +236,7 @@ void Player::render(double alpha) {
 	glDrawArrays(GL_TRIANGLES, 0, numVertices);
 
 
-};
+}
 
 void Player::addForce(float force, float theta, float phi) {
 	theta = (float) glm::radians(theta);
@@ -257,4 +259,9 @@ void Player::resetNetForce() {
 	netForce.x = 0.0f;
 	netForce.y = 0.0f;
 	netForce.z = 0.0f;
+}
+
+glm::vec3 Player::getPosition()
+{
+	return this->pos;
 }

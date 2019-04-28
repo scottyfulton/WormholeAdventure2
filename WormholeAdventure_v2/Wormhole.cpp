@@ -3,8 +3,8 @@
 
 Wormhole::Wormhole() {};
 
-Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID, std::vector<GLuint> *vaoID, 
-					std::vector<GLsizei> *vertexCount, GLsizei particleCount, GLsizei asteroidCount,  glm::vec3 pos) {
+Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID, std::vector<GLuint> *vaoID,
+	std::vector<GLsizei> *vertexCount, GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos) {
 	this->shaders = shaderID;
 	this->textures = textureID;
 	this->vaos = vaoID;
@@ -13,11 +13,13 @@ Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureI
 	this->numAsteroids = asteroidCount;
 	this->pos = pos;
 	//this->vel = glm::vec3(0.01f, 0.0f, -0.01f);
-	this->shaping = {{-1, 2}, {1,1} };
+	this->shaping = { {-1, 2}, {1,1} };
 	this->phi = 0;
 	this->dPhi = 0;
-	this->ddPhi = 0.000005;
+	this->ddPhi = 0.0000005;
 	this->currTheta = 0;
+	this->particleTimer = (10000000 / numParticles);
+	this->asteroidTimer = (1000000000 / numAsteroids);
 
 	//float random = (r() / r.max) * 5;
 	for (int i = 0; i < particleCount; i++) {
@@ -26,10 +28,10 @@ Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureI
 	}
 
 	for (int i = 0; i < asteroidCount; i++) {
-		asteroids.push_back(new Asteroid((*shaders)[0], (*textures)[2], (*vaos)[2], (*vertexCounts)[2],  pos, &cone));
+		asteroids.push_back(new Asteroid((*shaders)[0], (*textures)[2], (*vaos)[2], (*vertexCounts)[2], pos, &cone));
 		asteroids.back()->setFunc(&shaping);
 	}
-	
+
 };
 
 //destruct all Particles
@@ -42,9 +44,10 @@ Wormhole::~Wormhole() {
 };
 
 void Wormhole::update(double time, double dt) {
-	
-	int random = (std::rand() / RAND_MAX) % 2;
-	if (random == 0) {
+
+	float percentage = ((std::rand() % 10000)) * (particleTimer/2);
+	particleTimer -= percentage;
+	if (particleTimer <= 0.0f) {
 		for (Particle* p : particles) {
 			if (!(p->living)) {
 				p->reset(numParticles);
@@ -52,7 +55,17 @@ void Wormhole::update(double time, double dt) {
 			}
 
 		}
-		
+		particleTimer = (10000000 / numParticles);
+	};
+	for (Particle* p : particles) {
+		if (p->living) {
+
+			p->update(dTheta, phi, time, dt);
+		}
+	}
+	percentage = ((std::rand() % 10000)) * (asteroidTimer/2);
+	asteroidTimer -= percentage;
+	if (asteroidTimer <= 0.0f) {
 		for (Asteroid* a : asteroids) {
 			if (!(a->living)) {
 				a->reset(numAsteroids);
@@ -60,25 +73,17 @@ void Wormhole::update(double time, double dt) {
 			}
 
 		}
-	
-		for (Particle* p : particles) {
-			if (p->living) {
-				
-				p->update(dTheta, phi, time, dt);
-			}
-		}
-
-		for (Asteroid* a : asteroids) {
-			if (a->living) {
-
-				a->update(dTheta, phi, time, dt);
-			}
-		}
-		
-		//std::cout << "Number of Particles alive: " << numAlive << std::endl;
-		phi += dPhi;
-		dPhi += ddPhi;
+		asteroidTimer = (1000000000 / numAsteroids);
 	};
+
+	for (Asteroid* a : asteroids) {
+		if (a->living) {
+
+			a->update(phi, time, dt);
+		}
+	}
+	phi += dPhi;
+	dPhi += ddPhi;
 };
 
 void Wormhole::render(double alpha) {
@@ -99,12 +104,11 @@ void Wormhole::render(double alpha) {
 	//float phiI = phi + dPhi*alpha;
 	for (Particle* p : particles) {
 		if (p->isAlive())
-			p->render(dTheta, phi, alpha); //change to phiI once particle movement working
+			p->render(&viewMat, dTheta, phi, alpha); //change to phiI once particle movement working
 	}
 
-
-	//VAO
-	glUseProgram((*shaders)[0]);
+	// set up for asteroids
+	//glUseProgram((*shaders)[0]);
 	glBindVertexArray((*vaos)[2]);
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
@@ -112,7 +116,23 @@ void Wormhole::render(double alpha) {
 
 	for (Asteroid* a : asteroids) {
 		if (a->isAlive())
-			a->render(dTheta, phi, alpha); //change to phiI once particle movement working
+			a->render(&viewMat, phi, alpha); //change to phiI once particle movement working
 	}
-	
+
 };
+
+float Wormhole::getPhi() {
+	return this->phi;
+};
+
+void Wormhole::setviewMat(glm::mat4 *viewMat){
+	this->viewMat = *viewMat;
+};
+
+//change to make more efficient 
+//std::list<Asteroid*>* Wormhole::getAsteroid(int index)
+std::list<Asteroid*>* Wormhole::getAsteroid()
+{
+
+	return &asteroids;
+}

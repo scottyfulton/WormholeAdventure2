@@ -1,16 +1,5 @@
-﻿  Asteroid.cpp
-c:\users\user\desktop\graphicsproj\wormholeadventure2\wormholeadventure_v2\asteroid.cpp(39): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-c:\users\user\desktop\graphicsproj\wormholeadventure2\wormholeadventure_v2\asteroid.cpp(40): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(image_DXT.obj)' or at 'C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(image_helper.obj)' or at 'C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(SOIL.obj)' or at 'C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(stb_image_aug.obj)' or at 'C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\SOIL.pdb'; linking object as if no debug info
-  WormholeAdventure_v2.vcxproj -> C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\WormholeAdventure_v2.exe
+﻿  Engine.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\dev\wormholeadventure_v2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+c:\dev\wormholeadventure_v2\wormholeadventure_v2\wormhole.h(24): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  WormholeAdventure_v2.vcxproj -> C:\Dev\WormholeAdventure_v2\Debug\WormholeAdventure_v2.exe

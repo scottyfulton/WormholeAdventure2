@@ -45,6 +45,15 @@
     <ClCompile Include="GameMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="emigration\vertexArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="emigration\vertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Wormhole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -77,14 +86,23 @@
     <ClInclude Include="GameMenu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Wormhole.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Term.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="emigration\vertexArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="emigration\vertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wormhole.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Asteroid.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -95,5 +113,8 @@
       <Filter>Source Files\Shaders</Filter>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assyNotes.txt" />
   </ItemGroup>
 </Project>

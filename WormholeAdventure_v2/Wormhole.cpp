@@ -126,14 +126,14 @@ void Wormhole::render(double alpha) {
 
 void Wormhole::updateP(float* theta, glm::vec3* objPos, glm::vec3* vel){
 	float z = (*objPos)[2];
-	//float radius = z; //pass in z to baseShape function
-	z > 15.0f ? z = 15.0f : NULL;//limit on spread
+	float radius = z; //pass in z to baseShape function
+	radius > 15.0f ? radius = 15.0f : NULL;//limit on spread
 
 	(*objPos) += *vel;
-	(*objPos)[0] = cos(*theta) * z; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
-	(*objPos)[1] = sin(*theta) * z; // multiplied by cos & sin of phi to implement shaping direction phi
-	(*objPos)[0] += cos(phi) * sin(z/5.0f) * 10.0f; //shift of x
-	(*objPos)[1] += sin(phi) * sin(z/5.0f) * 10.0f; //shift of y
+	(*objPos)[0] = cos(*theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
+	(*objPos)[1] = sin(*theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
+	(*objPos)[0] -= cos(phi) * sin(z/5.0f) * 10.0f; //shift of x
+	(*objPos)[1] -= sin(phi) * sin(z/5.0f) * 10.0f; //shift of y
 	*theta += dTheta;
 };
 
@@ -145,8 +145,8 @@ void Wormhole::updateA(float* theta, glm::vec3* objPos, glm::vec3* vel) {
 	(*objPos) += *vel;
 	(*objPos)[0] = cos(*theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
 	(*objPos)[1] = sin(*theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-	(*objPos)[0] += cos(phi) * sin(z / 25.0f) * 10.0f; //shift of x
-	(*objPos)[1] += sin(phi) * sin(z / 25.0f) * 10.0f; //shift of y
+	(*objPos)[0] -= cos(phi) * sin(z / 5.0f) * 10.0f; //shift of x
+	(*objPos)[1] -= sin(phi) * sin(z / 5.0f) * 10.0f; //shift of y
 };
 
 float Wormhole::getPhi() {

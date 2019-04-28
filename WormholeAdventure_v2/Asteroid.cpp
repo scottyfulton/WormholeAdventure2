@@ -26,7 +26,7 @@ Asteroid::~Asteroid() {
 //radius increments based on predefined function of z
 void Asteroid::update(float phi, double time, double dt) {
 	
-	if (this->pos[2] >=50) {
+	if (this->pos[2] >= 85) {
 		this->living = false;
 	}
 
@@ -57,9 +57,9 @@ void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
 	//this->thetaI = theta + dTheta * (float)alpha;
 	
 	transformationMatrix = glm::mat4(1.0);//this works NICK! it's ugly but it WORKS
-	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.5, 0.5, 0.5));
-	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
+	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.5, 0.5, 0.5));
 	transformationMatrix = glm::translate(transformationMatrix, posI);
+	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
 	//transformationMatrix *= *viewMatInv; //won't work if camera's view matrix is adjusted
 
 	//Setting Uniform Value
@@ -81,9 +81,9 @@ float Asteroid::calc(float val, std::list<term>* function) {
 };
 
 void Asteroid::reset(float asteroidCount) {
-	this->pos[0] = 0;
-	this->vel = glm::vec3(0, 0, 1);
-	this->acc = glm::vec3(0, 0, 0.85);
+	this->pos[2] = 0;
+	this->vel = glm::vec3(0, 0, 0.1);
+	this->acc = glm::vec3(0, 0, 0.085);
 	this->setTheta(((float)360 / asteroidCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
 	this->setLiving();
 }

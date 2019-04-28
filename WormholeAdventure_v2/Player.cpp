@@ -12,14 +12,14 @@ Player::Player(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVerti
 	this->numVertices = numVertices;
 	this->pos = pos;
 	this->rot = rotate;
-	this->valY;
+	//this->valY;
 	this->vel = glm::vec3(0.0f);
 	this->acc = glm::vec3(0.0f);
 	this->phi = 90.0f;
 	this->theta = 0.0f;
 	this->movFriction = 0.1f;
 	this->force = 0.0f;
-	this->mass =10.0f;
+	this->mass = 50.0f;
 	   
 	//initialize new gobj on heap -> pass ids to constr
 	};
@@ -56,7 +56,10 @@ void Player::update(double time, double dt, bool arr[4]) { //manipulates positio
 	float zero = 0.0;
 	float incr = 0.1;
 
-	//phi clock 
+	//phi in horizontal axis
+	//theta in vertical axis
+	//sin(theta)*cos(phi) for x
+	//sin(theta) for y
 
 	switch (inVal)
 	{
@@ -68,93 +71,100 @@ void Player::update(double time, double dt, bool arr[4]) { //manipulates positio
 			break;
 		case 1:					//U
 			/*acc.y =  incr;*/ 
-			phi = 0.0f;
-			theta = 0.0f;
+			phi = 90.0f;
+			theta = 90.0f;
 			force = incr;
 			break;
 		case 2:				 //L
 			//acc.x = -incr;
-			phi = 90;		//using phi as dir instead or pos/neg
-			theta = -90.0f;
+			phi = 180.0f;		//using phi as dir instead or pos/neg
+			theta = 180.0f;
 			force = incr;
 			break;
 		case 3: 
 			//acc.y =  incr; //U
 			//acc.x = -incr; //L
-			phi = 0.0f;
-			theta = -45.0f;
+			phi = 180.0f;
+			theta = 90.0f;
 			force = incr;
 			break;
 		case 4:
 			//acc.y = -incr; //D
-			phi = 0.0f;
-			theta = 180.0f;
+			phi = 90.0f;
+			theta = -90.0f;
 			force = incr;
 			break;
 		case 5:
 			//acc.y =  zero; //UD
 			force = zero;
+			phi = 90.0f;
+			theta = 0.0f;
 			break;
 		case 6: 
 			//acc.x = -incr; //L
 			//acc.y = -incr; //D
-			phi = 0.0f;
-			theta = -135.0f;
+			phi = 180.0f;
+			theta = -90.0f;
 			break;
 		case 7:
 			//acc.x = -incr; //L
 			//acc.y =  zero; //UD
-			phi = 0.0f;		
-			theta = -90.0f;
+			phi = 180.0f;		
+			theta = 0.0f;
 			force = incr;
 			break;
 		case 8:
 			//acc.x =  incr; //R
 			phi = 0.0f;
-			theta = 90.0f;
+			theta = 0.0f;
 			force = incr;
 			break;
 		case 9:
 			//acc.x =  incr; //R
 			//acc.y =  incr; //U
 			phi = 0.0f;
-			theta = 45.0f;
+			theta = 90.0f;
 			break;
 		case 10:
 			//acc.x =  zero; //LR
 			force = zero;
+			phi = 90.0f;
+			theta = 0.0f;
 			break;
 		case 11:
 			//acc.x =  zero; //LR 
 			//acc.y =  incr; //U
 			phi = 90.0f;
-			theta = 0.0f;
+			theta = 90.0f;
 			force = incr;
 			break;
 		case 12:
 			//acc.x =  incr; //R
 			//acc.y = -incr; //D
 			phi = 0.0f;
-			theta = 135.0f;
+			theta = -90.0f;
 			force = incr;
 			break;
 		case 13:
 			//acc.x =  incr; //R
 			//acc.y =  zero; //DU
 			phi = 0.0f;
-			theta = 90.0f;
+			theta = 0.0f;
 			force = incr;
 			break;
 		case 14:
 			//acc.x =  zero; //LR
 			//acc.y = -incr; //D
-			theta = 180.0f;
+			theta = -90.0f;
+			phi = 90.0f;
 			force = incr;
 			break;
 		case 15:
 			//acc.x =  incr; //LR
 			//acc.y =  zero; //UD
 			force = zero;
+			phi = 90.0f;
+			theta = 0.0f;
 			break;
 
 		default:
@@ -170,10 +180,12 @@ void Player::update(double time, double dt, bool arr[4]) { //manipulates positio
 	vel.x = vel.x + acc.x;
 	vel.y = vel.y + acc.y;
 	vel.z = vel.z + acc.z;
-	pos.x = pos.x + vel.x;
-	pos.y = pos.y + vel.y;
+	if((pos.x + vel.x) <= 7.3 && (pos.x + vel.x) >= -7.3)
+		pos.x = pos.x + vel.x;
+	if((pos.y + vel.y) <= 6.0 && (pos.y + vel.y) >= -6.0)
+		pos.y = pos.y + vel.y;
 	//pos.z = pos.z + vel.z;
-	//std::cout << pos.x << " " << pos.y << " " << 
+	//std::cout << pos.x << " " << pos.y << " " << pos.z << " " << std::endl;
 };
 
 void Player::render(double alpha) {
@@ -199,26 +211,26 @@ void Player::render(double alpha) {
 	valZ = rot[2];
 	
 	transformationMatrix = glm::mat4(1.0);
-	rotationMatrix = glm::mat4(1.0);
-	rotationXMatrix = glm::mat4(1.0);
-	rotationYMatrix = glm::mat4(1.0);
-	rotationZMatrix = glm::mat4(1.0);
-	scaleMatrix = glm::mat4(1.0);
+	//rotationMatrix = glm::mat4(1.0);
+	//rotationXMatrix = glm::mat4(1.0);
+	//rotationYMatrix = glm::mat4(1.0);
+	//rotationZMatrix = glm::mat4(1.0);
+	//scaleMatrix = glm::mat4(1.0);
 
-	rotationXMatrix = glm::rotate(rotationXMatrix, (valX), glm::vec3(1.0, 0.0, 0.0));
-	rotationYMatrix = glm::rotate(rotationYMatrix, (valY) , glm::vec3(0.0, 1.0, 0.0)); // (1.57f/2.0f)
-	rotationZMatrix = glm::rotate(rotationZMatrix, (valZ), glm::vec3(0.0, 0.0, 1.0));
-	rotationMatrix = rotationZMatrix * rotationYMatrix *rotationXMatrix;
+	//rotationXMatrix = glm::rotate(rotationXMatrix, (valX), glm::vec3(1.0, 0.0, 0.0));
+	//rotationYMatrix = glm::rotate(rotationYMatrix, (valY+glm::radians(30.0f)) , glm::vec3(0.0, 1.0, 0.0)); // (1.57f/2.0f)
+	//rotationZMatrix = glm::rotate(rotationZMatrix, (valZ), glm::vec3(0.0, 0.0, 1.0));
+	//rotationMatrix = rotationZMatrix * rotationYMatrix *rotationXMatrix;
 	//rotationMatrix =  rotationXMatrix* rotationYMatrix *rotationZMatrix;
+	//transformationMatrix = translationMatrix * rotationMatrix; //commented for testing optimizations
 
 	//this->pos[0] += cos(phi) * sin(z / 12.75) * 30 * z; //shift of x
 	//this->pos[1] += sin(phi) * sin(z / 12.75) * 30 * z; //shift of y
 	translationMatrix = glm::translate(transformationMatrix, posI);
-
-	//scaleMatrix = glm::scale(rotationMatrix, glm::vec3(1.0f));
-
-	/*transformationMatrix = translationMatrix * rotationMatrix * scaleMatrix;*/
-	transformationMatrix = scaleMatrix * rotationMatrix *  translationMatrix;
+	transformationMatrix = glm::rotate(translationMatrix, valY + glm::radians(30.0f), glm::vec3(0, 1, 0));
+	//transformationMatrix = glm::rotate(transformationMatrix, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0));
+	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.1));
+	//transformationMatrix = scaleMatrix * rotationMatrix *  translationMatrix;
 
 	//Uniform
 	glUniform1i(texture, 0);
@@ -226,19 +238,14 @@ void Player::render(double alpha) {
 
 	//Draw
 	glDrawArrays(GL_TRIANGLES, 0, numVertices);
-	glBegin(GL_LINES);
-	glVertex3f(0.0, 0.0, 0.0);
-	glVertex3f(pos.x, pos.y, pos.z);
-	glEnd();
 }
 
 void Player::addForce(float force, float theta, float phi) {
 	theta = (float) glm::radians(theta);
 	phi = (float)glm::radians(phi);
-
 	
-	netForce.x = (float)(netForce.x + (force * sin(theta)*sin(phi)));
-	netForce.y = (float)(netForce.y + (force * cos(theta)));
+	netForce.x = (float)(netForce.x + (force * cos(phi)));
+	netForce.y = (float)(netForce.y + (force * sin(theta)));
 	netForce.z = (float)(netForce.z + (force * sin(theta)*cos(phi)));
 }
 

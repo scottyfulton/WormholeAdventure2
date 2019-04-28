@@ -68,14 +68,14 @@ Player::Player(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVerti
 	this->numVertices = numVertices;
 	this->pos = pos;
 	this->rot = rotate;
-	this->valY;
+	//this->valY;
 	this->vel = glm::vec3(0.0f);
 	this->acc = glm::vec3(0.0f);
 	this->phi = 90.0f;
 	this->theta = 0.0f;
 	this->movFriction = 0.1f;
 	this->force = 0.0f;
-	this->mass =10.0f;
+	this->mass = 50.0f;
 	   
 	//initialize new gobj on heap -> pass ids to constr
 <<<<<<< HEAD
@@ -153,6 +153,7 @@ void Player::update(double time, double dt, bool arr[4]) { //manipulates positio
 	//theta in vertical axis
 	//sin(theta)*cos(phi) for x
 	//sin(theta) for y
+<<<<<<< HEAD
 
 	switch (inVal)
 	{
@@ -497,6 +498,8 @@ void Player::setviewMat(glm::mat4 *viewMat) {
 	float incr = 0.1;
 
 	//phi clock 
+=======
+>>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
 
 	switch (inVal)
 	{
@@ -508,93 +511,100 @@ void Player::setviewMat(glm::mat4 *viewMat) {
 			break;
 		case 1:					//U
 			/*acc.y =  incr;*/ 
-			phi = 0.0f;
-			theta = 0.0f;
+			phi = 90.0f;
+			theta = 90.0f;
 			force = incr;
 			break;
 		case 2:				 //L
 			//acc.x = -incr;
-			phi = 90;		//using phi as dir instead or pos/neg
-			theta = -90.0f;
+			phi = 180.0f;		//using phi as dir instead or pos/neg
+			theta = 180.0f;
 			force = incr;
 			break;
 		case 3: 
 			//acc.y =  incr; //U
 			//acc.x = -incr; //L
-			phi = 0.0f;
-			theta = -45.0f;
+			phi = 180.0f;
+			theta = 90.0f;
 			force = incr;
 			break;
 		case 4:
 			//acc.y = -incr; //D
-			phi = 0.0f;
-			theta = 180.0f;
+			phi = 90.0f;
+			theta = -90.0f;
 			force = incr;
 			break;
 		case 5:
 			//acc.y =  zero; //UD
 			force = zero;
+			phi = 90.0f;
+			theta = 0.0f;
 			break;
 		case 6: 
 			//acc.x = -incr; //L
 			//acc.y = -incr; //D
-			phi = 0.0f;
-			theta = -135.0f;
+			phi = 180.0f;
+			theta = -90.0f;
 			break;
 		case 7:
 			//acc.x = -incr; //L
 			//acc.y =  zero; //UD
-			phi = 0.0f;		
-			theta = -90.0f;
+			phi = 180.0f;		
+			theta = 0.0f;
 			force = incr;
 			break;
 		case 8:
 			//acc.x =  incr; //R
 			phi = 0.0f;
-			theta = 90.0f;
+			theta = 0.0f;
 			force = incr;
 			break;
 		case 9:
 			//acc.x =  incr; //R
 			//acc.y =  incr; //U
 			phi = 0.0f;
-			theta = 45.0f;
+			theta = 90.0f;
 			break;
 		case 10:
 			//acc.x =  zero; //LR
 			force = zero;
+			phi = 90.0f;
+			theta = 0.0f;
 			break;
 		case 11:
 			//acc.x =  zero; //LR 
 			//acc.y =  incr; //U
 			phi = 90.0f;
-			theta = 0.0f;
+			theta = 90.0f;
 			force = incr;
 			break;
 		case 12:
 			//acc.x =  incr; //R
 			//acc.y = -incr; //D
 			phi = 0.0f;
-			theta = 135.0f;
+			theta = -90.0f;
 			force = incr;
 			break;
 		case 13:
 			//acc.x =  incr; //R
 			//acc.y =  zero; //DU
 			phi = 0.0f;
-			theta = 90.0f;
+			theta = 0.0f;
 			force = incr;
 			break;
 		case 14:
 			//acc.x =  zero; //LR
 			//acc.y = -incr; //D
-			theta = 180.0f;
+			theta = -90.0f;
+			phi = 90.0f;
 			force = incr;
 			break;
 		case 15:
 			//acc.x =  incr; //LR
 			//acc.y =  zero; //UD
 			force = zero;
+			phi = 90.0f;
+			theta = 0.0f;
 			break;
 
 		default:
@@ -610,10 +620,12 @@ void Player::setviewMat(glm::mat4 *viewMat) {
 	vel.x = vel.x + acc.x;
 	vel.y = vel.y + acc.y;
 	vel.z = vel.z + acc.z;
-	pos.x = pos.x + vel.x;
-	pos.y = pos.y + vel.y;
+	if((pos.x + vel.x) <= 7.3 && (pos.x + vel.x) >= -7.3)
+		pos.x = pos.x + vel.x;
+	if((pos.y + vel.y) <= 6.0 && (pos.y + vel.y) >= -6.0)
+		pos.y = pos.y + vel.y;
 	//pos.z = pos.z + vel.z;
-	//std::cout << pos.x << " " << pos.y << " " << 
+	//std::cout << pos.x << " " << pos.y << " " << pos.z << " " << std::endl;
 };
 
 void Player::render(double alpha) {
@@ -639,26 +651,26 @@ void Player::render(double alpha) {
 	valZ = rot[2];
 	
 	transformationMatrix = glm::mat4(1.0);
-	rotationMatrix = glm::mat4(1.0);
-	rotationXMatrix = glm::mat4(1.0);
-	rotationYMatrix = glm::mat4(1.0);
-	rotationZMatrix = glm::mat4(1.0);
-	scaleMatrix = glm::mat4(1.0);
+	//rotationMatrix = glm::mat4(1.0);
+	//rotationXMatrix = glm::mat4(1.0);
+	//rotationYMatrix = glm::mat4(1.0);
+	//rotationZMatrix = glm::mat4(1.0);
+	//scaleMatrix = glm::mat4(1.0);
 
-	rotationXMatrix = glm::rotate(rotationXMatrix, (valX), glm::vec3(1.0, 0.0, 0.0));
-	rotationYMatrix = glm::rotate(rotationYMatrix, (valY) , glm::vec3(0.0, 1.0, 0.0)); // (1.57f/2.0f)
-	rotationZMatrix = glm::rotate(rotationZMatrix, (valZ), glm::vec3(0.0, 0.0, 1.0));
-	rotationMatrix = rotationZMatrix * rotationYMatrix *rotationXMatrix;
+	//rotationXMatrix = glm::rotate(rotationXMatrix, (valX), glm::vec3(1.0, 0.0, 0.0));
+	//rotationYMatrix = glm::rotate(rotationYMatrix, (valY+glm::radians(30.0f)) , glm::vec3(0.0, 1.0, 0.0)); // (1.57f/2.0f)
+	//rotationZMatrix = glm::rotate(rotationZMatrix, (valZ), glm::vec3(0.0, 0.0, 1.0));
+	//rotationMatrix = rotationZMatrix * rotationYMatrix *rotationXMatrix;
 	//rotationMatrix =  rotationXMatrix* rotationYMatrix *rotationZMatrix;
+	//transformationMatrix = translationMatrix * rotationMatrix; //commented for testing optimizations
 
 	//this->pos[0] += cos(phi) * sin(z / 12.75) * 30 * z; //shift of x
 	//this->pos[1] += sin(phi) * sin(z / 12.75) * 30 * z; //shift of y
 	translationMatrix = glm::translate(transformationMatrix, posI);
-
-	//scaleMatrix = glm::scale(rotationMatrix, glm::vec3(1.0f));
-
-	/*transformationMatrix = translationMatrix * rotationMatrix * scaleMatrix;*/
-	transformationMatrix = scaleMatrix * rotationMatrix *  translationMatrix;
+	transformationMatrix = glm::rotate(translationMatrix, valY + glm::radians(30.0f), glm::vec3(0, 1, 0));
+	//transformationMatrix = glm::rotate(transformationMatrix, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0));
+	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.1));
+	//transformationMatrix = scaleMatrix * rotationMatrix *  translationMatrix;
 
 	//Uniform
 	glUniform1i(texture, 0);
@@ -666,6 +678,7 @@ void Player::render(double alpha) {
 
 	//Draw
 	glDrawArrays(GL_TRIANGLES, 0, numVertices);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -681,16 +694,17 @@ void Player::render(double alpha) {
 	glVertex3f(pos.x, pos.y, pos.z);
 	glEnd();
 >>>>>>> Changed phi value for moving player left (case 2) to 90 & commented the z-coordinate update for the player (shouldn't move in the z anyways). Weird result.
+=======
+>>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
 }
 >>>>>>> Added bilboarding and moved ship closer
 
 void Player::addForce(float force, float theta, float phi) {
 	theta = (float) glm::radians(theta);
 	phi = (float)glm::radians(phi);
-
 	
-	netForce.x = (float)(netForce.x + (force * sin(theta)*sin(phi)));
-	netForce.y = (float)(netForce.y + (force * cos(theta)));
+	netForce.x = (float)(netForce.x + (force * cos(phi)));
+	netForce.y = (float)(netForce.y + (force * sin(theta)));
 	netForce.z = (float)(netForce.z + (force * sin(theta)*cos(phi)));
 }
 

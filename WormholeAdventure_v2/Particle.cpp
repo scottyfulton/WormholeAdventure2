@@ -44,7 +44,11 @@ Particle::~Particle(){
 //radius increments based on predefined function of z
 void Particle::update(float dTheta, float phi, double time, double dt){
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (this->pos[2] >= 50) {
+=======
+	if (this->pos[2] >= 85) {
+>>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
 		this->living = false;
 	}
 	//std::cout << "z value of particle: " << this->pos[2] << std::endl;
@@ -197,9 +201,9 @@ void Particle::render(glm::mat4 *viewMat, float dTheta, float phi, double alpha)
 };
 
 void Particle::reset(float particleCount) {
-	this->pos[0] = 0;
+	this->pos[2] = 0;
 	this->vel = glm::vec3(0, 0, 0.1);
-	this->acc = glm::vec3(0, 0, 0.045);
+	this->acc = glm::vec3(0, 0, 0.75);
 	this->setTheta(((float)360 / particleCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
 	this->setLiving();
 }

@@ -30,6 +30,7 @@ void Asteroid::update(float phi, double time, double dt) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (this->pos[2] >=55) {
 =======
 	if (this->pos[2] >=150) {
@@ -78,6 +79,9 @@ void Asteroid::render(glm::mat4 *viewMat, float phi, double alpha) {
 =======
 =======
 	if (this->pos[2] >=50) {
+=======
+	if (this->pos[2] >= 85) {
+>>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
 		this->living = false;
 	}
 
@@ -113,6 +117,7 @@ void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
 	transformationMatrix = glm::mat4(1.0);//this works NICK! it's ugly but it WORKS
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
 	transformationMatrix = glm::translate(transformationMatrix, posI);
 	//transformationMatrix *= *viewMat; //won't work if camera's view matrix is adjusted
@@ -122,7 +127,11 @@ void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.5, 0.5, 0.5));
 >>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
+=======
+	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.5, 0.5, 0.5));
+>>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
 	transformationMatrix = glm::translate(transformationMatrix, posI);
+	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
 	//transformationMatrix *= *viewMatInv; //won't work if camera's view matrix is adjusted
 >>>>>>> Latest, got shiz
 
@@ -145,9 +154,9 @@ float Asteroid::calc(float val, std::list<term>* function) {
 };
 
 void Asteroid::reset(float asteroidCount) {
-	this->pos[0] = 0;
-	this->vel = glm::vec3(0, 0, 1);
-	this->acc = glm::vec3(0, 0, 0.85);
+	this->pos[2] = 0;
+	this->vel = glm::vec3(0, 0, 0.1);
+	this->acc = glm::vec3(0, 0, 0.085);
 	this->setTheta(((float)360 / asteroidCount) * (std::rand() / (float(RAND_MAX) / 360.0f)));
 	this->setLiving();
 }

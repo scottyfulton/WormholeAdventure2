@@ -20,6 +20,11 @@
 #include "Camera.h"
 //#include "Include.h"
 
+//for audio 
+#include <irrKlang.h>
+using namespace irrklang;
+#include <ik_ISound.h>
+
 
 
 class GameState {
@@ -52,5 +57,9 @@ private:
 	std::list<GObject*> gObjects;
 	std::list<Wormhole*> wormholes;
 	std::list<Player*> players;
+
+	//Audio Engine
+	ISoundEngine* engine;
+	ISound* soundWalking;
 	
 };

@@ -1,8 +1,25 @@
 #pragma once
 #include "GameState.h"
+//for playing audio 
+
 
 GameState::GameState()
 {
+	// Start the sound engine with default parameters
+	engine = createIrrKlangDevice();
+
+	if (!engine) {
+		// Error starting up the engine
+		printf("Failed to initialize Sound Engine!\n");
+		exit(0);
+	}
+
+	//engine->play2D("Resources/Audio/Never_Gonna_Give_You_Up.mp3", true);
+	//engine->play2D("Resources/Audio/Endless-Cyber-Runner.mp3", true);
+	//engine->setPlaybackSpeed();
+
+	soundWalking = engine->play2D("Resources/Audio/Never_Gonna_Give_You_Up.mp3", true, false, true, ESM_AUTO_DETECT, false);
+	soundWalking->setPlaybackSpeed(0.0);
 
 }
 
@@ -90,6 +107,7 @@ void GameState::update(double time, double dt, bool arr[4])
 						//Collision - Ship hit Astroid	
 						//boom game over
 						std::cout << "BOOOOOOOOOOOOM" << std::endl;
+						engine->play2D("Resources/Audio/Explosion+7.mp3");
 						//std::cout << "BOOOOOOOOOOOOM" << std::endl;
 						//std::cout << "BOOOOOOOOOOOOM" << std::endl;
 

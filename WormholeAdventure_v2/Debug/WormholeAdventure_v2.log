@@ -2,4 +2,13 @@
 c:\program files\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
   c:\users\user\desktop\graphicsproj\wormholeadventure2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
 c:\users\user\desktop\graphicsproj\wormholeadventure2\wormholeadventure_v2\wormhole.h(24): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  GameState.cpp
+c:\program files\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\users\user\desktop\graphicsproj\wormholeadventure2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+c:\users\user\desktop\graphicsproj\wormholeadventure2\wormholeadventure_v2\wormhole.h(24): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  main.cpp
+c:\program files\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\users\user\desktop\graphicsproj\wormholeadventure2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
+c:\users\user\desktop\graphicsproj\wormholeadventure2\wormholeadventure_v2\wormhole.h(24): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  Generating Code...
   WormholeAdventure_v2.vcxproj -> C:\Users\User\Desktop\GraphicsProj\WormholeAdventure2\Debug\WormholeAdventure_v2.exe

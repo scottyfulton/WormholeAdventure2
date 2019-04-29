@@ -196,19 +196,6 @@ void Engine::init() {
 
 	}
 
-	/********************************************************************************/
-
-	// Start the sound engine with default parameters
-	engine = createIrrKlangDevice();
-
-	if (!engine) {
-		// Error starting up the engine
-		printf("Failed to initialize Sound Engine!\n");
-		exit(0);
-	}
-
-	engine->play2D("Resources/Audio/Never_Gonna_Give_You_Up.mp3", true);
-	//engine->play2D("Resources/Audio/Endless-Cyber-Runner.mp3", true);
 	
 }
 
@@ -299,8 +286,9 @@ void Engine::input() {
 		isRunning = false;
 	}
 
-	if (glfwGetKey(window, GLFW_KEY_W) || glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_W) || glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) 
 		keys[0] = true;
+		
 	else
 		keys[0] = false;
 

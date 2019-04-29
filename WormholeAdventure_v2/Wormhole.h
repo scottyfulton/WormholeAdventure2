@@ -23,7 +23,7 @@ class Wormhole {
 
 	private:
 		bool isLight;
-		const float dTheta = 0.01; //rate of increase in theta for each particle, causes spiraling
+		const float dTheta = 0.075; //rate of increase in theta for each particle, causes spiraling
 		float currTheta, phi, dPhi, ddPhi, particleTimer, asteroidTimer; //passed in construction of a Particle, designates orientation on circumference of the Wormhole - phi = direction of shaping function
 		std::vector<GLuint> *textures, *shaders, *vaos;
 		GLuint numParticles, numAsteroids; // simply a reference to the correct vao/vbo to use for each GObject drawn

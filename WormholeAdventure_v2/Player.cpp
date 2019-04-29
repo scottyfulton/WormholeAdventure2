@@ -13,7 +13,6 @@ Player::Player(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID,
 	this->numVertices = (*vertexCount)[0];
 	this->pos = pos;
 	this->rot = rotate;
-	//this->valY;
 	this->vel = glm::vec3(0.0f);
 	this->acc = glm::vec3(0.0f);
 	this->phi = 90.0f;
@@ -21,8 +20,6 @@ Player::Player(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID,
 	this->movFriction = 0.1f;
 	this->force = 0.0f;
 	this->mass = 50.0f;
-	   
-	//initialize new gobj on heap -> pass ids to constr
 	};
 
 Player::~Player()
@@ -30,10 +27,10 @@ Player::~Player()
 	delete this;
 }
 
-void Player::update(double time, double dt, bool arr[4], bool isHit) { //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
+void Player::update(double time, double dt, bool arr[4], bool isHit) 
+{ //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
 //input cases determine theta&phi for rot in 3d space	
 
-	//bool boolArr[] = { false, false, false,false };
 	bool *boolArr = arr;
 	int inVal = 0;
 
@@ -52,7 +49,6 @@ void Player::update(double time, double dt, bool arr[4], bool isHit) { //manipul
 		}
 	}
 
-	//std::cout << "Up: " << boolArr[0] << "Left: " << boolArr[1] << "Down: " << boolArr[2] << "Right: " << boolArr[3] << std::endl;
 	//vars for adding velocity, to update all cases
 	float zero = 0.0;
 	float incr = 0.1;
@@ -183,21 +179,19 @@ void Player::update(double time, double dt, bool arr[4], bool isHit) { //manipul
 	vel.z = vel.z + acc.z;
 	if (!isHit) //if hit, disable control
 	{
+		//Directional control in XY planes
 		if ((pos.x + vel.x) <= 7.3 && (pos.x + vel.x) >= -7.3)
-			//if ((pos.x + vel.x) <= 6.3 && (pos.x + vel.x) >= -6.3)
 			pos.x = pos.x + vel.x;
 		if ((pos.y + vel.y) <= 6.0 && (pos.y + vel.y) >= -6.0)
-			//if((pos.y + vel.y) <= 5.0 && (pos.y + vel.y) >= -5.0)
 			pos.y = pos.y + vel.y;
 		//pos.z = pos.z + vel.z;
-		//std::cout << pos.x << " " << pos.y << " " << pos.z << " " << std::endl;
 	}
 };
 
 void Player::render(double alpha, bool isHit) {
 
 	glUseProgram((*shaders)[0]);
-	if (!isHit) 
+	if (!isHit)//if not hit render ship, else render kaboom
 	{
 	//VAO for ship
 		glBindVertexArray((*vaos)[0]);
@@ -209,7 +203,7 @@ void Player::render(double alpha, bool isHit) {
 		glEnable(GL_DEPTH_TEST);
 		//Uniform
 		glUniform1i((*textures)[0], 0);
-		//Interpolate
+		//Interpolate- smoothes movement by alpha
 		if ((pos.x + vel.x * alpha) <= 6.3 && (pos.x + vel.x * alpha) >= -6.3)
 			posI.x = pos.x + vel.x* alpha;
 		if ((pos.y + vel.y* alpha) <= 5.0 && (pos.y + vel.y* alpha) >= -5.0)
@@ -218,20 +212,23 @@ void Player::render(double alpha, bool isHit) {
 		valX = rot[0];
 		valY = rot[1];
 		valZ = rot[2];
-
-		transformationMatrix = glm::mat4(1.0);
-		transformationMatrix = glm::translate(transformationMatrix, pos);
-		transformationMatrix = glm::rotate(transformationMatrix,
+		//tranforms model 
+		transformationMatrix = glm::mat4(1.0);	//identify matrix
+		transformationMatrix = glm::translate(transformationMatrix, pos); //translate based on pos
+		transformationMatrix = glm::rotate(transformationMatrix,	//model is @90deg, so rotate every render about Y
 			valY + glm::radians(30.0f), glm::vec3(0, 1, 0));
-		transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.1));
+		transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.15)); //scale to a respectable size 10%
 
-		glUniformMatrix4fv(glGetUniformLocation((*shaders)[0], "transformationMatrix"),
+		glUniformMatrix4fv(glGetUniformLocation((*shaders)[0], "transformationMatrix"), //pass matrix to shader
 			1, false, glm::value_ptr(transformationMatrix));
 		//Draw
 		glDrawArrays(GL_TRIANGLES, 0, numVertices);
 
-	}else 
+	}
+	else //KABOOM!!!!!
 	{
+
+		//VAO for kaboom, borrowing particles coords
 		glBindVertexArray((*vaos)[1]);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
@@ -241,35 +238,29 @@ void Player::render(double alpha, bool isHit) {
 		glEnable(GL_DEPTH_TEST);
 		//Uniform
 		glUniform1i((*textures)[3], 0);
-		//Interpolate
-		//if ((pos.x + vel.x * alpha) <= 6.3 && (pos.x + vel.x * alpha) >= -6.3)
-		//	posI.x = pos.x + vel.x* alpha;
-		//if ((pos.y + vel.y* alpha) <= 5.0 && (pos.y + vel.y* alpha) >= -5.0)
-		//	posI.y = pos.y + vel.y* alpha;
 
 		valX = rot[0];
 		valY = rot[1];
 		valZ = rot[2];
+		//tranforms model 
+		transformationMatrix = glm::mat4(1.0);	//ident matrix
+		transformationMatrix = glm::translate(transformationMatrix, glm::vec3(pos.x, pos.y, pos.z+14)); //offset kaboom translateion about Z 
+		transformationMatrix = glm::scale(transformationMatrix, glm::vec3(3.0f));	//scale texture 300%!!!!
 
-		transformationMatrix = glm::mat4(1.0);
-		transformationMatrix = glm::translate(transformationMatrix, glm::vec3(pos.x, pos.y, pos.z+14));
-		transformationMatrix = glm::scale(transformationMatrix, glm::vec3(3.0f));
-
-		glUniformMatrix4fv(glGetUniformLocation((*shaders)[0], "transformationMatrix"),
+		glUniformMatrix4fv(glGetUniformLocation((*shaders)[0], "transformationMatrix"),	//pass matrix to shader
 			1, false, glm::value_ptr(transformationMatrix));
 
 		//Draw
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-
-		//isHit = false;
+		isHit = false;
 	}
 	
 
 }
 
 void Player::addForce(float force, float theta, float phi) {
-	theta = (float) glm::radians(theta);
-	phi = (float)glm::radians(phi);
+	theta = (float) glm::radians(theta); //clock hand dir
+	phi = (float)glm::radians(phi);	//equator dir
 	
 	netForce.x = (float)(netForce.x + (force * cos(phi)));
 	netForce.y = (float)(netForce.y + (force * sin(theta)));
@@ -293,18 +284,9 @@ glm::vec3 Player::getPosition()
 {
 	return this->pos;
 }
+
 glm::mat4 Player::getBillboardMat(glm::mat4* viewMat) {
 	glm::mat4 billboardMat(1.0);
-	//billboardMat[0][0] = (viewMat)[0][0];
-	//billboardMat[0][1] = (viewMat)[1][0];
-	//billboardMat[0][2] = (viewMat)[2][0];
-	//billboardMat[1][0] = (viewMat)[0][1];
-	//billboardMat[1][1] = (viewMat)[1][1];
-	//billboardMat[1][2] = (viewMat)[2][1];
-	//billboardMat[2][0] = (viewMat)[0][2];
-	//billboardMat[2][1] = (viewMat)[1][2];
-	//billboardMat[2][2] = (viewMat)[2][2];
-
 
 	billboardMat[0][0] = (*viewMat)[0][0];
 	billboardMat[0][1] = (*viewMat)[1][0];

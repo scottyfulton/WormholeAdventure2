@@ -82,7 +82,7 @@ void Engine::init() {
 	//Load Textures
 	GLuint Texture = loadtextures("ExportedModels/SS1_OBJ/SS1tri2.jpg");
 	textures.push_back(Texture); //index 0 is our first VAO's texture
-	Texture = loadtextures("Resources/Particle.png");
+	Texture = loadtextures("Resources/ParticleGradient_BK.png");
 	textures.push_back(Texture);
 	Texture = loadtextures("ExportedModels/Asteroid/10464_Asteroid_v1_diffuse.png");
 	textures.push_back(Texture);
@@ -92,7 +92,6 @@ void Engine::init() {
 
 	//ship
 	/********************************************************************************/
-	//Follow this for creating vao and binding vbos to it.  Probably just add more vbos 
 	//make va
 	vertexArray* va1 = new vertexArray();
 
@@ -182,7 +181,7 @@ void Engine::init() {
 		gameState->addPlayer(player0);
 
 		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, 
-			&vaoVertexCounts, 5000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
+			&vaoVertexCounts, 10000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
 
 	}
 }
@@ -226,7 +225,11 @@ void Engine::loop() {
 		accumulator += (double)frameTime.count();/*Adding length of frame*/
 
 		while (accumulator >= dt) {
-
+	/*		if (state) {
+				hisstate->.update/input
+			}else{
+			below update
+			}*/
 			gameState->update(time, dt, keys);
 
 			//FPS keeps track of updates
@@ -244,7 +247,13 @@ void Engine::loop() {
 		//Render GameState
 			// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		//if(state)****************
+		//his render
+		//else
+	//our render
 		gameState->render(alpha);
+
 		glfwSwapBuffers(window);
 		renderCounter++;
 

@@ -42,51 +42,24 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
     <ClCompile Include="GameMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Wormhole.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Latest, got shiz
     <ClCompile Include="emigration\vertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="emigration\vertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
-=======
->>>>>>> Created Particle class. Uses a list<term> to keep track of the function (list of terms) that each Particle will update based on. (term has a coefficient and exponent)
-=======
->>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
-=======
-    <ClCompile Include="Asteroid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
->>>>>>> Implemented Asteroids
-=======
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
->>>>>>> updated player class with input switch case
-=======
     <ClCompile Include="Wormhole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Asteroid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
->>>>>>> Latest, got shiz
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -110,48 +83,27 @@
     <ClInclude Include="Particle.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
     <ClInclude Include="GameMenu.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Term.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-<<<<<<< HEAD
     <ClInclude Include="emigration\vertexArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="emigration\vertexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
->>>>>>> Created Particle class. Uses a list<term> to keep track of the function (list of terms) that each Particle will update based on. (term has a coefficient and exponent)
-=======
->>>>>>> Implemented update function for Particles and the new Wormhole class that manages each Particle. Implemented interpolation of Particles. Implemented alpha value (transparency ratio) in the image loader. Still need to implement the "cone" function in Wormhole.h & its passing to Particles on construction, "shaping" function in Wormhole.cpp & its passing to Particles on construction, and Particle's update based on those functions.
-=======
-    <ClInclude Include="Asteroid.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
->>>>>>> Implemented Asteroids
-=======
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
->>>>>>> updated player class with input switch case
-=======
     <ClInclude Include="Wormhole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Asteroid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
->>>>>>> Latest, got shiz
   </ItemGroup>
   <ItemGroup>
     <None Include="TextureFragmentShader.fragmentshader">

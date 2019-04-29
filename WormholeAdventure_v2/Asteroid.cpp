@@ -26,62 +26,7 @@ Asteroid::~Asteroid() {
 //radius increments based on predefined function of z
 void Asteroid::update(float phi, double time, double dt) {
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	if (this->pos[2] >=55) {
-=======
-	if (this->pos[2] >=150) {
->>>>>>> Latest, got shiz
-=======
-	if (this->pos[2] >=400) {
->>>>>>> Added bilboarding and moved ship closer
-=======
-	if (this->pos[0] >=100) {
->>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
-		this->living = false;
-	}
-
-	float z = this->pos[1];
-	
-	float answer = z - 3;
-	//keeps z-3 positive
-	if (answer <= 0)
-	{
-		answer = 0;
-	}
-<<<<<<< HEAD
-	this->radius = calc(answer, baseShape); //pass in z to baseShape function
-	radius > 79 ? radius = 79 : NULL;//limit on spread
-	this->vel += this->acc;
-	this->pos += this->vel;
-	this->pos[0] = cos(theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
-	this->pos[1] = sin(theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-<<<<<<< HEAD
-<<<<<<< HEAD
-	this->pos[0] += 175.76 * cos(phi)* sin(z / 11) * z; //shift of x
-	this->pos[1] += 175.76 * sin(phi)* sin(z/11) * z; //shift of y
-};
-
-void Asteroid::render(glm::mat4 *viewMat, float phi, double alpha) {
-=======
-	this->pos[0] += cos(phi) * sin(z / 12.75) * 250.0f; //shift of x
-	this->pos[1] += sin(phi) * sin(z / 12.75) * 250.0f; //shift of y
-=======
-	//this->pos[0] += cos(phi) * sin(z / 12.75) * 250.0f; //shift of x
-	//this->pos[1] += sin(phi) * sin(z / 12.75) * 250.0f; //shift of y
-
-	this->pos[0] += cos(phi) * sin(z / 28) * 80; //shift of x
-	this->pos[1] += sin(phi) * sin(z / 28) * 80; //shift of y
->>>>>>> Added bilboarding and moved ship closer
-=======
-=======
-	if (this->pos[2] >=50) {
-=======
 	if (this->pos[2] >= 85) {
->>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
 		this->living = false;
 	}
 
@@ -93,7 +38,6 @@ void Asteroid::render(glm::mat4 *viewMat, float phi, double alpha) {
 	//{
 	//	answer = 0;
 	//}
->>>>>>> Changed phi value for moving player left (case 2) to 90 & commented the z-coordinate update for the player (shouldn't move in the z anyways). Weird result.
 	//this->radius = calc(answer, baseShape); //pass in z to baseShape function
 	//radius > 79 ? radius = 79 : NULL;//limit on spread
 	//this->vel += this->acc;
@@ -105,35 +49,18 @@ void Asteroid::render(glm::mat4 *viewMat, float phi, double alpha) {
 
 	//this->pos[2] += cos(phi) * sin(z) * 5; //shift of x
 	//this->pos[1] += sin(phi) * sin(z) * 5; //shift of y
->>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
 };
 
 void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
->>>>>>> Latest, got shiz
 	//Interpolate
 	this->posI = pos + vel * (float)alpha;
 	//this->thetaI = theta + dTheta * (float)alpha;
 	
 	transformationMatrix = glm::mat4(1.0);//this works NICK! it's ugly but it WORKS
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
-	transformationMatrix = glm::translate(transformationMatrix, posI);
-	//transformationMatrix *= *viewMat; //won't work if camera's view matrix is adjusted
-=======
-	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.6, 0.6, 0.6));
-=======
-	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.5, 0.5, 0.5));
->>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
-	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
-=======
 	//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.5, 0.5, 0.5));
->>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
 	transformationMatrix = glm::translate(transformationMatrix, posI);
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
 	//transformationMatrix *= *viewMatInv; //won't work if camera's view matrix is adjusted
->>>>>>> Latest, got shiz
 
 	//Setting Uniform Value
 	glUniform1i(texture, 0);
@@ -181,19 +108,4 @@ void Asteroid::setTheta(float newTheta) {
 //sets the new shaping function for an individual particle, called once particle "resets" back to 0 position
 void Asteroid::setFunc(std::list<term>* shapingFunc) {
 	shapeFunc = *shapingFunc;
-<<<<<<< HEAD
 };
-<<<<<<< HEAD
-=======
-};
-<<<<<<< HEAD
->>>>>>> Latest, got shiz
-=======
-
-glm::vec3 Asteroid::getPosition()
-{
-	return this->posI;
-}
->>>>>>> Added bilboarding and moved ship closer
-=======
->>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.

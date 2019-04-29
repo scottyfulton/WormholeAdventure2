@@ -13,12 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-
-
-
-
 using namespace glm;
-
 
 class GObject {
 public:
@@ -31,8 +26,7 @@ public:
 
 
 protected:
-	
-	GLuint texture, shader, vao, type; // simply a reference to the correct vao/vbo to use for each GObject drawn
+	GLuint texture, shader, vao; // simply a reference to the correct vao/vbo to use for each GObject drawn
 	// when glDrawElements called, pass each object's "texture", "shader", etc. which simply reference the already loaded & bound data
 	;
 
@@ -49,18 +43,10 @@ protected:
 	glm::vec3 pos;
 	glm::vec3 vel;
 	glm::vec3 acc;
-<<<<<<< HEAD
-	
-<<<<<<< HEAD
-	
-	
-=======
 	glm::vec3 rot;
->>>>>>> updated player class with input switch case
 
-=======
->>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
 	GLsizei numVertices;
+
 	bool isLight;
 };
 

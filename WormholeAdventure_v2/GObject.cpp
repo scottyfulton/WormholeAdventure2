@@ -7,9 +7,6 @@ using namespace glm;
 ** then sorting (binarySort) for the 10 closest light sources
 */
 
-GObject *obj; 
- 
-
 GObject::GObject(){}; // implicitly called when child classes are constructed
 GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos, glm::vec3 rot ) {
 	this->shader = shaderID;
@@ -17,31 +14,16 @@ GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVer
 	this->vao = vaoID;
 	this->numVertices = numVertices;
 	this->pos = pos;
-<<<<<<< HEAD
-<<<<<<< HEAD
-	
-	
-	
-	
-=======
->>>>>>> messed with the camera to rotate it to look down the wormhole. buggy. bugs buggy.
-
-=======
 	this->rot = rot;
 	
->>>>>>> updated player class with input switch case
 };
 
 GObject::~GObject() {
 
-
 }
 
-void GObject::update( double time, double dt) { //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
-	
+void GObject::update(double time, double dt) { //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
 
-	
-	
 };
 
 void GObject::render(double alpha){

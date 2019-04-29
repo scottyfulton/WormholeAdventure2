@@ -1,48 +1,29 @@
-﻿  Camera.cpp
-  Engine.cpp
-c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
-  c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
-c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\wormhole.h(16): warning C4305: 'initializing': truncation from 'double' to 'const float'
-c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\engine.cpp(115): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=GLsizei
-          ]
-c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\engine.cpp(158): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=GLsizei
-          ]
-  GameMenu.cpp
-  GameState.cpp
-c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
-  c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
-c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\wormhole.h(16): warning C4305: 'initializing': truncation from 'double' to 'const float'
-  GObject.cpp
-  main.cpp
-c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
-  c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
-c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\wormhole.h(16): warning C4305: 'initializing': truncation from 'double' to 'const float'
-  objloader.cpp
-  Particle.cpp
-c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\particle.cpp(35): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+﻿  Player.cpp
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(58): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(224): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\particle.cpp(36): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(227): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-  shader.cpp
-  Wormhole.cpp
-c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\wormhole.h(16): warning C4305: 'initializing': truncation from 'double' to 'const float'
-c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\wormhole.cpp(17): warning C4305: '=': truncation from 'double' to 'float'
-c:\dev\wormholeadventure2-travis\wormholeadventure2-travis\wormholeadventure_v2\wormhole.cpp(39): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
-  Generating Code...
-soil.lib(image_DXT.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(image_DXT.obj)' or at 'C:\Dev\WormholeAdventure2-Travis\WormholeAdventure2-Travis\x64\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(image_helper.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(image_helper.obj)' or at 'C:\Dev\WormholeAdventure2-Travis\WormholeAdventure2-Travis\x64\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(SOIL.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(SOIL.obj)' or at 'C:\Dev\WormholeAdventure2-Travis\WormholeAdventure2-Travis\x64\Debug\SOIL.pdb'; linking object as if no debug info
-soil.lib(stb_image_aug.obj) : warning LNK4099: PDB 'SOIL.pdb' was not found with 'soil.lib(stb_image_aug.obj)' or at 'C:\Dev\WormholeAdventure2-Travis\WormholeAdventure2-Travis\x64\Debug\SOIL.pdb'; linking object as if no debug info
-  WormholeAdventure_v2.vcxproj -> C:\Dev\WormholeAdventure2-Travis\WormholeAdventure2-Travis\x64\Debug\WormholeAdventure_v2.exe
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(239): warning C4305: 'argument': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(265): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(268): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  WormholeAdventure_v2.vcxproj -> C:\dev\WormholeAdventure_v2\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe

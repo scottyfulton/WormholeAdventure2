@@ -6,13 +6,19 @@ uniform mat4 transformationMatrix;
 
 in vec3 pos;
 in vec2 uv;
+in vec3 norm;
 
-out vec2 uv_Frag;
+out vec3 vertFrag;
+out vec2 uvFrag;
+out vec3 normFrag;
 
 void main(){
-	
-	gl_Position = projectionMatrix * viewMatrix * transformationMatrix * vec4(pos, 1.0);
+	//passed to fragment shader
+	vertFrag = pos;
+	uvFrag = uv;
+	normFrag = norm;
 
-	uv_Frag = uv;
+	//apply matrix multiplications to get MVP transforms applied to a vertex
+	gl_Position = projectionMatrix * viewMatrix * transformationMatrix * vec4(pos, 1.0);
 }
 

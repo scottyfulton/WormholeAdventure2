@@ -1,29 +1,24 @@
-﻿  GameState.cpp
-c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
-  s:\_computer_graphics_labs\wormholeadventure2\packages\nupengl.core.0.1.0.1\build\native\include\glfw\glfw3.h(92): note: see previous definition of 'APIENTRY'
-s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(24): warning C4305: 'initializing': truncation from 'double' to 'const float'
-  Player.cpp
+﻿  Player.cpp
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(50): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(57): warning C4305: 'initializing': truncation from 'double' to 'float'
-s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(205): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(206): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(207): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(208): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(232): warning C4305: 'argument': truncation from 'double' to 'T'
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(209): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
           with
           [
               T=float
           ]
-  Generating Code...
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(221): warning C4305: 'argument': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
   WormholeAdventure_v2.vcxproj -> S:\_Computer_Graphics_Labs\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe

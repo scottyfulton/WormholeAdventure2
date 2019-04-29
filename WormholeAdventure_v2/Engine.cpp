@@ -165,6 +165,42 @@ void Engine::init() {
 	/********************************************************************************/
 
 	if (isRunning) {
+		// copied and pasted from multiple lights lab - clean up, optimize, wormhole updates 
+		//light positions (light particle list) - code to implement copy-pasted into txt
+
+		//GLint Ambient_Light_color = glGetUniformLocation(programID, "ambientColor");
+		//glUniform3fv(Ambient_Light_color, 1, glm::value_ptr(glm::vec3(.5, 0.0, 0.0)));
+
+		////Diffuse Staff
+		//// Set the Diffuse light Position
+		//GLint Diffuse_Light_position = glGetUniformLocation(programID, "lightPos");
+		//glUniform3fv(Diffuse_Light_position, 1, glm::value_ptr(glm::vec3(4.0, 50.0, 4.0)));
+		//GLint Diffuse_Light_position1 = glGetUniformLocation(programID, "lightPos1");
+		//glUniform3fv(Diffuse_Light_position1, 1, glm::value_ptr(glm::vec3(-60, 0, 5.0)));
+		//GLint Diffuse_Light_position2 = glGetUniformLocation(programID, "lightPos2");
+		//glUniform3fv(Diffuse_Light_position2, 1, glm::value_ptr(glm::vec3(60, 0, 5.0)));
+
+		//// Set the Diffuse light Position
+		//GLint Diffuse_Light_color = glGetUniformLocation(programID, "lightColor");
+		//glUniform3fv(Diffuse_Light_color, 1, glm::value_ptr(glm::vec3(1.0, 1.0, 1.0)));
+		//GLint Diffuse_Light_color1 = glGetUniformLocation(programID, "lightColor1"); //purple
+		//glUniform3fv(Diffuse_Light_color1, 1, glm::value_ptr(glm::vec3(0.203, 0.062, 0.635)));
+		//GLint Diffuse_Light_color2 = glGetUniformLocation(programID, "lightColor2"); //shsu orange
+		//glUniform3fv(Diffuse_Light_color2, 1, glm::value_ptr(glm::vec3(0.894, 0.556, 0.066)));
+
+
+		////Specular Staff
+		////Set the Cameraposition (eye location)
+		//GLint eye_location = glGetUniformLocation(programID, "vertexPosition_cameraspace");
+		//glm::vec3 CameraPosition = getCameraPosition();
+		//glUniform3fv(eye_location, 1, glm::value_ptr(CameraPosition));
+		////Set the specular color
+		//GLint Spec_Light_color = glGetUniformLocation(programID, "specColor");
+		//glUniform3fv(Spec_Light_color, 1, glm::value_ptr(glm::vec3(0.0, 1.0, 0.0)));
+		//// Set the Specular light Position
+		//GLint Spec_Light_position = glGetUniformLocation(programID, "speclightPos");
+		//glUniform3fv(Spec_Light_position, 1, glm::value_ptr(glm::vec3(0.0, -50.0, 0.0)));
+
 		//Create GameState
 
 		//

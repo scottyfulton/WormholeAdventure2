@@ -159,6 +159,5 @@ void Wormhole::setviewMat(glm::mat4 *viewMat){
 
 std::list<Asteroid*>* Wormhole::getAsteroid()
 {
-
 	return &asteroids;
 }

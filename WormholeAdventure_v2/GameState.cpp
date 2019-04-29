@@ -151,7 +151,7 @@ bool GameState::collisionDetection(Player* obj1, Asteroid* obj2)
 
 	//Subtract radii
 	//distance -= (obj1Radius + obj2Radius);
-	distance -= (05 + 1.0);
+	distance -= (0.5 + 1.0);
 	if (distance < 0) {
 		return true;	
 	}

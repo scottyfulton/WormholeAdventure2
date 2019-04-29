@@ -1,9 +1,28 @@
 #pragma once
 #include "Particle.h"
 #include "Asteroid.h"
-
-
 #include <random>
+
+struct PointLight {
+		vec3 pos, ambient, diffuse, specular;
+		float constant, linear, quadratic;
+
+		void updatePos(glm::vec3 position) {
+			pos = position;
+		}
+
+		void setColors(glm::vec3 amb, glm::vec3 diff, glm::vec3 spec) {
+			ambient = amb;
+			diffuse = diff;
+			specular = spec;
+		}
+
+		void setFunc(float c, float l, float q) { //the coefficients for the attenuation distance calculation
+			constant = c;
+			linear = l;
+			quadratic = q;
+		}
+};
 
 class Wormhole {
 	public:
@@ -17,6 +36,7 @@ class Wormhole {
 		float getPhi();
 		//std::list<Asteroid*>* getAsteroid(int index);
 		std::list<Asteroid*>* getAsteroid();
+		std::list<PointLight*>* getLights();
 
 
 	private:
@@ -39,6 +59,7 @@ class Wormhole {
 		std::list<term> cone = {{1.0f,2.0f}}; // function to define the initial cone shape of the wormhole
 		std::list<term> shaping; //if changed, only passed to a particle when the particle reaches the maximum height of the wormhole (max z)
 		std::list<Particle*> particles;
+		std::list<PointLight*> lights;
 		std::list<Asteroid*> asteroids;
 	
 		void updateP(float* theta, glm::vec3* objPos, glm::vec3* vel);

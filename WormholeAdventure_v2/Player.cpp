@@ -202,8 +202,10 @@ void Player::render(double alpha) {
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glEnable(GL_DEPTH_TEST);
 	//Interpolate
-	posI[0] = pos[0] + vel[0] * alpha;
-	posI[1] = pos[1] + vel[1] * alpha;
+	if ((posI.x + vel.x*alpha) <= 7.3 && (pos.x + vel.x*alpha) >= -7.3)
+		posI[0] = pos[0] + vel[0] * alpha;
+	if ((posI.y + vel.y*alpha) <= 6.0 && (posI.y + vel.y*alpha) >= -6.0)
+		posI[1] = pos[1] + vel[1] * alpha;
 	posI[2] = pos[2] + vel[2] * alpha;
 
 	valX = rot[0];
@@ -211,26 +213,12 @@ void Player::render(double alpha) {
 	valZ = rot[2];
 	
 	transformationMatrix = glm::mat4(1.0);
-	//rotationMatrix = glm::mat4(1.0);
-	//rotationXMatrix = glm::mat4(1.0);
-	//rotationYMatrix = glm::mat4(1.0);
-	//rotationZMatrix = glm::mat4(1.0);
-	//scaleMatrix = glm::mat4(1.0);
-
-	//rotationXMatrix = glm::rotate(rotationXMatrix, (valX), glm::vec3(1.0, 0.0, 0.0));
-	//rotationYMatrix = glm::rotate(rotationYMatrix, (valY+glm::radians(30.0f)) , glm::vec3(0.0, 1.0, 0.0)); // (1.57f/2.0f)
-	//rotationZMatrix = glm::rotate(rotationZMatrix, (valZ), glm::vec3(0.0, 0.0, 1.0));
-	//rotationMatrix = rotationZMatrix * rotationYMatrix *rotationXMatrix;
-	//rotationMatrix =  rotationXMatrix* rotationYMatrix *rotationZMatrix;
-	//transformationMatrix = translationMatrix * rotationMatrix; //commented for testing optimizations
-
+	
 	//this->pos[0] += cos(phi) * sin(z / 12.75) * 30 * z; //shift of x
 	//this->pos[1] += sin(phi) * sin(z / 12.75) * 30 * z; //shift of y
 	translationMatrix = glm::translate(transformationMatrix, posI);
 	transformationMatrix = glm::rotate(translationMatrix, valY + glm::radians(30.0f), glm::vec3(0, 1, 0));
-	//transformationMatrix = glm::rotate(transformationMatrix, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0));
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.1));
-	//transformationMatrix = scaleMatrix * rotationMatrix *  translationMatrix;
 
 	//Uniform
 	glUniform1i(texture, 0);

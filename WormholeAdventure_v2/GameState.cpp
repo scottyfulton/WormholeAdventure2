@@ -45,7 +45,7 @@ void GameState::update(double time, double dt, bool arr[4])
 
 	for (Player* p : players) {
 		p->setviewMat(view);
-		p->update(time, dt, arr);
+		p->update(time, dt, arr, isHit);
 	}
 
 	for (GObject* g : gObjects)

@@ -165,23 +165,6 @@ void Engine::init() {
 	vaoVertexCounts.push_back(vertices.size());
 	/********************************************************************************/
 
-	//BOOM
-	/********************************************************************************/
-	//vertexArray* va4 = new vertexArray();
-
-	////make vb
-	//vertexBuffer* vert_VB4 = new vertexBuffer(&vertices[0], vertices.size() * sizeof(glm::vec3));
-	//va4->addBuffer(vert_VB4, 0, 0, 3, GL_FLOAT, false, 0, 0);
-
-	////make uv vb
-	//vertexBuffer* uv_VB4 = new vertexBuffer(&uvs[0], uvs.size() * sizeof(glm::vec2));
-	//va4->addBuffer(uv_VB4, 1, 1, 2, GL_FLOAT, false, 0, 0);
-
-	////get it on 
-	//vaoIDs.push_back(va4->arrayID);
-	//vaoVertexCounts.push_back(vertices.size());
-	/********************************************************************************/
-
 
 	if (isRunning) {
 		//Create GameState

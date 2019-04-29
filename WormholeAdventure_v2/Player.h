@@ -32,7 +32,7 @@ public:
 		glm::vec3 pos, glm::vec3 rotate);
 	~Player();
 
-	void update(double time, double dt, bool arr[4]); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
+	void update(double time, double dt, bool arr[4], bool isHit); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
 	void render(double alpha, bool isHit);
 	void resetNetForce();
 	void addForce(float force, float theta, float phi);

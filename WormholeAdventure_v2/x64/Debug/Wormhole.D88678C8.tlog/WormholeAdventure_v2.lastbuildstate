@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Debug|x64|C:\dev\WormholeAdventure_v2\WormholeAdventure2\|
 =======
 Debug|x64|S:\_Computer_Graphics_Labs\WormholeAdventure2\|
@@ -12,3 +13,6 @@ Debug|x64|C:\Dev\WormholeAdventure_v2\|
 =======
 Debug|x64|S:\_Computer_Graphics_Labs\WormholeAdventure2\|
 >>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
+=======
+Debug|x64|C:\dev\WormholeAdventure_v2\WormholeAdventure2\|
+>>>>>>> KABOOM WORKS!

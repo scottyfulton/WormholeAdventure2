@@ -32,6 +32,7 @@ class Wormhole {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> * textureID, 
 			std::vector<GLuint> * vaoID, std::vector<GLsizei> *vertexCount, 
 			GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos);
@@ -44,6 +45,11 @@ class Wormhole {
 =======
 		Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> * textureID, std::vector<GLuint> * vaoID, std::vector<GLsizei> *vertexCount, GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos);
 >>>>>>> Latest, got shiz
+=======
+		Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> * textureID, 
+			std::vector<GLuint> * vaoID, std::vector<GLsizei> *vertexCount, 
+			GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos);
+>>>>>>> KABOOM WORKS!
 		~Wormhole();
 
 		void update(double time, double dt);

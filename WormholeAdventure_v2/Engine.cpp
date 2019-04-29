@@ -47,6 +47,7 @@ void Engine::init() {
 <<<<<<< HEAD
 	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
 	//window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
 =======
@@ -56,6 +57,10 @@ void Engine::init() {
 =======
 	//window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
 	window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
+=======
+	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
+	//window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
+>>>>>>> KABOOM WORKS!
 
 >>>>>>> Latest, got shiz
 
@@ -111,10 +116,15 @@ void Engine::init() {
 	Texture = loadtextures("ExportedModels/Asteroid/10464_Asteroid_v1_diffuse.png");
 	textures.push_back(Texture);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	Texture = loadtextures("ExportedModels/Boom/BOOM.png");
 	textures.push_back(Texture);
 =======
 >>>>>>> Latest, got shiz
+=======
+	Texture = loadtextures("ExportedModels/Boom/BOOM.png");
+	textures.push_back(Texture);
+>>>>>>> KABOOM WORKS!
 	//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler"); used in object class, not here
 
 	//ship
@@ -138,6 +148,7 @@ void Engine::init() {
 	
 	//particle
 	/********************************************************************************/
+<<<<<<< HEAD
 =======
 	//creating a VAO
 	GLuint vao;
@@ -182,6 +193,8 @@ void Engine::init() {
 =======
 
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
+=======
+>>>>>>> KABOOM WORKS!
 	//construct VAO for a particle - hardcoded first
 	vertices = {
 		glm::vec3(-.5, .5, -5),
@@ -202,11 +215,14 @@ void Engine::init() {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
 	/********************************************************************************/
 >>>>>>> Latest, got shiz
+=======
+>>>>>>> KABOOM WORKS!
 	vertexArray* va2 = new vertexArray();
 
 	//make vb
@@ -226,6 +242,7 @@ void Engine::init() {
 	normals.clear();
 	   
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//asteroid
 	/********************************************************************************/
 	res = loadOBJ("ExportedModels/Asteroid/asteroid1.obj", vertices, uvs, normals);//make va
@@ -234,6 +251,11 @@ void Engine::init() {
 	res = loadOBJ("ExportedModels/Asteroid/asteroid1.obj", vertices, uvs, normals);//make va
 		/********************************************************************************/
 >>>>>>> Latest, got shiz
+=======
+	//asteroid
+	/********************************************************************************/
+	res = loadOBJ("ExportedModels/Asteroid/asteroid1.obj", vertices, uvs, normals);//make va
+>>>>>>> KABOOM WORKS!
 	vertexArray* va3 = new vertexArray();
 
 	//make vb
@@ -270,6 +292,24 @@ void Engine::init() {
 =======
 >>>>>>> Latest, got shiz
 
+	//BOOM
+	/********************************************************************************/
+	//vertexArray* va4 = new vertexArray();
+
+	////make vb
+	//vertexBuffer* vert_VB4 = new vertexBuffer(&vertices[0], vertices.size() * sizeof(glm::vec3));
+	//va4->addBuffer(vert_VB4, 0, 0, 3, GL_FLOAT, false, 0, 0);
+
+	////make uv vb
+	//vertexBuffer* uv_VB4 = new vertexBuffer(&uvs[0], uvs.size() * sizeof(glm::vec2));
+	//va4->addBuffer(uv_VB4, 1, 1, 2, GL_FLOAT, false, 0, 0);
+
+	////get it on 
+	//vaoIDs.push_back(va4->arrayID);
+	//vaoVertexCounts.push_back(vertices.size());
+	/********************************************************************************/
+
+
 	if (isRunning) {
 		//Create GameState
 
@@ -284,10 +324,14 @@ void Engine::init() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> KABOOM WORKS!
 
 		Player* player0 = new Player(&shaders, &textures, &vaoIDs,
 			&vaoVertexCounts, glm::vec3(0.0f, 0.0f, 75.0f), glm::vec3(0.0, 1.0, 0.0));
 			//&vaoVertexCounts, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 0.0, 1.0));
+<<<<<<< HEAD
 		gameState->addPlayer(player0);
 
 		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, 
@@ -323,8 +367,12 @@ void Engine::init() {
 >>>>>>> Added bilboarding and moved ship closer
 		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
 		//gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));
+=======
+		gameState->addPlayer(player0);
+
+>>>>>>> KABOOM WORKS!
 		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, 
-			&vaoVertexCounts, 10000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
+			&vaoVertexCounts, 5000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
 
 >>>>>>> Latest, got shiz
 	}

@@ -7,10 +7,14 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> KABOOM WORKS!
 ﻿  Player.cpp
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(51): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(58): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(224): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+<<<<<<< HEAD
 =======
 ﻿  Engine.cpp
 c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
@@ -74,10 +78,13 @@ s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(50
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(57): warning C4305: 'initializing': truncation from 'double' to 'float'
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(205): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
 >>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
+=======
+>>>>>>> KABOOM WORKS!
           with
           [
               T=float
           ]
+<<<<<<< HEAD
 <<<<<<< HEAD
   WormholeAdventure_v2.vcxproj -> C:\dev\WormholeAdventure_v2\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe
 =======
@@ -137,10 +144,14 @@ s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(19
 =======
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(206): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
 >>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
+=======
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(227): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+>>>>>>> KABOOM WORKS!
           with
           [
               T=float
           ]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -169,10 +180,14 @@ s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(19
 =======
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(207): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
 >>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
+=======
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(239): warning C4305: 'argument': truncation from 'double' to 'T'
+>>>>>>> KABOOM WORKS!
           with
           [
               T=float
           ]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -204,20 +219,28 @@ c:\dev\wormholeadventure_v2\wormholeadventure_v2\particle.cpp(35): warning C4244
 =======
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(232): warning C4305: 'argument': truncation from 'double' to 'T'
 >>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
+=======
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(265): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+>>>>>>> KABOOM WORKS!
           with
           [
               T=float
           ]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\particle.cpp(36): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
 =======
 c:\dev\wormholeadventure_v2\wormholeadventure_v2\particle.cpp(36): warning C4244: '+=': conversion from 'double' to 'T', possible loss of data
 >>>>>>> Latest, got shiz
+=======
+c:\dev\wormholeadventure_v2\wormholeadventure2\wormholeadventure_v2\player.cpp(268): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+>>>>>>> KABOOM WORKS!
           with
           [
               T=float
           ]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> This is MUCH closer to the wormhole effect that we wanted in the beginning.
@@ -276,3 +299,6 @@ s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(
 >>>>>>> Updated Asteroids to follow correct path (was matrix order issue in render()), adjusted Player's rotation to face (0, 0, 0), adjust Player's render() for slight optimization, adjusted Player's movement cases, adjust Player's movement calculations to ignore theta in x (not needed, complicates). Slowed down Player's movement. Tweaked hit detection to be more realistic. Added conditions to Player's movement to avoid Player moving off-screen (causes bouncing on edges of screen because of interpolation and friction vector addition).
   WormholeAdventure_v2.vcxproj -> S:\_Computer_Graphics_Labs\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe
 >>>>>>> Updated wormhole to perform position calculations for each Particle/Asteroid. Made shaping function an even amplitude throughout. Sped up Asteroids. Asteroids STILL follow a DIFFERENT path than Particles for SOME UNGODLY REASON.
+=======
+  WormholeAdventure_v2.vcxproj -> C:\dev\WormholeAdventure_v2\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe
+>>>>>>> KABOOM WORKS!

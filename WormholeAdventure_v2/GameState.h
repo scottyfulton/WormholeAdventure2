@@ -64,9 +64,13 @@ public:
 private:
 	bool collisionDetection(Player* obj1, Asteroid* obj2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	bool isHit;
 =======
 >>>>>>> Added bilboarding and moved ship closer
+=======
+	bool isHit;
+>>>>>>> KABOOM WORKS!
 	std::list<Camera*> cameras;
 	std::list<GObject*> gObjects;
 	std::list<Wormhole*> wormholes;

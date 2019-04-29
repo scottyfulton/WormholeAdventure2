@@ -58,6 +58,7 @@ void GameState::update(double time, double dt, bool arr[4])
 		c->update(currPhi, time, dt);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for (Player* p : players) {
 		p->setviewMat(view);
 		p->update(time, dt, arr);
@@ -110,7 +111,12 @@ void GameState::update(double time, double dt, bool arr[4])
 >>>>>>> Updated Camera to adjust its position to move with the center of the wormhole. Updated Particles & Asteroids to not use the transpose of the Camera's view matrix & directly use the Camera's view matrix (passed to each Particle/Asteroid). Got keyboard input working how we want with Blane.
 =======
 	for (Player* p : players)
+=======
+	for (Player* p : players) {
+		p->setviewMat(view);
+>>>>>>> KABOOM WORKS!
 		p->update(time, dt, arr);
+	}
 
 >>>>>>> Latest, got shiz
 	for (GObject* g : gObjects)
@@ -165,6 +171,8 @@ void GameState::update(double time, double dt, bool arr[4])
 						//Collision - Ship hit Astroid	
 						//boom game over
 						std::cout << "BOOOOOOOOOOOOM" << std::endl;
+						//set bool
+						isHit = true;
 					}
 				}
 			}
@@ -194,7 +202,7 @@ void GameState::render(double alpha)
 =======
 
 	for (Player* p : players)
-		p->render(alpha);
+		p->render(alpha, isHit);
 	
 >>>>>>> Added bilboarding and moved ship closer
 	//Objects
@@ -294,17 +302,13 @@ bool GameState::collisionDetection(Player* obj1, Asteroid* obj2)
 	glm::vec3 pos1 = obj1->getPosition();
 	glm::vec3 pos2 = *(obj2->getPosition());
 
-	//Extract the Radius because its symmetrical!!!!!
-	//std::cout << "big d " << distance << std::endl;
-
-
 	//Calculate Distance
 	//float distance = sqrt(pow(obj2.pos.x - obj1.pos.x, 2.0f) + pow(obj2.y - obj1.y, 2.0f) + pow(obj2.z - obj1.z, 2.0f));
 	float distance = sqrt(pow(pos2.x - pos1.x, 2.0f) + pow(pos2.y - pos1.y, 2.0f) + pow(pos2.z - pos1.z, 2.0f));
 
 	//Subtract radii
 	//distance -= (obj1Radius + obj2Radius);
-	distance -= (05 + 1.0);
+	distance -= (0.75 + 1.5);
 	if (distance < 0) {
 		return true;	
 	}

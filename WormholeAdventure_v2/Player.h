@@ -1,9 +1,13 @@
 #pragma once
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 #pragma once
 >>>>>>> updated player class with input switch case
+=======
+
+>>>>>>> KABOOM WORKS!
 // Include GLEW
 #include <GL/glew.h>
 #include <GL/glut.h>
@@ -19,11 +23,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 //#include <glm/ext.hpp>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <vector>
 
 #include <string>
 #include <iostream>
 =======
+=======
+#include <vector>
+>>>>>>> KABOOM WORKS!
 
 #include <string>
 <<<<<<< HEAD
@@ -40,6 +48,7 @@ using namespace glm;
 class Player{
 public:
 	Player(); // implicitly called when child classes are constructed
+<<<<<<< HEAD
 <<<<<<< HEAD
 	Player(std::vector<GLuint> * shaderID, std::vector<GLuint> * textureID,
 		std::vector<GLuint> * vaoID, std::vector<GLsizei> *vertexCount,
@@ -61,20 +70,31 @@ protected:
 	std::vector<GLuint> *textures, *shaders, *vaos; // simply a reference to the correct vao/vbo to use for each GObject drawn
 =======
 	Player(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos, glm::vec3 rotate);
+=======
+	Player(std::vector<GLuint> * shaderID, std::vector<GLuint> * textureID,
+		std::vector<GLuint> * vaoID, std::vector<GLsizei> *vertexCount,
+		glm::vec3 pos, glm::vec3 rotate);
+>>>>>>> KABOOM WORKS!
 	~Player();
 
 	void update(double time, double dt, bool arr[4]); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
-	void render(double alpha);
+	void render(double alpha, bool isHit);
 	void resetNetForce();
 	void addForce(float force, float theta, float phi);
 	void addForceVec(float x, float y, float z);
 	glm::vec3 getPosition();
+	glm::mat4 getBillboardMat(glm::mat4* viewMat);
+	void setviewMat(glm::mat4 *viewMat);
 
 protected:
 	float radTemp = glm::radians(90.f);
 	float valX, valY, valZ, phi, theta, force, movFriction, mass;
+<<<<<<< HEAD
 	GLuint texture, shader, vao; // simply a reference to the correct vao/vbo to use for each GObject drawn
 >>>>>>> updated player class with input switch case
+=======
+	std::vector<GLuint> *textures, *shaders, *vaos; // simply a reference to the correct vao/vbo to use for each GObject drawn
+>>>>>>> KABOOM WORKS!
 	// when glDrawElements called, pass each object's "texture", "shader", etc. which simply reference the already loaded & bound data
 	//Matricies
 	glm::mat4 projectionMatrix;
@@ -85,6 +105,7 @@ protected:
 	glm::mat4 rotationYMatrix;
 	glm::mat4 rotationZMatrix;
 	glm::mat4 modelMatrix;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	glm::mat4 translationMatrix, viewMat;
 
@@ -97,6 +118,9 @@ protected:
 	glm::vec3 netForce;
 =======
 	glm::mat4 translationMatrix;
+=======
+	glm::mat4 translationMatrix, viewMat;
+>>>>>>> KABOOM WORKS!
 
 	/*pos, vel, acc*/
 	glm::vec3 pos;

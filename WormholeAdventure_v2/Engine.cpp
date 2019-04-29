@@ -32,8 +32,8 @@ void Engine::init() {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
-	//window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
-	window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
+	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
+	//window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
 
 
 	if (window == NULL) {
@@ -86,9 +86,11 @@ void Engine::init() {
 	textures.push_back(Texture);
 	Texture = loadtextures("ExportedModels/Asteroid/10464_Asteroid_v1_diffuse.png");
 	textures.push_back(Texture);
+	Texture = loadtextures("ExportedModels/Boom/BOOM.png");
+	textures.push_back(Texture);
 	//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler"); used in object class, not here
 
-
+	//ship
 	/********************************************************************************/
 	//Follow this for creating vao and binding vbos to it.  Probably just add more vbos 
 	//make va
@@ -107,6 +109,8 @@ void Engine::init() {
 	vaoVertexCounts.push_back(vertices.size());
 	/********************************************************************************/
 	
+	//particle
+	/********************************************************************************/
 	//construct VAO for a particle - hardcoded first
 	vertices = {
 		glm::vec3(-.5, .5, -5),
@@ -125,9 +129,6 @@ void Engine::init() {
 		glm::vec2(1, 1)
 	};
 
-
-
-	/********************************************************************************/
 	vertexArray* va2 = new vertexArray();
 
 	//make vb
@@ -146,9 +147,9 @@ void Engine::init() {
 	uvs.clear();
 	normals.clear();
 	   
-
+	//asteroid
+	/********************************************************************************/
 	res = loadOBJ("ExportedModels/Asteroid/asteroid1.obj", vertices, uvs, normals);//make va
-		/********************************************************************************/
 	vertexArray* va3 = new vertexArray();
 
 	//make vb
@@ -164,6 +165,24 @@ void Engine::init() {
 	vaoVertexCounts.push_back(vertices.size());
 	/********************************************************************************/
 
+	//BOOM
+	/********************************************************************************/
+	//vertexArray* va4 = new vertexArray();
+
+	////make vb
+	//vertexBuffer* vert_VB4 = new vertexBuffer(&vertices[0], vertices.size() * sizeof(glm::vec3));
+	//va4->addBuffer(vert_VB4, 0, 0, 3, GL_FLOAT, false, 0, 0);
+
+	////make uv vb
+	//vertexBuffer* uv_VB4 = new vertexBuffer(&uvs[0], uvs.size() * sizeof(glm::vec2));
+	//va4->addBuffer(uv_VB4, 1, 1, 2, GL_FLOAT, false, 0, 0);
+
+	////get it on 
+	//vaoIDs.push_back(va4->arrayID);
+	//vaoVertexCounts.push_back(vertices.size());
+	/********************************************************************************/
+
+
 	if (isRunning) {
 		//Create GameState
 
@@ -173,16 +192,14 @@ void Engine::init() {
 		//GLuint MatrixID = glGetUniformLocation(programID, "MVP"); not used here, will be later in gamestate (basically one instance of a possible camera class)
 
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
-		Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 75.0f), glm::vec3(0.0, 1.0, 0.0));
-		
+
+		Player* player0 = new Player(&shaders, &textures, &vaoIDs,
+			&vaoVertexCounts, glm::vec3(0.0f, 0.0f, 75.0f), glm::vec3(0.0, 1.0, 0.0));
+			//&vaoVertexCounts, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 0.0, 1.0));
 		gameState->addPlayer(player0);
 
-		/*gameState->addPlayer(new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0],
-			glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 1.0, 0.0)));*/
-		//gameState->addGObject(new GObject(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 0.0f)));
-		//gameState->addWormhole(new Wormhole(shaders[0], textures[1], vaoIDs[1], vaoVertexCounts[1], 10000, glm::vec3(0.0f, 0.0f, 0.0f)));
 		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs, 
-			&vaoVertexCounts, 10000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
+			&vaoVertexCounts, 5000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
 
 	}
 }

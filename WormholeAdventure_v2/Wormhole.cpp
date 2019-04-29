@@ -3,8 +3,9 @@
 
 Wormhole::Wormhole() {};
 
-Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID, std::vector<GLuint> *vaoID,
-	std::vector<GLsizei> *vertexCount, GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos) {
+Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID, 
+	std::vector<GLuint> *vaoID,	std::vector<GLsizei> *vertexCount, 
+	GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos) {
 	this->shaders = shaderID;
 	this->textures = textureID;
 	this->vaos = vaoID;
@@ -132,21 +133,21 @@ void Wormhole::updateP(float* theta, glm::vec3* objPos, glm::vec3* vel){
 	(*objPos) += *vel;
 	(*objPos)[0] = cos(*theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
 	(*objPos)[1] = sin(*theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-	(*objPos)[0] -= cos(phi) * sin(z/5.0f) * 10.0f; //shift of x
-	(*objPos)[1] -= sin(phi) * sin(z/5.0f) * 10.0f; //shift of y
+	//(*objPos)[0] -= cos(phi) * sin(z/5.0f) * 10.0f; //shift of x
+	//(*objPos)[1] -= sin(phi) * sin(z/5.0f) * 10.0f; //shift of y
 	*theta += dTheta;
 };
 
 void Wormhole::updateA(float* theta, glm::vec3* objPos, glm::vec3* vel) {
 	float z = (*objPos)[2];
 	float radius = z; //pass in z to baseShape function
-	radius > 10.0f ? radius = 10.0f : NULL;//limit on spread
+	radius > 5.0f ? radius = 5.0f : NULL;//limit on spread
 
 	(*objPos) += *vel;
 	(*objPos)[0] = cos(*theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
 	(*objPos)[1] = sin(*theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
-	(*objPos)[0] -= cos(phi) * sin(z / 5.0f) * 10.0f; //shift of x
-	(*objPos)[1] -= sin(phi) * sin(z / 5.0f) * 10.0f; //shift of y
+	//(*objPos)[0] -= cos(phi) * sin(z / 5.0f) * 10.0f; //shift of x
+	//(*objPos)[1] -= sin(phi) * sin(z / 5.0f) * 10.0f; //shift of y
 };
 
 float Wormhole::getPhi() {

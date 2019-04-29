@@ -3,6 +3,7 @@
 
 GameState::GameState()
 {
+	isHit = false;
 
 }
 
@@ -42,8 +43,10 @@ void GameState::update(double time, double dt, bool arr[4])
 	for (Camera* c : cameras)
 		c->update(currPhi, time, dt);
 
-	for (Player* p : players)
+	for (Player* p : players) {
+		p->setviewMat(view);
 		p->update(time, dt, arr);
+	}
 
 	for (GObject* g : gObjects)
 		g->update(time, dt);
@@ -73,6 +76,8 @@ void GameState::update(double time, double dt, bool arr[4])
 						//Collision - Ship hit Astroid	
 						//boom game over
 						std::cout << "BOOOOOOOOOOOOM" << std::endl;
+						//set bool
+						isHit = true;
 					}
 				}
 			}
@@ -87,7 +92,7 @@ void GameState::render(double alpha)
 		c->render(alpha);
 
 	for (Player* p : players)
-		p->render(alpha);
+		p->render(alpha, isHit);
 	
 	//Objects
 	for (GObject* g : gObjects)
@@ -141,17 +146,13 @@ bool GameState::collisionDetection(Player* obj1, Asteroid* obj2)
 	glm::vec3 pos1 = obj1->getPosition();
 	glm::vec3 pos2 = *(obj2->getPosition());
 
-	//Extract the Radius because its symmetrical!!!!!
-	//std::cout << "big d " << distance << std::endl;
-
-
 	//Calculate Distance
 	//float distance = sqrt(pow(obj2.pos.x - obj1.pos.x, 2.0f) + pow(obj2.y - obj1.y, 2.0f) + pow(obj2.z - obj1.z, 2.0f));
 	float distance = sqrt(pow(pos2.x - pos1.x, 2.0f) + pow(pos2.y - pos1.y, 2.0f) + pow(pos2.z - pos1.z, 2.0f));
 
 	//Subtract radii
 	//distance -= (obj1Radius + obj2Radius);
-	distance -= (05 + 1.0);
+	distance -= (0.75 + 1.5);
 	if (distance < 0) {
 		return true;	
 	}

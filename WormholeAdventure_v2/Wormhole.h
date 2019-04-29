@@ -8,7 +8,9 @@
 class Wormhole {
 	public:
 		Wormhole();
-		Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> * textureID, std::vector<GLuint> * vaoID, std::vector<GLsizei> *vertexCount, GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos);
+		Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> * textureID, 
+			std::vector<GLuint> * vaoID, std::vector<GLsizei> *vertexCount, 
+			GLsizei particleCount, GLsizei asteroidCount, glm::vec3 pos);
 		~Wormhole();
 
 		void update(double time, double dt);

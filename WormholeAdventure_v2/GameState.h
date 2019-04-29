@@ -47,6 +47,7 @@ public:
 
 private:
 	bool collisionDetection(Player* obj1, Asteroid* obj2);
+	bool isHit;
 	std::list<Camera*> cameras;
 	std::list<GObject*> gObjects;
 	std::list<Wormhole*> wormholes;

@@ -3,13 +3,14 @@
 using namespace glm;
 
 Player::Player() {};
-Player::Player(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, 
+Player::Player(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureID,
+	std::vector<GLuint> *vaoID, std::vector<GLsizei> *vertexCount,
 	glm::vec3 pos, glm::vec3 rotate)
 {
-	this->shader = shaderID;
-	this->texture = textureID;
-	this->vao = vaoID;
-	this->numVertices = numVertices;
+	this->shaders = shaderID;
+	this->textures = textureID;
+	this->vaos = vaoID;
+	this->numVertices = (*vertexCount)[0];
 	this->pos = pos;
 	this->rot = rotate;
 	//this->valY;
@@ -180,64 +181,163 @@ void Player::update(double time, double dt, bool arr[4]) { //manipulates positio
 	vel.x = vel.x + acc.x;
 	vel.y = vel.y + acc.y;
 	vel.z = vel.z + acc.z;
+
 	if((pos.x + vel.x) <= 7.3 && (pos.x + vel.x) >= -7.3)
+	//if ((pos.x + vel.x) <= 6.3 && (pos.x + vel.x) >= -6.3)
 		pos.x = pos.x + vel.x;
-	if((pos.y + vel.y) <= 6.0 && (pos.y + vel.y) >= -6.0)
+	if ((pos.y + vel.y) <= 6.0 && (pos.y + vel.y) >= -6.0)
+	//if((pos.y + vel.y) <= 5.0 && (pos.y + vel.y) >= -5.0)
 		pos.y = pos.y + vel.y;
 	//pos.z = pos.z + vel.z;
 	//std::cout << pos.x << " " << pos.y << " " << pos.z << " " << std::endl;
 };
 
-void Player::render(double alpha) {
+void Player::render(double alpha, bool isHit) {
+
 
 	//call gobj render(alpha)
 	//Shader
-	glUseProgram(shader);
-	//VAO
-	glBindVertexArray(vao);
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	//Texture
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glEnable(GL_DEPTH_TEST);
-	//Interpolate
-	posI[0] = pos[0] + vel[0] * alpha;
-	posI[1] = pos[1] + vel[1] * alpha;
-	posI[2] = pos[2] + vel[2] * alpha;
-
-	valX = rot[0];
-	valY = rot[1];
-	valZ = rot[2];
 	
-	transformationMatrix = glm::mat4(1.0);
-	//rotationMatrix = glm::mat4(1.0);
-	//rotationXMatrix = glm::mat4(1.0);
-	//rotationYMatrix = glm::mat4(1.0);
-	//rotationZMatrix = glm::mat4(1.0);
-	//scaleMatrix = glm::mat4(1.0);
+	//posI.x = pos.x + vel.x* alpha;
+	//posI.y = pos.y + vel.y* alpha;
+	//posI.z = pos.z + vel.z * alpha;
+		glUseProgram((*shaders)[0]);
+	if (!isHit) 
+	{
+	////	//VAO for ship
+		//glUseProgram((*shaders)[0]);
+		//glBindVertexArray((*vaos)[0]);
+		glBindVertexArray((*vaos)[0]);
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		//Texture
+		glActiveTexture(GL_TEXTURE0);
+		/*glBindTexture(GL_TEXTURE_2D, (*textures)[0]);*/
+		glBindTexture(GL_TEXTURE_2D, (*textures)[0]);
+		glEnable(GL_DEPTH_TEST);
+		//Uniform
+		//glUniform1i((*textures)[0], 0);
+		glUniform1i((*textures)[0], 0);
+		//Interpolate
+		//posI[0] = pos[0] + vel[0] * alpha;
+		if ((pos.x + vel.x * alpha) <= 6.3 && (pos.x + vel.x * alpha) >= -6.3)
+			posI.x = pos.x + vel.x* alpha;
+		//posI[1] = pos[1] + vel[1] * alpha;
+		if ((pos.y + vel.y* alpha) <= 5.0 && (pos.y + vel.y* alpha) >= -5.0)
+			posI.y = pos.y + vel.y* alpha;
+		//posI[2] = pos[2] + vel[2] * alpha;
 
-	//rotationXMatrix = glm::rotate(rotationXMatrix, (valX), glm::vec3(1.0, 0.0, 0.0));
-	//rotationYMatrix = glm::rotate(rotationYMatrix, (valY+glm::radians(30.0f)) , glm::vec3(0.0, 1.0, 0.0)); // (1.57f/2.0f)
-	//rotationZMatrix = glm::rotate(rotationZMatrix, (valZ), glm::vec3(0.0, 0.0, 1.0));
-	//rotationMatrix = rotationZMatrix * rotationYMatrix *rotationXMatrix;
-	//rotationMatrix =  rotationXMatrix* rotationYMatrix *rotationZMatrix;
-	//transformationMatrix = translationMatrix * rotationMatrix; //commented for testing optimizations
+		valX = rot[0];
+		valY = rot[1];
+		valZ = rot[2];
 
-	//this->pos[0] += cos(phi) * sin(z / 12.75) * 30 * z; //shift of x
-	//this->pos[1] += sin(phi) * sin(z / 12.75) * 30 * z; //shift of y
-	translationMatrix = glm::translate(transformationMatrix, posI);
-	transformationMatrix = glm::rotate(translationMatrix, valY + glm::radians(30.0f), glm::vec3(0, 1, 0));
-	//transformationMatrix = glm::rotate(transformationMatrix, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0));
-	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.1));
-	//transformationMatrix = scaleMatrix * rotationMatrix *  translationMatrix;
+		transformationMatrix = glm::mat4(1.0);
 
-	//Uniform
-	glUniform1i(texture, 0);
-	glUniformMatrix4fv(glGetUniformLocation(shader, "transformationMatrix"), 1, false, glm::value_ptr(transformationMatrix));
+		transformationMatrix = glm::translate(transformationMatrix, pos);
+		transformationMatrix = glm::rotate(transformationMatrix,
+			valY + glm::radians(30.0f), glm::vec3(0, 1, 0));
+		transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.1));
 
-	//Draw
-	glDrawArrays(GL_TRIANGLES, 0, numVertices);
+
+		glUniformMatrix4fv(glGetUniformLocation((*shaders)[0], "transformationMatrix"),
+			1, false, glm::value_ptr(transformationMatrix));
+
+		//Draw
+		glDrawArrays(GL_TRIANGLES, 0, numVertices);
+
+	}else 
+	{
+
+		glBindVertexArray((*vaos)[1]);
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		//Texture
+		glActiveTexture(GL_TEXTURE0);
+		/*glBindTexture(GL_TEXTURE_2D, (*textures)[0]);*/
+		glBindTexture(GL_TEXTURE_2D, (*textures)[3]);
+		glEnable(GL_DEPTH_TEST);
+		//Uniform
+		//glUniform1i((*textures)[0], 0);
+		glUniform1i((*textures)[3], 0);
+		//Interpolate
+		//posI[0] = pos[0] + vel[0] * alpha;
+		if ((pos.x + vel.x * alpha) <= 6.3 && (pos.x + vel.x * alpha) >= -6.3)
+			posI.x = pos.x + vel.x* alpha;
+		//posI[1] = pos[1] + vel[1] * alpha;
+		if ((pos.y + vel.y* alpha) <= 5.0 && (pos.y + vel.y* alpha) >= -5.0)
+			posI.y = pos.y + vel.y* alpha;
+		//posI[2] = pos[2] + vel[2] * alpha;
+
+		valX = rot[0];
+		valY = rot[1];
+		valZ = rot[2];
+
+		transformationMatrix = glm::mat4(1.0);
+
+		transformationMatrix = glm::translate(transformationMatrix, pos);
+		//transformationMatrix = glm::rotate(translationMatrix,
+		//	valY + glm::radians(30.0f), glm::vec3(0, 1, 0));
+		transformationMatrix = glm::scale(transformationMatrix, glm::vec3(3.0f));
+
+
+		glUniformMatrix4fv(glGetUniformLocation((*shaders)[0], "transformationMatrix"),
+			1, false, glm::value_ptr(transformationMatrix));
+
+		//Draw
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		//VAO for kaboom/particle
+		/*glUseProgram((*shaders)[0]);*/
+
+		//glBindVertexArray((*vaos)[0]);
+		//glEnableVertexAttribArray(0);
+		//glEnableVertexAttribArray(1);
+
+		//glBindVertexArray((*vaos)[1]);
+		//glEnableVertexAttribArray(0);
+		//glEnableVertexAttribArray(1);
+		////Texture
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_2D, (*textures)[3]);
+		//glEnable(GL_DEPTH_TEST);
+		////Uniform
+		//glUniform1i((*textures)[3], 0);
+		//isHit = false;
+		//////Interpolate
+		////posI[0] = pos[0] + vel[0] * alpha;
+		////if ((pos.x + vel.x * alpha) <= 6.3 && (pos.x + vel.x * alpha) >= -6.3)
+		//	//posI.x = pos.x + vel.x;
+		////posI[1] = pos[1] + vel[1] * alpha;
+		////if ((pos.y + vel.y* alpha) <= 5.0 && (pos.y + vel.y* alpha) >= -5.0)
+		//	//posI.y = pos.y + vel.y;
+		////posI[2] = pos[2] + vel[2] * alpha;
+
+		////valX = rot[0];
+		////valY = rot[1];
+		////valZ = rot[2];
+
+		////setviewMat(&viewMat);
+
+		//transformationMatrix = glm::mat4(1.0);
+		////transformationMatrix *= getBillboardMat(&viewMat);
+		////transformationMatrix = glm::translate(transformationMatrix, glm::vec3(pos.x, pos.y, 300.0f)); //mock pos
+		//transformationMatrix = glm::scale(transformationMatrix, glm::vec3(50.0f));
+		//transformationMatrix = glm::translate(transformationMatrix, pos); //mock pos
+
+
+		////transformationMatrix = glm::rotate(translationMatrix,
+		////	valY + glm::radians(30.0f), glm::vec3(0, 0, 0));
+
+
+		//glUniformMatrix4fv(glGetUniformLocation((*shaders)[0], "transformationMatrix"),
+		//	1, false, glm::value_ptr(transformationMatrix));
+
+		////Draw
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	}
+	
+
 }
 
 void Player::addForce(float force, float theta, float phi) {
@@ -246,14 +346,14 @@ void Player::addForce(float force, float theta, float phi) {
 	
 	netForce.x = (float)(netForce.x + (force * cos(phi)));
 	netForce.y = (float)(netForce.y + (force * sin(theta)));
-	netForce.z = (float)(netForce.z + (force * sin(theta)*cos(phi)));
+	//netForce.z = (float)(netForce.z + (force * sin(theta)*cos(phi)));
 }
 
 void Player::addForceVec(float x, float y, float z) {
 
 	netForce.x = netForce.x + x;
 	netForce.y = netForce.y + y;
-	netForce.z = netForce.z + z;
+	//netForce.z = netForce.z + z;
 }
 
 void Player::resetNetForce() {
@@ -266,3 +366,32 @@ glm::vec3 Player::getPosition()
 {
 	return this->pos;
 }
+glm::mat4 Player::getBillboardMat(glm::mat4* viewMat) {
+	glm::mat4 billboardMat(1.0);
+	//billboardMat[0][0] = (viewMat)[0][0];
+	//billboardMat[0][1] = (viewMat)[1][0];
+	//billboardMat[0][2] = (viewMat)[2][0];
+	//billboardMat[1][0] = (viewMat)[0][1];
+	//billboardMat[1][1] = (viewMat)[1][1];
+	//billboardMat[1][2] = (viewMat)[2][1];
+	//billboardMat[2][0] = (viewMat)[0][2];
+	//billboardMat[2][1] = (viewMat)[1][2];
+	//billboardMat[2][2] = (viewMat)[2][2];
+
+
+	billboardMat[0][0] = (*viewMat)[0][0];
+	billboardMat[0][1] = (*viewMat)[1][0];
+	billboardMat[0][2] = (*viewMat)[2][0];
+	billboardMat[1][0] = (*viewMat)[0][1];
+	billboardMat[1][1] = (*viewMat)[1][1];
+	billboardMat[1][2] = (*viewMat)[2][1];
+	billboardMat[2][0] = (*viewMat)[0][2];
+	billboardMat[2][1] = (*viewMat)[1][2];
+	billboardMat[2][2] = (*viewMat)[2][2];
+
+	return billboardMat;
+}
+
+void Player::setviewMat(glm::mat4 *viewMat) {
+	this->viewMat = *viewMat;
+};

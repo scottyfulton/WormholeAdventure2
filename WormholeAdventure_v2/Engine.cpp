@@ -1,5 +1,7 @@
 #include "Engine.h"
 
+
+
 /*
 ** The view and projection matrices will be the same for every GObject, and every GObject's shader can be the same with an if statement in the shader
 ** that determines if the object is also a light source. With that in mind, only one set of shaders is needed.
@@ -11,12 +13,15 @@ Engine::Engine() {
 }
 //need a VAO and the number of vertices in model to pass to each object
 Engine::~Engine() {
+	//engine->drop();
 	glfwTerminate();
 	delete gameState;
 	delete this;
 }
 
 void Engine::init() {
+	
+
 	// Initialise GLFW
 	if (!glfwInit())
 	{
@@ -64,10 +69,14 @@ void Engine::init() {
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
+
+	
+
 	//OpenGL Settings
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);
+
 
 	//Load Shaders
 	GLuint programID = LoadShaders("TransformVertexShader.vertexshader", "TextureFragmentShader.fragmentshader");
@@ -186,6 +195,20 @@ void Engine::init() {
 			&vaoVertexCounts, 10000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
 
 	}
+
+	/********************************************************************************/
+
+	// Start the sound engine with default parameters
+	engine = createIrrKlangDevice();
+
+	if (!engine) {
+		// Error starting up the engine
+		printf("Failed to initialize Sound Engine!\n");
+		exit(0);
+	}
+
+	engine->play2D("Resources/Audio/Never_Gonna_Give_You_Up.mp3", true);
+	//engine->play2D("Resources/Audio/Endless-Cyber-Runner.mp3", true);
 	
 }
 

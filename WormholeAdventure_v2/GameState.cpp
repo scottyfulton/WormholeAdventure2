@@ -23,7 +23,9 @@ GameState::~GameState()
 
 void GameState::init()
 {
+
 	wormholes.push_back(new Wormhole());
+	
 }
 
 void GameState::update(double time, double dt, bool arr[4])

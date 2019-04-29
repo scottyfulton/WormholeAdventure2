@@ -34,6 +34,15 @@
 #include "emigration/vertexArray.h"
 #include "emigration/vertexBuffer.h"
 
+//for playing audio 
+#include <irrKlang.h>
+using namespace irrklang;
+
+
+
+
+
+
 
 //#include "Camera.h"
 //#include "GObject.h"
@@ -52,6 +61,9 @@ class Engine {
 		//Window
 		GLFWwindow* window;
 		const GLFWvidmode* mode;
+
+		//Audio Engine
+		ISoundEngine* engine;
 
 		//GameState
 		GameState *gameState;

@@ -21,6 +21,7 @@
 //#include "Include.h"
 
 
+
 class GameState {
 public:
 	GameState();
@@ -51,4 +52,5 @@ private:
 	std::list<GObject*> gObjects;
 	std::list<Wormhole*> wormholes;
 	std::list<Player*> players;
+	
 };

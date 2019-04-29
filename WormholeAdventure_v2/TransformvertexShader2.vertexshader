@@ -1,0 +1,17 @@
+#version 330 core
+
+uniform mat4 projectionMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 transformationMatrix;
+
+in vec3 pos;
+in vec2 uv;
+
+out vec2 uv_Frag;
+
+void main(){
+	
+	gl_Position = projectionMatrix * viewMatrix * transformationMatrix * vec4(pos, 1.0);
+
+	uv_Frag = uv;
+}

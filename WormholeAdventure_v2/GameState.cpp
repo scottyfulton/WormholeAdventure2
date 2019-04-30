@@ -4,6 +4,7 @@
 GameState::GameState()
 {
 	isHit = false;
+	timeHit = 0;
 	// Start the sound engine with default parameters
 	engine = createIrrKlangDevice();
 
@@ -13,10 +14,10 @@ GameState::GameState()
 		exit(0);
 	}
 	
-	soundWalking = engine->play2D("Resources/Audio/Never_Gonna_Give_You_Up.mp3", 
-		true, false, true, ESM_AUTO_DETECT, false);
-	soundWalking->setPlaybackSpeed(0.0);
-	soundWalking->setVolume(0.4f);
+	//soundWalking = engine->play2D("Resources/Audio/Never_Gonna_Give_You_Up.mp3", 
+	//	true, false, true, ESM_AUTO_DETECT, false);
+	//soundWalking->setPlaybackSpeed(0.0);
+	//soundWalking->setVolume(0.4f);
 }
 
 GameState::~GameState()
@@ -40,16 +41,37 @@ GameState::~GameState()
 		w->~Wormhole();
 		//wormholes.remove(w);
 	}
+
+
 	delete this;
 }
 
 void GameState::init()
 {
-	wormholes.push_back(new Wormhole());
+	if (soundWalking == NULL) {
+		soundWalking = engine->play2D("Resources/Audio/Never_Gonna_Give_You_Up.mp3",
+			true, false, true, ESM_AUTO_DETECT, false);
+		soundWalking->setPlaybackSpeed(0.0);
+		soundWalking->setVolume(0.4f);
+	}
+	else 
+	{
+		engine->removeSoundSource("Resources/Audio/Never_Gonna_Give_You_Up.mp3");
+
+		//soundWalking->stop();
+		//soundWalking->drop();
+
+
+		soundWalking = engine->play2D("Resources/Audio/Never_Gonna_Give_You_Up.mp3",
+			true, false, true, ESM_AUTO_DETECT, false);
+		soundWalking->setPlaybackSpeed(0.0);
+		soundWalking->setVolume(0.4f);
+	}
 }
 
 void GameState::update(double time, double dt, bool arr[4])
 {
+
 	float currPhi = wormholes.front()->getPhi();
 	glm::mat4* view = (cameras.front())->getView();
 	for (Camera* c : cameras)
@@ -81,9 +103,21 @@ void GameState::update(double time, double dt, bool arr[4])
 					{
 						//Collision - Ship hit Astroid	
 						//boom game over
-						engine->play2D("Resources/Audio/Explosion+7.mp3");
+						//soundWalking->drop();
+						//engine->play2D("Resources/Audio/NeverGunnaGive.mp3");
+
+						soundWalking->stop();
+						//soundWalking->drop();
+						engine->removeSoundSource("Resources/Audio/Never_Gonna_Give_You_Up.mp3");
+						//engine->play2D("Resources/Audio/Explosion+7.mp3");
+						//exploder = engine->play2D("Resources/Audio/NeverGunnaGive.mp3", false, false, true, ESM_AUTO_DETECT, false);
+						//exploder->setPlaybackSpeed(0.0);
+						//exploder->setVolume(0.4f);
+						soundWalking = engine->play2D("Resources/Audio/Explosion+7.mp3", false, false, true, ESM_AUTO_DETECT, false);
 						soundWalking->setPlaybackSpeed(0.0);
-						soundWalking->setVolume(0.7f);
+						soundWalking->setVolume(0.4f);
+
+
 						isHit = true;
 					}
 				}

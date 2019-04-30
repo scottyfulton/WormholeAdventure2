@@ -30,6 +30,7 @@ class GameState {
 public:
 	GameState();
 	~GameState();
+	int timeHit;
 
 	void init(); //load all the vaos, vbos, things
 	void update(double time, double dt, bool arr[4]); //vaos, vbos updated with new vertex positions
@@ -49,10 +50,10 @@ public:
 
 	//void addInput(Input* obj);
 	//void removeInput(Input* obj);
+	bool isHit;
 
 private:
 	bool collisionDetection(Player* obj1, Asteroid* obj2);
-	bool isHit;
 	std::list<Camera*> cameras;
 	std::list<GObject*> gObjects;
 	std::list<Wormhole*> wormholes;
@@ -61,4 +62,5 @@ private:
 	//Audio Engine
 	ISoundEngine* engine;
 	ISound* soundWalking;
+	ISound* exploder;
 };

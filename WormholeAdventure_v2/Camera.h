@@ -17,6 +17,7 @@ using namespace glm;
 class Camera {
 public:
 	Camera(GLuint shaderID, float fov, float ratio, float near_p, float far_p);
+	Camera(GLuint shaderID, float fov, float ratio, float near_p, float far_p, bool isOrtho);
 	~Camera();
 
 
@@ -34,4 +35,5 @@ private:
 	float fov, ratio, near_p, far_p, phi, rotX, rotY;
 
 	void setRotationAngles(float phi);
+	bool isOrtho;
 };

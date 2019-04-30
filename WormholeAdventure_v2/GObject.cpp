@@ -15,6 +15,8 @@ GObject::GObject(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVer
 	this->numVertices = numVertices;
 	this->pos = pos;
 	this->rot = rot;
+	enable = true;
+
 	
 };
 
@@ -27,6 +29,7 @@ void GObject::update(double time, double dt) { //manipulates position data (part
 };
 
 void GObject::render(double alpha){
+	if (!enable) return;
 
 	//Shader
 	glUseProgram(shader);
@@ -63,6 +66,12 @@ void GObject::render(double alpha){
 	glDrawArrays(GL_TRIANGLES, 0, numVertices);
 
 }
+
+void GObject::enableObject(bool enable)
+{
+	this->enable = enable;
+}
+
 /*
 reset  matrix 
 

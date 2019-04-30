@@ -12,7 +12,20 @@ Camera::Camera(GLuint shaderID, float fov, float ratio, float near_p, float far_
 	this->ratio = ratio;
 	this->near_p = near_p;
 	this->far_p = far_p;
+	isOrtho = false;
 };
+
+Camera::Camera(GLuint shaderID, float fov, float ratio, float near_p, float far_p, bool isOrtho) 
+{
+	shader = shaderID;
+	this->fov = fov;
+	this->ratio = ratio;
+	this->near_p = near_p;
+	this->far_p = far_p;
+	//isOrtho = false;
+	this->isOrtho = isOrtho;
+};
+
 
 Camera::~Camera() {
 
@@ -31,19 +44,31 @@ void Camera::render(double alpha){
 	glUseProgram(shader);
 
 	//Interpolate
-
 	//projection
-	projectionMatrix = glm::perspective(glm::radians(fov), ratio, near_p, far_p);
+	if (isOrtho)
+	{
+		viewMatrix = glm::mat4(1.0);
+		projectionMatrix = glm::ortho(-1, 1, -1, 1);
+		//viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -80.0f));
+		
+	}
+	else
+	{
+		viewMatrix = glm::mat4(1.0);
+		//projectionMatrix = glm::mat4(1.0);
+		projectionMatrix = glm::perspective(glm::radians(fov), ratio, near_p, far_p);
 
-	//viewMatrix
-	viewMatrix = glm::mat4(1.0);
-	//viewMatrix = glm::rotate(viewMatrix, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -80.0f)); // adjustments to camera in x- or z-axis are inverted, not to anything else
-	//viewMatrix = glm::rotate(viewMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		//viewMatrix = glm::rotate(viewMatrix, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0, -80.0f)); // adjustments to camera in x- or z-axis are inverted, not to anything else
+		//viewMatrix = glm::rotate(viewMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	}
+	//projectionMatrix = glm::mat4(1.0);
 
 	//Uniform
 	glUniformMatrix4fv(glGetUniformLocation(shader, "projectionMatrix"), 1, false, glm::value_ptr(projectionMatrix));
 	glUniformMatrix4fv(glGetUniformLocation(shader, "viewMatrix"), 1, false, glm::value_ptr(viewMatrix));
+
+	//isOrtho = false;
 }
 
 glm::mat4* Camera::getView() {

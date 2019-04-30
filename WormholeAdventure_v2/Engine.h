@@ -52,14 +52,21 @@ class Engine {
 		void init();
 		void loop();
 		void input();
+		void reset();
 
 	private:
 		//Window
 		GLFWwindow* window;
 		const GLFWvidmode* mode;
 
+		GObject *playHighLight;
+		GObject *exitHighLight;
+
+		int state = 0;	// 0 for menu, 1 for game
+
 		//GameState
 		GameState *gameState;
+		GameState *menuState;
 
 		//Loop
 		bool isRunning = true; 
@@ -75,4 +82,9 @@ class Engine {
 		//Texture
 		GLuint loadtextures(const char* fileName);
 		std::vector<GLuint> textures; //textureIDs
+
+		void createMenu();
+		void setState(int state);
+
+		GLuint createVao(std::vector<glm::vec3> &vertices, std::vector<glm::vec2> &uvs);
 };

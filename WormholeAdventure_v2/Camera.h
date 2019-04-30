@@ -23,6 +23,7 @@ public:
 	void update(float phi, double time, double dt); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
 	void render(double alpha);
 	glm::mat4* getView();
+	glm::vec3 getPos();
 
 private:
 	GLuint shader; // simply a reference to the correct vao/vbo to use for each GObject drawn
@@ -30,7 +31,7 @@ private:
 
 	//Matricies
 	glm::mat4 projectionMatrix, viewMatrix, transformationMatrix;
-	glm::vec3 pos = glm::vec3(-50, 0, 0), vel, acc;
+	glm::vec3 pos = glm::vec3(0, 0, -80), vel, acc;
 	float fov, ratio, near_p, far_p, phi, rotX, rotY;
 
 	void setRotationAngles(float phi);

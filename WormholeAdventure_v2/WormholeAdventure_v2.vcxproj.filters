@@ -104,6 +104,9 @@
     <ClInclude Include="Asteroid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="TextureFragmentShader.fragmentshader">
@@ -113,6 +116,8 @@
       <Filter>Source Files\Shaders</Filter>
     </None>
     <None Include="packages.config" />
+    <None Include="FailedFragShader.fragmentshader" />
+    <None Include="DiffShader.fragmentshader" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assyNotes.txt" />

@@ -20,6 +20,16 @@ Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureI
 	this->currTheta = 0;
 	this->particleTimer = (100000 / numParticles);
 	this->asteroidTimer = (1000000000 / numAsteroids);
+	this->dirLight = {glm::vec3(0.0f), glm::vec3(1), glm::vec3(0.976, 0.949, 0.364), glm::vec3(1)}; //direction needs to be set in GameState using camPos
+	float eqTheta = 36; // 360/10
+	float  eqZ = 7.0f;
+	for (int i = 0; i < 100; i++) {
+							// pos				amb			diff							spec		attenuation coefficients
+		this->pLights[i] = {glm::vec3(0.0f, 0.0f, eqZ), glm::vec3(1), glm::vec3(0.976, 0.949, 0.364), glm::vec3(1), 5.0, 3.0, 1.5, eqTheta};
+		eqTheta += 36;
+		if(i % 10 ==0)
+			eqZ += 7; //equal z incrementation between rings, doesn't change evar
+	}
 
 	//float random = (r() / r.max) * 5;
 	for (int i = 0; i < particleCount; i++) {
@@ -28,7 +38,7 @@ Wormhole::Wormhole(std::vector<GLuint> * shaderID, std::vector<GLuint> *textureI
 	}
 
 	for (int i = 0; i < asteroidCount; i++) {
-		asteroids.push_back(new Asteroid((*shaders)[0], (*textures)[2], (*vaos)[2], (*vertexCounts)[2], pos, &cone));
+		asteroids.push_back(new Asteroid((*shaders)[1], (*textures)[2], (*vaos)[2], (*vertexCounts)[2], pos, &cone));
 		asteroids.back()->setFunc(&shaping);
 	}
 
@@ -46,8 +56,7 @@ Wormhole::~Wormhole() {
 };
 
 void Wormhole::update(double time, double dt) {
-
-	float percentage = ((std::rand() % 10000)) * (particleTimer/2);
+	float percentage = ((std::rand() % 100000)) * (particleTimer/2);
 	particleTimer -= percentage;
 	if (particleTimer <= 0.0f) {
 		for (Particle* p : particles) {
@@ -55,7 +64,6 @@ void Wormhole::update(double time, double dt) {
 				p->reset(numParticles);
 				break;
 			}
-
 		}
 		particleTimer = (100000 / numParticles);
 	};
@@ -84,6 +92,8 @@ void Wormhole::update(double time, double dt) {
 			a->update(phi, time, dt);
 		}
 	}
+	//update Light positions
+	updatePtLights();
 
 	phi += dPhi;
 	dPhi += ddPhi;
@@ -118,11 +128,32 @@ void Wormhole::render(double alpha) {
 	glBindTexture(GL_TEXTURE_2D, (*textures)[2]);
 
 	for (Asteroid* a : asteroids) {
+		setClosest(a);
 		if (a->isAlive())
-			a->render(&viewMat, phi, alpha); //change to phiI once particle movement working
+			a->render(&viewMat, phi, alpha, closest, dirLight, &camPos); //change to phiI once particle movement working
 	}
 
 };
+
+void Wormhole::setClosest(Asteroid* a) {
+	for (int i = 0; i < 10; i++) {
+		closest[i] = pLights[((int)(*(a->getPosition())).z % 10)*7 + i];
+	}
+};
+
+void Wormhole::updatePtLights(){
+	for (int i = 0; i < 100; i++) {
+		float z = pLights[i].pos.z;
+		float radius = z; //pass in z to baseShape function
+		radius > 15.0f ? radius = 15.0f : NULL;//limit on spread
+
+		pLights[i].pos[0] = cos(pLights[i].theta) * radius; //ensure x and y coordinates of each particle are on circumference of Wormhole on each z plane,
+		pLights[i].pos[1] = sin(pLights[i].theta) * radius; // multiplied by cos & sin of phi to implement shaping direction phi
+		pLights[i].pos[0] -= cos(phi) * sin(z / 5.0f) * 10.0f; //shift of x
+		pLights[i].pos[1] -= sin(phi) * sin(z / 5.0f) * 10.0f; //shift of y
+		pLights[i].theta += dTheta;
+	}
+}
 
 void Wormhole::updateP(float* theta, glm::vec3* objPos, glm::vec3* vel){
 	float z = (*objPos)[2];
@@ -149,6 +180,9 @@ void Wormhole::updateA(float* theta, glm::vec3* objPos, glm::vec3* vel) {
 	(*objPos)[1] -= sin(phi) * sin(z / 5.0f) * 10.0f; //shift of y
 };
 
+PointLight* Wormhole::getPntLights(){ return (this->pLights);};
+DirLight* Wormhole::getDirLight() {return &(this->dirLight);};
+
 float Wormhole::getPhi() {
 	return this->phi;
 };
@@ -156,6 +190,10 @@ float Wormhole::getPhi() {
 void Wormhole::setviewMat(glm::mat4 *viewMat){
 	this->viewMat = *viewMat;
 };
+
+void Wormhole::setCamPos(glm::vec3* camPos){ this->camPos = *camPos;}
+
+void Wormhole::setDirLightDir(glm::vec3 camPos){ this->dirLight.direction = glm::vec3(-camPos);}
 
 std::list<Asteroid*>* Wormhole::getAsteroid()
 {

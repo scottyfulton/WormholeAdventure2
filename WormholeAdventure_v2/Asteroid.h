@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Term.h"
 #include "GObject.h"
+#include "Lights.h"
 
 class Asteroid: GObject {
 	
@@ -15,7 +16,7 @@ public:
 	Asteroid(GLuint shaderID, GLuint textureID, GLuint vaoID, GLsizei numVertices, glm::vec3 pos, std::list<term>* baseShape);
 	~Asteroid();
 	void update( float phi, double time, double dt); //manipulates position data (particles follow wormhole, ship moves in xy-plane, asteroids follow path inside wormhole)
-	void render(glm::mat4 *viewMatTransposed, float phi, double alpha);
+	void render(glm::mat4 *viewMatTransposed, float phi, double alpha, PointLight* p, DirLight &d,  glm::vec3* camPos);
 	float calc(float val, std::list<term>* function);
 	bool isAlive(); //for Wormhole to check if the particle should be rendered
 	float* getTheta();

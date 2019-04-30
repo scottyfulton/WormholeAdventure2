@@ -50,6 +50,8 @@ glm::mat4* Camera::getView() {
 	return &viewMatrix;
 }
 
+glm::vec3 Camera::getPos() { return pos;}
+
 void Camera::setRotationAngles(float phi) {
 	float xCoord = cos(phi) * pow(40, 2);
 	float yCoord = sin(phi) * pow(40, 2);

@@ -49,6 +49,10 @@ void GameState::update(double time, double dt, bool arr[4])
 		g->update(time, dt);
 
 	for (Wormhole* w : wormholes) {
+		/*for (int i = 0; i < 100; i++)
+			w->updatePtLights();*/
+		w->setCamPos(&(cameras.front()->getPos()));
+		w->setDirLightDir(cameras.front()->getPos());
 		w->setviewMat(view);
 		w->update(time, dt);
 	}

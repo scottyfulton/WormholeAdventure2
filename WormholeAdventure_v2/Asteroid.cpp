@@ -1,6 +1,7 @@
 #include "Asteroid.h"
 #include <iostream>
 #include <stdlib.h>
+#include <string>
 
 
 
@@ -51,7 +52,7 @@ void Asteroid::update(float phi, double time, double dt) {
 	//this->pos[1] += sin(phi) * sin(z) * 5; //shift of y
 };
 
-void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
+void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha, PointLight* p, DirLight &d, glm::vec3* camPos) {
 	//Interpolate
 	this->posI = pos + vel * (float)alpha;
 	//this->thetaI = theta + dTheta * (float)alpha;
@@ -61,11 +62,38 @@ void Asteroid::render(glm::mat4 *viewMatInv, float phi, double alpha) {
 	transformationMatrix = glm::translate(transformationMatrix, posI);
 	transformationMatrix = glm::scale(transformationMatrix, glm::vec3(0.2));
 	//transformationMatrix *= *viewMatInv; //won't work if camera's view matrix is adjusted
-
+	char buffer[64];
 	//Setting Uniform Value
 	glUniform1i(texture, 0);
 	glUniformMatrix4fv(glGetUniformLocation(shader, "transformationMatrix"), 1, false, glm::value_ptr(transformationMatrix));
-	
+	//glUniform1i(glGetUniformLocation(shader, "numPointLights"), 10);
+	sprintf_s(buffer, "dirLight.pos");
+	glUniform3fv(glGetUniformLocation(shader, buffer), 1, glm::value_ptr(d.direction));
+	sprintf_s(buffer, "dirLight.ambient");
+	glUniform3fv(glGetUniformLocation(shader, buffer), 1, glm::value_ptr(glm::vec3(0.4f, 0.4f, 0.4f)));
+	sprintf_s(buffer, "dirLight.diffuse");
+	glUniform3fv(glGetUniformLocation(shader, buffer), 1, glm::value_ptr(glm::vec3(0.976f, 0.949f, 0.364f)));
+	sprintf_s(buffer, "dirLight.specular");
+	glUniform3fv(glGetUniformLocation(shader, buffer), 1, glm::value_ptr(glm::vec3(1.0f, 1.0f, 1.0f)));
+	glUniform3fv(glGetUniformLocation(shader, buffer), 1, glm::value_ptr(*camPos));
+	//for (int i = 0; i < 10; i++) { //set every single one of the values of each instance of the PointLight struct in the shader
+	//	
+	//	sprintf_s(buffer, "pointLights[%i].position", i);
+	//	glUniform3fv(glGetUniformLocation(shader, buffer), 1, glm::value_ptr(((p[i]).pos)));
+	//	
+	//	sprintf_s(buffer, "pointLights[%i].ambient", i);
+	//	glUniform3fv(glGetUniformLocation(shader, buffer), 1, glm::value_ptr(((p[i]).pos)));
+	//	
+	//	sprintf_s(buffer, "pointLights[%i].diffuse", i);
+	//	glUniform3fv(glGetUniformLocation(shader, buffer), 1, glm::value_ptr(((p[i]).pos)));
+	//
+	//	sprintf_s(buffer, "pointLights[%i].specular", i);
+	//	glUniform3fv(glGetUniformLocation(shader, buffer), 1, glm::value_ptr(((p[i]).pos)));
+
+	//	glUniform1f(glGetUniformLocation(shader, "pointLights[%i].constant"), 5.0f);
+	//	glUniform1f(glGetUniformLocation(shader, "pointLights[%i].linear"), 3.0f);
+	//	glUniform1f(glGetUniformLocation(shader, "pointLights[%i].quadratic"), 1.5f);
+	//}
 	//Draw
 	glDrawArrays(GL_TRIANGLES, 0, numVertices);
 	//glDisable(GL_BLEND); //other textures aren't transparent and don't have an alpha value (0)

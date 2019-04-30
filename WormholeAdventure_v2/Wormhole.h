@@ -1,28 +1,8 @@
 #pragma once
 #include "Particle.h"
 #include "Asteroid.h"
+#include "Lights.h"
 #include <random>
-
-struct PointLight {
-		vec3 pos, ambient, diffuse, specular;
-		float constant, linear, quadratic;
-
-		void updatePos(glm::vec3 position) {
-			pos = position;
-		}
-
-		void setColors(glm::vec3 amb, glm::vec3 diff, glm::vec3 spec) {
-			ambient = amb;
-			diffuse = diff;
-			specular = spec;
-		}
-
-		void setFunc(float c, float l, float q) { //the coefficients for the attenuation distance calculation
-			constant = c;
-			linear = l;
-			quadratic = q;
-		}
-};
 
 class Wormhole {
 	public:
@@ -33,11 +13,14 @@ class Wormhole {
 		void update(double time, double dt);
 		void render(double alpha);
 		void setviewMat(glm::mat4 *viewMat);
+		void setDirLightDir(glm::vec3 camPos);
+		void setCamPos(glm::vec3* camPos);
+		void updatePtLights();
 		float getPhi();
 		//std::list<Asteroid*>* getAsteroid(int index);
 		std::list<Asteroid*>* getAsteroid();
-		std::list<PointLight*>* getLights();
-
+		PointLight* getPntLights();
+		DirLight* getDirLight();
 
 	private:
 		bool isLight;
@@ -51,7 +34,7 @@ class Wormhole {
 
 		glm::mat4 transformationMatrix, viewMat;
 		//pos, vel, acc
-		glm::vec3 pos;
+		glm::vec3 pos, camPos;
 		/*glm::vec3 vel;
 		glm::vec3 acc;*/
 
@@ -59,9 +42,12 @@ class Wormhole {
 		std::list<term> cone = {{1.0f,2.0f}}; // function to define the initial cone shape of the wormhole
 		std::list<term> shaping; //if changed, only passed to a particle when the particle reaches the maximum height of the wormhole (max z)
 		std::list<Particle*> particles;
-		std::list<PointLight*> lights;
+		PointLight pLights[100], closest[10];
+		DirLight dirLight;
 		std::list<Asteroid*> asteroids;
 	
 		void updateP(float* theta, glm::vec3* objPos, glm::vec3* vel);
 		void updateA(float* theta, glm::vec3* objPos, glm::vec3* vel);
+		void setClosest(Asteroid* a); //sets closest[10] to the closest 10 point lights to an asteroid for it's rendering
 };
+

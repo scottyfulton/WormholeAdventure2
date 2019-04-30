@@ -140,6 +140,7 @@
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GObject.h" />
+    <ClInclude Include="Lights.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Term.h" />
     <ClInclude Include="objloader.hpp" />
@@ -148,6 +149,8 @@
     <ClInclude Include="Wormhole.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DiffShader.fragmentshader" />
+    <None Include="FailedFragShader.fragmentshader" />
     <None Include="packages.config" />
     <None Include="TextureFragmentShader.fragmentshader" />
     <None Include="TransformVertexShader.vertexshader" />

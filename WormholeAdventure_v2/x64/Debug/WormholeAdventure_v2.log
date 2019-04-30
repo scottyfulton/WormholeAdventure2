@@ -1,24 +1,10 @@
-﻿  Player.cpp
-s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(50): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(57): warning C4305: 'initializing': truncation from 'double' to 'float'
-s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(206): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(208): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(209): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\player.cpp(221): warning C4305: 'argument': truncation from 'double' to 'T'
-          with
-          [
-              T=float
-          ]
+﻿  Wormhole.cpp
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.h(27): warning C4305: 'initializing': truncation from 'double' to 'const float'
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(19): warning C4305: '=': truncation from 'double' to 'float'
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(21): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(22): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(64): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(68): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(81): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
+s:\_computer_graphics_labs\wormholeadventure2\wormholeadventure_v2\wormhole.cpp(86): warning C4244: '=': conversion from 'GLuint' to 'float', possible loss of data
   WormholeAdventure_v2.vcxproj -> S:\_Computer_Graphics_Labs\WormholeAdventure2\x64\Debug\WormholeAdventure_v2.exe

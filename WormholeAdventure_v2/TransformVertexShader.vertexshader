@@ -11,13 +11,14 @@ in vec3 norm;
 out vec3 vertFrag;
 out vec2 uvFrag;
 out vec3 normFrag;
+out mat4 MVP;
 
 void main(){
 	//passed to fragment shader
 	vertFrag = pos;
 	uvFrag = uv;
 	normFrag = norm;
-
+	MVP = projectionMatrix * viewMatrix * transformationMatrix;
 	//apply matrix multiplications to get MVP transforms applied to a vertex
 	gl_Position = projectionMatrix * viewMatrix * transformationMatrix * vec4(pos, 1.0);
 }

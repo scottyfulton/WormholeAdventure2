@@ -1,0 +1,107 @@
+#version 330 core
+
+struct DirLight {
+    vec3 direction;
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+}; 
+
+struct PointLight {
+		vec3 pos;
+		vec3 ambient;
+		vec3 diffuse;
+		vec3 specular;
+		float constant;
+		float linear;
+		float quadratic;
+};
+
+uniform sampler2D texture0;
+#define numPointLights 10;
+uniform DirLight dirLight;
+uniform PointLight pointLights[numPointLights];
+
+in mat4 MVP;
+in vec3 vertFrag;
+in vec2 uvFrag;
+in vec3 normFrag;
+
+out vec3 color;
+
+vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
+{
+    vec3 lightDir = normalize(-light.direction);
+    // diffuse shading
+    float diff = max(dot(normal, lightDir), 0.0);
+    // specular shading
+    vec3 reflectDir = reflect(-lightDir, normal);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 0.2f);
+    // combine results
+    vec3 ambient  = light.ambient  * vec3(texture2D(texture0, uvFrag));
+    vec3 diffuse  = light.diffuse  * diff * vec3(texture2D(texture0, uvFrag));
+    vec3 specular = light.specular * spec * vec3(texture2D(texture0, uvFrag));
+    return (ambient + diffuse + specular);
+}
+
+vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
+{
+	vec3 lightDir = normalize(light.pos - fragPos);
+	// diffuse shading
+	float diff = max(dot(normal, lightDir), 0.0);
+	// specular shading
+	vec3 reflectDir = reflect(-lightDir, normal);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 0.2); //0.2 is arbitrary shininess
+	// attenuation
+	float distance = length(light.pos - fragPos);
+	float attenuation = 1.0 / (light.constant + light.linear * distance +
+		light.quadratic * (distance * distance));
+	// combine results
+	vec3 ambient = light.ambient  * vec3(texture2D(texture0, uvFrag));
+	vec3 diffuse = light.diffuse  * diff * vec3(texture2D(texture0, uvFrag));
+	vec3 specular = light.specular * spec * vec3(texture2D(texture0, uvFrag));
+	ambient *= attenuation;
+	diffuse *= attenuation;
+	specular *= attenuation;
+	return (ambient + diffuse + specular);
+}
+
+
+void main()
+{
+    // properties
+    vec3 norm = normalize(normFrag);
+    vec3 viewDir = normalize(camPos - vertFrag);
+
+    //Directional lighting
+    vec3 result = CalcDirLight(dirLight, norm, viewDir);
+    //Point lights
+    for(int i = 0; i < numPointLights; i++) {
+        result += CalcPointLight(pointLights[i], norm, vertFrag, viewDir);
+	}
+    // phase 3: Spot light
+    //result += CalcSpotLight(spotLight, norm, vertFrag, viewDir);    
+    
+    color = vec3(result, 1.0);
+}
+
+//void main(){
+	//calculate the normal of the vertex in world's vector space
+	//mat3 normalMat = transpose(inverse(mat3(MVP)));
+	//vec3 normal = normalize(normalMat * normFrag);
+
+	//calculate position of the fragment in world's vector space
+	//vec3 posFrag = vec3(model * vec4(vertFrag, 1));
+	//vec3 vertToLight = light.pos - posFrag; //light vector
+
+	//calculate cosine of light dir w/ respect to vertex
+	//float brightness = dot(normal, vertToLight) / (length(vertToLight) * length(normal));
+	//brightness = clamp(brightness, 0, 1); //keep values between 0 & 1
+
+	// get color of texture mapped to this vertex being calculated
+	//color = texture(texture0, uv_Frag);
+	//if(color.a < 0.5){
+        //discard; //discard the color if alpha (the transparency ratio) < 0.5 
+    //}
+	//color = vec4(brightness * light.intensities * color.rgb, color.a);
+//}

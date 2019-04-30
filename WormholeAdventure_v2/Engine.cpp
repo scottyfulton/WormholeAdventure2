@@ -72,6 +72,8 @@ void Engine::init() {
 	//Load Shaders
 	GLuint programID = LoadShaders("TransformVertexShader.vertexshader", "TextureFragmentShader.fragmentshader");
 	shaders.push_back(programID); //add the shaderID once it's loaded for each of the shaders we use
+	programID = LoadShaders("TransformVertexShader.vertexshader", "DiffShader.fragmentshader");
+	shaders.push_back(programID); //add the shaderID once it's loaded for each of the shaders we use
 	//Load VAOs
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvs;
@@ -209,7 +211,7 @@ void Engine::init() {
 		//GLuint MatrixID = glGetUniformLocation(programID, "MVP"); not used here, will be later in gamestate (basically one instance of a possible camera class)
 
 		gameState->addCamera(new Camera(shaders[0], 90.0f, 4.0f / 3.0f, 0.1f, 1000.0f));
-		Player* player0 = new Player(shaders[0], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 75.0f), glm::vec3(0.0, 1.0, 0.0));
+		Player* player0 = new Player(shaders[1], textures[0], vaoIDs[0], vaoVertexCounts[0], glm::vec3(0.0f, 0.0f, 75.0f), glm::vec3(0.0, 1.0, 0.0));
 		
 		gameState->addPlayer(player0);
 

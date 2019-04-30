@@ -33,8 +33,8 @@ void Engine::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	//window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
-	window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
+	window = glfwCreateWindow(mode->width, mode->height, "Worm Hole Space Adventure", glfwGetPrimaryMonitor(), NULL);
+	//window = glfwCreateWindow(1024, 768, "Worm Hole Space Adventure", NULL, NULL);
 	//window = glfwCreateWindow(1400, 1050, "Worm Hole Space Adventure", NULL, NULL);
 
 
@@ -267,7 +267,7 @@ void Engine::reset()
 		gameState->addWormhole(new Wormhole(&shaders, &textures, &vaoIDs,
 			&vaoVertexCounts, 10000, 10, glm::vec3(0.0f, 0.0f, 0.0f)));
 
-		gameState->addGObject(new DigitalClock(shaders[0], textures[4], vaoIDs[3], vaoVertexCounts[3], glm::vec3(-150.0f, 150.0f, -81.0f)));
+		//gameState->addGObject(new DigitalClock(shaders[0], textures[4], vaoIDs[3], vaoVertexCounts[3], glm::vec3(-150.0f, 150.0f, -81.0f)));
 
 	//}
 }
@@ -437,33 +437,19 @@ void Engine::loop() {
 					std::cout << "RESET" << std::endl;
 					gameState->timeHit = 0;
 					reset();
-
 				}
-			//}
-
 		}
-
-		//Spiral of death?
-
 		accumulator += (double)frameTime.count();/*Adding length of frame*/
 
 		while (accumulator >= dt) {
-	/*		if (state) {
-				hisstate->.update/input
-			}else{
-			below update
-			}*/
 			gameState->update(time, dt, keys);
-
 			//FPS keeps track of updates
 			updateCounter++;
-
 			//Calculate Time
 			time += dt;
 			//subtracting dt intervals
 			accumulator -= dt;
 		}
-
 		//Calculate Alpha
 		alpha = accumulator / dt;
 
@@ -471,10 +457,6 @@ void Engine::loop() {
 			// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//if(state)****************
-		//his render
-		//else
-		//our render
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		gameState->render(alpha);
 

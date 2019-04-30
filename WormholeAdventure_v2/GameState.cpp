@@ -113,6 +113,7 @@ void GameState::update(double time, double dt, bool arr[4])
 						//exploder = engine->play2D("Resources/Audio/NeverGunnaGive.mp3", false, false, true, ESM_AUTO_DETECT, false);
 						//exploder->setPlaybackSpeed(0.0);
 						//exploder->setVolume(0.4f);
+						//soundWalking = engine->play2D("Resources/Audio/NeverGunnaGive.mp3", false, false, true, ESM_AUTO_DETECT, false);
 						soundWalking = engine->play2D("Resources/Audio/Explosion+7.mp3", false, false, true, ESM_AUTO_DETECT, false);
 						soundWalking->setPlaybackSpeed(0.0);
 						soundWalking->setVolume(0.4f);
